@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Texture">
+      <UniqueIdentifier>{bbba4316-d927-4909-8903-387db8c7e946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\FileSys">
+      <UniqueIdentifier>{ce76064a-0b4b-419a-82ba-dfd4ec752432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Graphic">
+      <UniqueIdentifier>{ca533903-b983-4954-b0a9-973ea5a2450d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Sound">
+      <UniqueIdentifier>{22c0e12a-d3fd-4c6d-87ff-fea65461e655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Control">
+      <UniqueIdentifier>{9713ef5a-889a-4f94-a4c6-c30cc40896dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Interface">
+      <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Texture">
+      <UniqueIdentifier>{d6ce3103-28f0-4541-8f69-3b3b60f939d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Graphic">
+      <UniqueIdentifier>{697c6cd9-8fcb-45c4-b664-2896e62cfd6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\FileSys">
+      <UniqueIdentifier>{25614462-8bf8-4f1b-81c5-f03aa2c5dc38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Control">
+      <UniqueIdentifier>{0b1c4f8a-34c6-4ea2-b422-e33fdd7a0447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Sound">
+      <UniqueIdentifier>{ab1ea3ec-4563-444b-bf6f-ae69da29d71e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Font">
+      <UniqueIdentifier>{4f7f769a-5ae1-4fea-914d-b52aaceba151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Font">
+      <UniqueIdentifier>{d8ca0166-9e5e-4833-90c5-832d27b5ce4c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BMP.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBuffer.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageFormat.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
+    <ClCompile Include="WAV.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>源文件\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveOut.cpp">
+      <Filter>源文件\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsAudioSession.cpp">
+      <Filter>源文件\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>源文件\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeType.cpp">
+      <Filter>源文件\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBuilder.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="FontBuilder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entrance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Preprocess.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="IClickable.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="WAV.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveOut.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsAudioSession.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundCommon.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBuffer.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFormat.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>头文件\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeType.h">
+      <Filter>头文件\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBuilder.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="FontBuilder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
