@@ -23,16 +23,6 @@ TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize)
 	if (!(pxLength = Texture::GetPixelLength(pixelFormat, byteSize)))
 		throw exception("Unsupported pixel format.");
 }
-/*
-TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize, Size max)
-{
-	this->size_Total = { 0, 0 };
-	this->deadline = max;
-	this->pixelFormat = pixelFormat;
-	this->byteSize = byteSize;
-	if (!(pxLength = Texture::GetPixelLength(pixelFormat, byteSize)))
-		throw exception("Unsupported pixel format.");
-}*/
 
 bool TextureBuilder::AppendConponent(TextureConponent conponent)
 {
