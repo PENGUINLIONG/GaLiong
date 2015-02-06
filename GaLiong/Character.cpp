@@ -1,59 +1,31 @@
 #include "Character.h"
 
 _L_BEGIN
-Character::Character(Renderer &renderer)
+Character::Character()
 {
-	this->renderer = renderer;
-	visible = true;
+	this->implemented = ImplementedInterface::IRenderable;
 }
 
 void Character::Render()
 {
 	if (!visible)
 		return;
-	if (!texture || !texture->Index)
-	{
-		renderer.DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-		return;
-	}
-	glColor4ub(0xFF, 0xFF, 0xFF, alpha);
-	if (this->displayMode == CharacterDisplayMode::Normal)
-		renderer.DrawRectangle(texture->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-	else
-		renderer.DrawRectangleUpsideDown(texture->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-	if (fx != CharacterFX::Normal)
-		ProcessFX();
-}
 
-void Character::SetPosition(PointD position)
-{
-	Entity::SetPosition(position);
-	fxCounter = 0;
-	pos_Original = position;
-}
-void Character::SetSize(SizeD size)
-{
-	Entity::SetSize(size);
-	fxCounter = 0;
-	pos = pos_Original;
-}
-void Character::SwitchDisplayMode(CharacterDisplayMode displayMode)
-{
-	if (displayMode == CharacterDisplayMode::Inherit)
-		return;
-	if (displayMode == CharacterDisplayMode::Hidden)
-		visible = false;
-	else
-		visible = true;
-	this->displayMode = displayMode;
-}
-void Character::SwitchFX(CharacterFX fx)
-{
-	if (fx == CharacterFX::Inherit)
-		return;
-	this->fx = fx;
-	fxCounter = 0;
-	pos = pos_Original;
+	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++) // Go to Entity::Render for details.
+	{
+		if (!(*it) || !(*it)->Index)
+		{
+			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			return;
+		}
+		glColor4ub(0xFF, 0xFF, 0xFF, alpha);
+		if (this->displayMode == CharacterDisplayMode::Normal)
+			Renderer::DrawRectangle((*it)->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		else
+			Renderer::DrawRectangleUpsideDown((*it)->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		if (fx != CharacterFX::Normal)
+			ProcessFX();
+	}
 }
 
 void Character::ProcessFX()

@@ -9,12 +9,11 @@ class _L_ TextureBuffer
 public:
 	TextureBuffer();
 	TextureBuffer(unsigned char length);
-	__declspec(property(get = _GetCurrent, put = _SetCurrent)) Texture *Current;
-	Texture *_GetCurrent()
+	Texture *GetCurrent()
 	{
 		return current;
 	}
-	void _SetCurrent(Texture *source)
+	void SetCurrent(Texture *source)
 	{
 		current = source;
 	}

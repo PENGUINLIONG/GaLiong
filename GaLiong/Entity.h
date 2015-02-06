@@ -14,28 +14,30 @@ public:
 	{
 		if (!texture)
 			return;
-		this->texture = texture;
+		textures.push_back(texture);
 	}
-	virtual void SetPosition(PointD position)
+	//void RemoveTexture();
+	void inline virtual SetPosition(PointD position)
 	{
 		this->pos = position;
 	}
-	virtual void SetSize(SizeD size)
+	void inline virtual SetSize(SizeD size)
 	{
 		this->size = size;
 	}
-	virtual void SetAlpha(unsigned char alpha)
+	void inline virtual SetAlpha(unsigned char alpha)
 	{
 		this->alpha = alpha;
 	}
-	virtual unsigned int GetTag()
+	const inline bool Implemented(unsigned long long key)
 	{
-		return EntityType::IRenderable;
+		return key & implemented ? true : false;
 	}
 protected:
+	bool visible = true;
+	unsigned long long implemented = 0;
 	unsigned char alpha = 255;
-	Texture *texture = nullptr;
-	Renderer renderer;
+	list<Texture *> textures;
 	PointD pos;
 	SizeD size;
 };

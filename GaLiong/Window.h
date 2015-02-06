@@ -23,10 +23,6 @@ public:
 	void Click(Point point);
 	void Render();
 	unsigned int AppendEntity(Entity *Entity);
-	Renderer &GetRenderer()
-	{
-		return renderer;
-	}
 	Entity *&GetEntity(unsigned int id)
 	{
 		return entitys[id];
@@ -46,7 +42,6 @@ private:
 	UINT uTimer;
 
 	Size size;
-	Renderer renderer;
 	unsigned int entityID = 0;
 	map<unsigned int, Entity *> entitys;
 };

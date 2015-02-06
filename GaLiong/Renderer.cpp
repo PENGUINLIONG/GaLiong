@@ -1,10 +1,6 @@
 #include "Renderer.h"
 
 _L_BEGIN
-Renderer::Renderer()
-{
-}
-
 #define ×óÉÏ 0.0f, 1.0f
 #define ×óÏÂ 0.0f, 0.0f
 #define ÓÒÉÏ 1.0f, 1.0f
@@ -51,8 +47,8 @@ void Renderer::DrawBackGroundImage(Texture &texture)
 }
 void Renderer::DrawBackGroundImage(TextureBuffer &texture)
 {
-	double &&ratio = (double)texture.Current->Size.Width / (double)texture.Current->Size.Height;
-	DrawRectangle(texture.Current->Index, { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
+	double ratio = (double)texture.GetCurrent()->Size.Width / (double)texture.GetCurrent()->Size.Height;
+	DrawRectangle(texture.GetCurrent()->Index, { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
 }
 
 void Renderer::DrawWithoutTexture(RectD rect)
@@ -88,12 +84,6 @@ void Renderer::DrawWithoutTexture(RectD rect)
 	glEnd();
 }
 
-void Renderer::Resize(Size size)
-{
-	window.Width = size.Width;
-	window.Height = size.Height;
-}
-
 void Renderer::DrawTestImage()
 {
 	glDisable(GL_TEXTURE_2D);
@@ -121,9 +111,5 @@ void Renderer::DrawTestImage()
 	}
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
-}
-
-Renderer::~Renderer()
-{
 }
 _L_END

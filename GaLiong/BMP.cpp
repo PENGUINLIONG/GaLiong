@@ -34,7 +34,7 @@ void BMP::Automatic(ifstream &stream, wchar_t *path, Texture &texture)
 }
 void BMP::Automatic(ifstream &stream, wchar_t *path, TextureBuffer &texture)
 {
-	Automatic(stream, path, *texture.Current);
+	Automatic(stream, path, *texture.GetCurrent());
 }
 
 void BMP::Automatic_Unsafe(ifstream &stream, wchar_t *path, Texture &texture)

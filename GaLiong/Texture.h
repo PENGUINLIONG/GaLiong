@@ -27,4 +27,10 @@ public:
 private:
 	bool available = false;
 };
+
+typedef struct
+{
+	Rect Rect;
+	Texture *Texture;
+} TextureConponent;
 _L_END

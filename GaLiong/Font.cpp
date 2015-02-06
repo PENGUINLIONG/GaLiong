@@ -11,7 +11,7 @@ Font::Font(unsigned char *file, unsigned long length, long index, FT_Library lib
 	fontColor = outlineColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 }
 
-Texture *Font::RenderString(wchar_t *text)
+Texture *Font::RenderString(wchar_t *text, Size border)
 {
 	if (!fontColor.Alpha) // If font color is null, there will be nothing happen.
 		fontColor.Alpha = 0xFF;
@@ -59,6 +59,18 @@ Texture *Font::RenderString(wchar_t *text)
 		{
 			offset.X += face->glyph->metrics.horiAdvance >> 6;
 			continue;
+		}
+		
+		if (bitmap.rows - offset.Y > border.Height)
+		{
+			FT_Done_Glyph(glyph);
+			break;
+		}
+
+		if (bitmap.width + offset.X > border.Width)
+		{
+			offset.X = 0;
+			offset.Y -= advance.Height;
 		}
 
 		// Kerning.

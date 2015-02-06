@@ -1,17 +1,3 @@
-/*
- __________________________________________________________________________________________
-|                               _     ____   _      _____  _        ___                    |
-|                   |      |   / \   |    \ | \   |   |   | \   |  /                       |
-|                   |      |  /___\  |____/ |  \  |   |   |  \  | |                        |
-|                   |  /\  | |     | |   \  |   \ |   |   |   \ | |  ___                   |
-|                    \/  \/  |     | |    \ |    \| __|__ |    \|  \___|                   |
-|                                                                                          |
-|----------------------------- This module may make you blind.------------------------------|
-|                                                                                          |
-|The code here are working well but it's not good for you to read them without sunglasses. |
-|Reading the code might make you *BLIND*. Please think over seriously before you decide to.|
-|__________________________________________________________________________________________|
-*/
 #include "TextureBuilder.h"
 
 _L_BEGIN
@@ -56,7 +42,7 @@ Texture *TextureBuilder::Make()
 	memset(buffer, 0, length); // Prevent the black background appearing.
 
 	// Copy the value of each pixel.
-	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // Copy pixels here.
+	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // Copy pixels here.
 	{
 		TextureConponent &ref = *it;
 		if (!ref.Texture)
@@ -117,7 +103,7 @@ Texture *TextureBuilder::Make()
 
 TextureBuilder::~TextureBuilder()
 {
-	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // it == Texture **
+	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // it == Texture **
 	{
 		if (it->Texture)
 		{

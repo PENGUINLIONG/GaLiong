@@ -116,7 +116,6 @@ void Window::Resize(Size size)
 	//glLoadIdentity();
 	//       |    摄像机位置   |       中心      |     朝上的点     |
 	gluLookAt(0.0f, 0.0f, 50.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	renderer.Resize(size);
 	this->size = size;
 }
 
@@ -149,7 +148,7 @@ void Window::Click(Point point)
 		Entity *&entity = entitys[i];
 		if (!entity)
 			continue;
-		if (entity->GetTag() & EntityType::IClickable)
+		if (entity->Implemented(ImplementedInterface::IClickable))
 		{
 			IClickable *iClickable = dynamic_cast<IClickable *>(entity);
 			if (iClickable && iClickable->CheckClick(size, point))
@@ -173,7 +172,7 @@ void Window::Render()
 		Entity *&entity = entitys[i];
 		if (!entity)
 			continue;
-		if (entity->GetTag() & EntityType::IRenderable)
+		if (entity->Implemented(ImplementedInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(entity);
 			if (iRenderable)

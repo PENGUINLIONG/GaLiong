@@ -28,12 +28,38 @@ enum class CharacterFX {
 class _L_ Character : public Entity
 {
 public:
-	Character(Renderer &renderer);
+	Character();
 	void IRenderable::Render() override;
-	void SetPosition(PointD position) override;
-	void SetSize(SizeD size) override;
-	void SwitchDisplayMode(CharacterDisplayMode displayMode);
-	void SwitchFX(CharacterFX fx);
+	void inline SetPosition(PointD position) override
+	{
+		Entity::SetPosition(position);
+		fxCounter = 0;
+		pos_Original = position;
+	}
+	void inline SetSize(SizeD size) override
+	{
+		Entity::SetSize(size);
+		fxCounter = 0;
+		pos = pos_Original;
+	}
+	void inline SwitchDisplayMode(CharacterDisplayMode displayMode)
+	{
+		if (displayMode == CharacterDisplayMode::Inherit)
+			return;
+		if (displayMode == CharacterDisplayMode::Hidden)
+			visible = false;
+		else
+			visible = true;
+		this->displayMode = displayMode;
+	}
+	void inline SwitchFX(CharacterFX fx)
+	{
+		if (fx == CharacterFX::Inherit)
+			return;
+		this->fx = fx;
+		fxCounter = 0;
+		pos = pos_Original;
+	}
 	~Character();
 private:
 	short fxCounter = 0;

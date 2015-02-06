@@ -1,7 +1,12 @@
 #pragma once
-#include <iostream>
+// Standard library
 #include <fstream>
+#include <iostream>
 #include <string>
+// STL
+#include <list>
+#include <vector>
+// Windows
 #include <Windows.h>
 // OpenGL
 #include <gl\GL.h>
@@ -12,32 +17,41 @@
 #include FT_GLYPH_H
 #include FT_STROKER_H
 
+// Import libraries
 //#pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 
+// Not a good habit. Must be deleted after the complement of basic features.
 using namespace std;
 
+// I forgot what this used for.
 #pragma warning( disable: 4251 )
 
+// Get ready for export the dll.
 #ifdef GALIONG_EXPORTS
 #define _L_ __declspec(dllexport)
 #else
 #define _L_ __declspec(dllimport)
 #endif
 
-typedef int code;
-
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
+#ifdef _DEBUG // White-box testing
+#define private public
+#define protected public
+#endif
+
 _L_BEGIN
-namespace EntityType
+// 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
+// 看上去就像是EntityType这个enum class（其实是namespace）里面的项
+namespace ImplementedInterface
 {
-	enum EntityType
+	enum ImplementedInterface
 	{
-		IRenderable = 0x01,
-		IClickable = 0x01 << 1
+		IRenderable = 1,
+		IClickable = 1 << 1
 	};
 }
 
