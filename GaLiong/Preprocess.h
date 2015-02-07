@@ -1,5 +1,6 @@
 #pragma once
 // Standard library
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -38,7 +39,7 @@ using namespace std;
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
-#ifdef _DEBUG // White-box testing
+#ifdef _WHITE_BOX_TESTING // White-box testing
 #define private public
 #define protected public
 #endif

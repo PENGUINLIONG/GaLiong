@@ -16,6 +16,11 @@ Texture *Font::RenderString(wchar_t *text, Size border)
 	if (!fontColor.Alpha) // If font color is null, there will be nothing happen.
 		fontColor.Alpha = 0xFF;
 
+	if (border.Width == 0)
+		border.Width = MAXLONG;
+	if (border.Height == 0)
+		border.Height = MAXLONG;
+
 	FT_Glyph glyph, _glyph;
 	unsigned long strLength = wcslen(text);
 	FT_UInt previousIndex = 0;

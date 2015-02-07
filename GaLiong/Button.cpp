@@ -16,7 +16,7 @@ bool Button::CheckClick(Size window, Point point)
 	if (x0 > point.X || point.X > x1 || y0 > point.Y || point.Y > y1)
 		return false;
 
-	for (list<Texture *>::iterator it = textures.end(); it != textures.begin(); it--)
+	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++)
 	{
 		if ((*it)->PixelFormat == GL_BGR_EXT || (*it)->PixelFormat == GL_RGB)
 			return true;

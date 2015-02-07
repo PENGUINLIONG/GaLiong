@@ -96,7 +96,6 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FontBuilder.cpp" />
     <ClCompile Include="FreeType.cpp" />
     <ClCompile Include="ImageFormat.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -116,7 +115,6 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="FontBuilder.h" />
     <ClInclude Include="FreeType.h" />
     <ClInclude Include="IClickable.h" />
     <ClInclude Include="ImageFormat.h" />

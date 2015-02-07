@@ -1,10 +1,10 @@
 #pragma once
-#include <map>
 #include "Preprocess.h"
-#include "IClickable.h"
 #include "Entity.h"
-#include "Character.h"
 #include "Button.h"
+#include "Character.h"
+#include "IClickable.h"
+
 
 using namespace std;
 
@@ -22,12 +22,12 @@ public:
 	void Remove();
 	void Click(Point point);
 	void Render();
-	unsigned int AppendEntity(Entity *Entity);
-	Entity *&GetEntity(unsigned int id)
+	inline Entity *AppendEntity(Entity *entity)
 	{
-		return entitys[id];
+		entitys.push_back(entity);
+		return entity;
 	}
-	HDC GetDeviceContext()
+	inline HDC GetDeviceContext()
 	{
 		return hDeviceContext;
 	}
@@ -42,7 +42,6 @@ private:
 	UINT uTimer;
 
 	Size size;
-	unsigned int entityID = 0;
-	map<unsigned int, Entity *> entitys;
+	list<Entity *> entitys;
 };
 _L_END

@@ -102,9 +102,6 @@
     <ClCompile Include="TextureBuilder.cpp">
       <Filter>源文件\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="FontBuilder.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entrance.h">
@@ -169,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="TextureBuilder.h">
       <Filter>头文件\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="FontBuilder.h">
-      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

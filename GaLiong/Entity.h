@@ -16,16 +16,15 @@ public:
 			return;
 		textures.push_back(texture);
 	}
-	//void RemoveTexture();
-	void inline virtual SetPosition(PointD position)
+	inline void virtual SetPosition(PointD position)
 	{
 		this->pos = position;
 	}
-	void inline virtual SetSize(SizeD size)
+	inline void virtual SetSize(SizeD size)
 	{
 		this->size = size;
 	}
-	void inline virtual SetAlpha(unsigned char alpha)
+	inline void virtual SetAlpha(unsigned char alpha)
 	{
 		this->alpha = alpha;
 	}

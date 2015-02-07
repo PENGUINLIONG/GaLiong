@@ -137,20 +137,13 @@ void Window::Remove()
 
 void Window::Click(Point point)
 {
-	if (entityID == 0)
-		return;
-	unsigned int i = entityID;
-	while (true)
+	for (list<Entity *>::iterator item = entitys.begin(); item != entitys.end(); item++)
 	{
-		if (i == 0)
-			return;
-		i--;
-		Entity *&entity = entitys[i];
-		if (!entity)
+		if (!*item)
 			continue;
-		if (entity->Implemented(ImplementedInterface::IClickable))
+		if ((*item)->Implemented(ImplementedInterface::IClickable))
 		{
-			IClickable *iClickable = dynamic_cast<IClickable *>(entity);
+			IClickable *iClickable = dynamic_cast<IClickable *>(*item);
 			if (iClickable && iClickable->CheckClick(size, point))
 			{
 				iClickable->ClickEventHandler(point);
@@ -162,31 +155,17 @@ void Window::Click(Point point)
 
 void Window::Render()
 {
-	if (entityID == 0)
-		return;
-	unsigned int i = 0;
-	while (true)
+	for_each(entitys.begin(), entitys.end(), [](Entity *&entity)
 	{
-		if (i == entityID)
-			return;
-		Entity *&entity = entitys[i];
 		if (!entity)
-			continue;
+			return;
 		if (entity->Implemented(ImplementedInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(entity);
 			if (iRenderable)
 				iRenderable->Render();
 		}
-		i++;
-	}
-}
-
-unsigned int Window::AppendEntity(Entity *Entity)
-{
-	entitys[entityID] = Entity;
-	entityID++;
-	return entityID - 1;
+	});
 }
 
 LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -233,15 +212,11 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 Window::~Window()
 {
-	do
-	{
-		if (entityID == 0)
-			return;
-		entityID--;
-		Entity *&entity = entitys[entityID];
+	for_each(entitys.begin(), entitys.end(), [](Entity *&entity){
 		if (!entity)
-			continue;
+			return;
 		delete entity;
-	} while (true);
+		entity = nullptr;
+	});
 }
 _L_END
