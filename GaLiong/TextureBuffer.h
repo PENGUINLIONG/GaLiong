@@ -1,7 +1,6 @@
 #pragma once
 #include "Preprocess.h"
 #include "Texture.h"
-#include <utility>
 
 _L_BEGIN
 class _L_ TextureBuffer
@@ -9,27 +8,26 @@ class _L_ TextureBuffer
 public:
 	TextureBuffer();
 	TextureBuffer(unsigned char length);
-	Texture *GetCurrent()
+	inline Texture &GetCurrent()
 	{
-		return current;
+		return *current;
 	}
-	void SetCurrent(Texture *source)
+	inline void SetCurrent(Texture *source)
 	{
 		current = source;
 	}
-	virtual TextureBuffer *MoveNext()
+	inline TextureBuffer &MoveNext()
 	{
-		unsigned char i = 0;
-		return MoveNext(i);
+		return MoveFor(1);
 	}
+	TextureBuffer &MoveFor(unsigned char steps);
 	void Append(Texture *source);
 	~TextureBuffer();
 	friend void TextureBuffer::Append(Texture *source);
 private:
 	bool available = false;
-	unsigned char offset = 0;
-	Texture *textures, *last, *current, *append;
+	unsigned char max = 0;
+	Texture *textures = nullptr, *last = nullptr, *current = nullptr, *append = nullptr;
 
-	TextureBuffer *MoveNext(unsigned char &flag);
 };
 _L_END

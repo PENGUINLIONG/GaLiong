@@ -47,8 +47,8 @@ void Renderer::DrawBackGroundImage(Texture &texture)
 }
 void Renderer::DrawBackGroundImage(TextureBuffer &texture)
 {
-	double ratio = (double)texture.GetCurrent()->Size.Width / (double)texture.GetCurrent()->Size.Height;
-	DrawRectangle(texture.GetCurrent()->Index, { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
+	double ratio = (double)texture.GetCurrent().Size.Width / (double)texture.GetCurrent().Size.Height;
+	DrawRectangle(texture.GetCurrent().Index, { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
 }
 
 void Renderer::DrawWithoutTexture(RectD rect)

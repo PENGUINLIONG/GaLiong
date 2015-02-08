@@ -3,33 +3,40 @@
 _L_BEGIN
 TextureBuffer::TextureBuffer()
 {
-	offset = 7;
+	max = 8;
+	current = textures = new Texture[8];
 	last = textures + 7 * sizeof(Texture *);
-	textures = new Texture[8];
+	append = textures;
 	available = true;
 }
 TextureBuffer::TextureBuffer(unsigned char length)
 {
 	if (!length)
 		return;
-	offset = length - 1;
+	max = length;
 	current = textures = new Texture[length];
-	last = textures + offset * sizeof(Texture *);
+	last = textures + (length - 1) * sizeof(Texture *);
+	append = textures;
 	available = true;
 }
 
-TextureBuffer *TextureBuffer::MoveNext(unsigned char &flag)
+TextureBuffer &TextureBuffer::MoveFor(unsigned char steps)
 {
-	if (available)
+	if (!available)
+		return *this;
+
+	while (steps >= max)
+		steps -= max;
+	while (steps)
 	{
 		if (current == last)
+		{
 			current = textures;
-		else
-			current += sizeof(Texture *);
-		if (!current->GetAvailability() && flag < offset)
-			MoveNext(++flag);
+			return MoveFor(steps - 1);
+		}
+		current += sizeof(Texture *);
 	}
-	return this;
+	return *this;
 }
 
 void TextureBuffer::Append(Texture *source) //Incompleted
@@ -38,7 +45,7 @@ void TextureBuffer::Append(Texture *source) //Incompleted
 		append = textures;
 	else
 		append += sizeof(Texture *);
-	*append = std::move(*source);
+	*append = *source;
 }
 
 TextureBuffer::~TextureBuffer()

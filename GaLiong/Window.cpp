@@ -96,29 +96,6 @@ bool Window::Create()
 	return true;
 }
 
-void Window::Resize(Size size)
-{
-	GLfloat &&w = (GLfloat)size.Width;
-	GLfloat &&h = (GLfloat)size.Height;
-	if (h == 0)
-		h = 1;
-	glViewport(0, 0, size.Width, size.Height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	double ratio = 1.0f * w / h;
-	// Set the correct perspective.
-	gluPerspective(90, ratio, 0.0f, 10.0f);
-	//if (w <= h)
-		//glOrtho(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 10.0f);
-	//else
-	glOrtho(h/w, h/w, 0.0f, 0.0f, 0.0f, 10.0f);
-	//glMatrixMode(GL_MODELVIEW);						// 选择模型观察矩阵
-	//glLoadIdentity();
-	//       |    摄像机位置   |       中心      |     朝上的点     |
-	gluLookAt(0.0f, 0.0f, 50.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	this->size = size;
-}
-
 void Window::Remove()
 {
 	if (hRenderingContext)
@@ -133,6 +110,30 @@ void Window::Remove()
 		hWindow = NULL;
 	if (!UnregisterClass(L"OpenGLiong", hInstance))
 		hInstance = 0;
+}
+
+
+void Window::Resize(Size size)
+{
+	GLfloat w = (GLfloat)size.Width;
+	GLfloat h = (GLfloat)size.Height;
+	if (h == 0)
+		h = 1;
+	glViewport(0, 0, size.Width, size.Height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	double ratio = 1.0f * w / h;
+	// Set the correct perspective.
+	gluPerspective(90, ratio, 0.0f, 10.0f);
+	//if (w <= h)
+		//glOrtho(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 10.0f);
+	//else
+	glOrtho(h/w, h/w, 0.0f, 0.0f, -10.0f, 10.0f);
+	//glMatrixMode(GL_MODELVIEW);						// 选择模型观察矩阵
+	//glLoadIdentity();
+	//       |    摄像机位置   |       中心      |     朝上的点     |
+	gluLookAt(0.0f, 0.0f, 50.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	this->size = size;
 }
 
 void Window::Click(Point point)
