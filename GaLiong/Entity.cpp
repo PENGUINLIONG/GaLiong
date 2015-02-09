@@ -8,13 +8,12 @@ void Entity::Render()
 
 	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++) // The order to render the textures is to
 	{
-		if (!(*it) || !(*it)->Index)
+		if (!(*it) || !(*it)->IsAvailable())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 			return;
 		}
-		glColor4ub(255, 255, 255, alpha);
-		Renderer::DrawRectangle((*it)->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		Renderer::DrawRectangle((*it)->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}
 }
 _L_END

@@ -210,21 +210,14 @@ Texture *Font::RenderString(wchar_t *text, Size border)
 		offset.X += advance.Width;
 
 		texture = new Texture();
-
-#pragma region Pack up the texture
-#ifdef _DEBUG
-		texture->Path = text + i;
-#endif
-		texture->DataLength = length;
-		texture->Data = buffer;
-		texture->Size = { bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height };
-		texture->PixelFormat = GL_RGBA;
-		texture->ByteSize = GL_UNSIGNED_BYTE;
-#pragma endregion
+		texture->Set(length,
+			buffer,
+			{ bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height },
+			GL_RGBA,
+			GL_UNSIGNED_BYTE);
+		builder.AppendConponent({ rect, texture });
 
 		FT_Done_Glyph(glyph);
-
-		builder.AppendConponent({ rect, texture });
 
 		previousIndex = index;
 	}

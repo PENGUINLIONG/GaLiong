@@ -13,16 +13,15 @@ void Character::Render()
 
 	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++) // Go to Entity::Render for details.
 	{
-		if (!(*it) || !(*it)->Index)
+		if (!(*it) || !(*it)->IsAvailable())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 			return;
 		}
-		glColor4ub(0xFF, 0xFF, 0xFF, alpha);
 		if (this->displayMode == CharacterDisplayMode::Normal)
-			Renderer::DrawRectangle((*it)->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangle((*it)->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
-			Renderer::DrawRectangleUpsideDown((*it)->Index, { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangleUpsideDown((*it)->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		if (fx != CharacterFX::Normal)
 			ProcessFX();
 	}

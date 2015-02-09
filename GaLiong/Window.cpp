@@ -90,9 +90,7 @@ bool Window::Create()
 	glDisable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glDepthFunc(GL_NEVER); // No 3D models will be used.
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // BEFORE
-	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // AFTER
-
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	return true;
 }
 
@@ -111,7 +109,6 @@ void Window::Remove()
 	if (!UnregisterClass(L"OpenGLiong", hInstance))
 		hInstance = 0;
 }
-
 
 void Window::Resize(Size size)
 {

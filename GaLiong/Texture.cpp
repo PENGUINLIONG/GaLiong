@@ -5,7 +5,7 @@ Texture::Texture()
 {
 }
 
-int Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
+unsigned char Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
 {
 	if (byteSize == GL_UNSIGNED_BYTE)
 	{
@@ -37,14 +37,10 @@ int Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
 	}
 	return 0;
 }
-int Texture::GetPixelLength()
-{
-	return	available ? GetPixelLength(PixelFormat, ByteSize) : 0;
-}
 
 void Texture::Generate()
 {
-	if (!PixelFormat || !Size.Width || !Size.Height || !PixelFormat || !ByteSize || !Data)
+	if (!pixelFormat || !size.Width || !size.Height || !byteSize || !data)
 		return;
 	GLuint textureIndex;
 
@@ -52,19 +48,19 @@ void Texture::Generate()
 	glBindTexture(GL_TEXTURE_2D, textureIndex);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
 	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Size.Width, Size.Height, 0, PixelFormat, ByteSize, Data); // After
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	Index = textureIndex;
+	index = textureIndex;
 	available = true;
 }
 
 Texture::~Texture()
 {
-	if (Data && available)
+	if (data && available)
 	{
-		delete[] Data;
-		Data = nullptr;
+		delete[] data;
+		data = nullptr;
 		available = false;
 	}
 }

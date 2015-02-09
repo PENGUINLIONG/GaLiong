@@ -7,6 +7,7 @@
 #include "IClickable.h"
 #include "ImageFormat.h"
 #include "IRenderable.h"
+#include "ITexture.h"
 #include "Preprocess.h"
 #include "Renderer.h"
 #include "SoundCommon.h"

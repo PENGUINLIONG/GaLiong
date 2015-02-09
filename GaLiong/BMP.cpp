@@ -1,7 +1,7 @@
  #include "BMP.h"
 
 _L_BEGIN
-bool BMP::InitHeader(ifstream &stream, Size &size, int &length)
+bool BMP::InitHeader(ifstream &stream, Size &size, unsigned long &length)
 {
 	BITMAPFILEHEADER bf;
 	BITMAPINFOHEADER bi;
@@ -16,7 +16,7 @@ bool BMP::InitHeader(ifstream &stream, Size &size, int &length)
 	return true;
 }
 
-unsigned char *BMP::ReadData(ifstream &stream, int length)
+unsigned char *BMP::ReadData(ifstream &stream, unsigned long length)
 {
 	unsigned char *data = new unsigned char[length]; // NEED TO BE DELETED.
 	stream.read((char *)data, length);
@@ -34,22 +34,19 @@ void BMP::Automatic(ifstream &stream, wchar_t *path, Texture &texture)
 }
 void BMP::Automatic(ifstream &stream, wchar_t *path, TextureBuffer &texture)
 {
-	Automatic(stream, path, texture.GetCurrent());
+	Automatic(stream, path, texture.Get());
 }
 
 void BMP::Automatic_Unsafe(ifstream &stream, wchar_t *path, Texture &texture)
 {
-	if (InitHeader(stream, texture.Size, texture.DataLength))
+	Size size;
+	unsigned long dataLength;
+	if (InitHeader(stream, size, dataLength))
 	{
-		unsigned char *data = ReadData(stream, texture.DataLength);
-#ifdef _DEBUG
-		texture.Path = path;
-#endif
-		texture.Data = data;
-		texture.PixelFormat = GL_BGR_EXT;
-		texture.ByteSize = GL_UNSIGNED_BYTE;
+		unsigned char *data = ReadData(stream, dataLength);
+
+		texture.Set(dataLength, data, size, GL_BGR_EXT, GL_UNSIGNED_BYTE);
 		texture.Generate();
-		texture.Informative = true;
 	}
 }
 _L_END

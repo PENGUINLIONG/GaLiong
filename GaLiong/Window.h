@@ -15,8 +15,9 @@ public:
 	Window(Size size);
 	bool Create();
 	void Resize(Size size);
-	void Flush()
+	inline void Flush()
 	{
+		glFlush();
 		SwapBuffers(hDeviceContext);
 	}
 	void Remove();

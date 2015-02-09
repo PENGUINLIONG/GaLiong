@@ -167,5 +167,8 @@
     <ClInclude Include="TextureBuilder.h">
       <Filter>头文件\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="ITexture.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

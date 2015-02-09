@@ -119,6 +119,7 @@
     <ClInclude Include="IClickable.h" />
     <ClInclude Include="ImageFormat.h" />
     <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="ITexture.h" />
     <ClInclude Include="Preprocess.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SoundCommon.h" />

@@ -12,7 +12,7 @@ TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize)
 
 bool TextureBuilder::AppendConponent(TextureConponent conponent)
 {
-	if (conponent.Texture->PixelFormat != pixelFormat || conponent.Texture->ByteSize != byteSize ||
+	if (!conponent.Texture->IsInformative() || !conponent.Texture->SameType(pixelFormat, byteSize) ||
 		conponent.Rect.Right <= conponent.Rect.Left || conponent.Rect.Top <= conponent.Rect.Bottom)
 		return false;
 	
@@ -41,62 +41,57 @@ Texture *TextureBuilder::Make()
 	unsigned char *buffer = new unsigned char[length];
 	memset(buffer, 0, length); // Prevent the black background appearing.
 
+	int x, y;
+
 	// Copy the value of each pixel.
 	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // Copy pixels here.
 	{
 		TextureConponent &ref = *it;
-		if (!ref.Texture)
-			continue;
-
+		const unsigned char *textureData = ref.Texture->GetData();
+		const Size textureSize = ref.Texture->GetSize();
+		
 		dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
 		srcOffset = 0;
 
-		int nextLine = (size.Width - ref.Texture->Size.Width) * pxLength;
-		int x, y;
+		int nextLine = (size.Width - textureSize.Width) * pxLength;
 
-		for (y = 0; y < ref.Texture->Size.Height; y++)
+
+		for (y = 0; y < textureSize.Height; y++)
 		{
-			for (x = 0; x < ref.Texture->Size.Width * pxLength; x++)
+			for (x = 0; x < textureSize.Width * pxLength; x++)
 			{
 #ifdef _DEBUG
-				if (y == 0 || y == ref.Texture->Size.Height - 1 || x < 4 || x > ref.Texture->Size.Width * pxLength - 5)
+				if (y == 0 || y == textureSize.Height - 1 || x < 4 || x > textureSize.Width * pxLength - 5)
 					*(buffer + dstOffset) = 0xFF;
 				else
 #endif
-				if (*(ref.Texture->Data + srcOffset))
-					*(buffer + dstOffset) = *(ref.Texture->Data + srcOffset); // Do copy from source to destination.
+				if (*(textureData + srcOffset))
+					*(buffer + dstOffset) = *(textureData + srcOffset); // Do copy from source to destination.
 
 				dstOffset++;
 				srcOffset++;
 			}
 			dstOffset += nextLine;
 		}
-#ifdef _DEBUG
-		dstOffset = 0;
-		for (y = 0; y < size.Height; y++)
-		{
-			for (x = 0; x < size.Width * pxLength; x++)
-			{
-				if (y == 0 || y == size.Height - 1 || x < 4 || x > size.Width * pxLength - 5)
-					*(buffer + dstOffset) = 0xFF;
-				dstOffset++;
-			}
-		}
-#endif
 		continue;
 	}
-
-
+#ifdef _DEBUG
+	dstOffset = 0;
+	for (y = 0; y < size.Height; y++)
+	{
+		for (x = 0; x < size.Width * pxLength; x++)
+		{
+			if (y == 0 || y == size.Height - 1 || x < 4 || x > size.Width * pxLength - 5)
+				*(buffer + dstOffset) = 0xFF;
+			dstOffset++;
+		}
+	}
+#endif
 
 	// Ending.
 	Texture *texture = new Texture();
-	texture->DataLength = length;
-	texture->Data = buffer;
-	texture->Size = size;
-	texture->PixelFormat = pixelFormat;
-	texture->ByteSize = byteSize;
+	texture->Set(length, buffer, size, pixelFormat, byteSize);
 	texture->Generate();
-	texture->Informative = true;
 
 	return texture;
 }

@@ -18,26 +18,21 @@ bool Button::CheckClick(Size window, Point point)
 
 	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++)
 	{
-		if ((*it)->PixelFormat == GL_BGR_EXT || (*it)->PixelFormat == GL_RGB)
+		if ((*it)->SameType(GL_BGR_EXT, GL_RGB))
 			return true;
-		else if ((*it)->PixelFormat == GL_BGRA_EXT || (*it)->PixelFormat == GL_RGBA)
+		else if ((*it)->SameType(GL_BGRA_EXT, GL_RGBA))
 		{
 			int pixelLength = (*it)->GetPixelLength();
 			if (pixelLength < 5)
 			{
-				if (*(unsigned char *)((*it)->Data + ((point.X - x0) + (point.Y - y0) * (*it)->Size.Width) * pixelLength + 3)) // Calculate the offset to the pixel.
+				if (*(unsigned char *)((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
 					return true;
 			}
 			else
 			{
-				if (*(unsigned short *)((*it)->Data + ((point.X - x0) + (point.Y - y0) * (*it)->Size.Width) * pixelLength + 6))
+				if (*(unsigned short *)((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 6))
 					return true;
 			}
-		}
-		else if ((*it)->PixelFormat == GL_ALPHA)
-		{
-			if (*(unsigned char *)((*it)->Data + ((point.X - x0) + (point.Y - y0) * (*it)->Size.Width)))
-				return true;
 		}
 	}
 	return false;

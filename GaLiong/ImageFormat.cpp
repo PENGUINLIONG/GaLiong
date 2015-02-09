@@ -44,7 +44,7 @@ void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureBuffer &
 	switch (format)
 	{
 		case ImageFileFormat::BMP:
-			BMP::Automatic_Unsafe(stream, path, target.GetCurrent()); break;
+			BMP::Automatic_Unsafe(stream, path, target.Get()); break;
 			//case ImageFileFormat::PNG:
 			// ...
 		default: stream.close(); return;
