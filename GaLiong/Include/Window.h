@@ -1,12 +1,10 @@
 #pragma once
 #include "Preprocess.h"
-#include "Entity.h"
+#include "Control.h"
 #include "Button.h"
 #include "Character.h"
 #include "IClickable.h"
-
-
-using namespace std;
+#include "IRenderable.h"
 
 _L_BEGIN
 class _L_ Window
@@ -23,10 +21,10 @@ public:
 	void Remove();
 	void Click(Point point);
 	void Render();
-	inline Entity *AppendEntity(Entity *entity)
+	inline Control *AppendEntity(Control *control)
 	{
-		entitys.push_back(entity);
-		return entity;
+		controls.push_back(control);
+		return control;
 	}
 	inline HDC GetDeviceContext()
 	{
@@ -43,6 +41,6 @@ private:
 	UINT uTimer;
 
 	Size size;
-	list<Entity *> entitys;
+	list<Control *> controls;
 };
 _L_END

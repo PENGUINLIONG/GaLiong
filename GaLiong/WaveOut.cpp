@@ -64,7 +64,7 @@ void WaveOut::Restart()
 
 void WaveOut::Callback(HWAVEOUT hWaveOut, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2)
 {
-	WaveOut *instance = (WaveOut *)dwInstance;
+	WaveOut *instance = reinterpret_cast<WaveOut *>(dwInstance);
 	if (uMsg == WOM_DONE && instance->playing && instance->loop)
 		instance->Write();
 }

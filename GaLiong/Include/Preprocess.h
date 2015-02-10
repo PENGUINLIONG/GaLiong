@@ -1,11 +1,13 @@
 #pragma once
 // Standard library
 #include <algorithm>
+#include <cstdarg>
 #include <fstream>
 #include <iostream>
 #include <string>
 // STL
 #include <list>
+#include <tuple>
 #include <vector>
 // Windows
 #include <Windows.h>
@@ -39,6 +41,10 @@ using namespace std;
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
+#define _L_ENUM_BEGIN(name) enum name {
+#define _L_ENUM_JOIN(name) }; enum name {
+#define _L_ENUM_END };
+
 #ifdef _WHITE_BOX_TESTING // White-box testing
 #define private public
 #define protected public
@@ -47,13 +53,32 @@ using namespace std;
 _L_BEGIN
 // 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
 // 看上去就像是EntityType这个enum class（其实是namespace）里面的项
-namespace ImplementedInterface
+namespace ControlInterface
 {
-	enum ImplementedInterface
+	enum ControlInterface
 	{
 		IRenderable = 1,
 		IClickable = 1 << 1
 	};
+}
+
+namespace Invoke
+{
+	// 对于间接函数调用，我们规定：
+	// IClickable_CheckClick  =  0x02010001,
+	// \________/ \________/       \/\/\__/
+	//     |           |           /  |  \
+	// [接口名称]  [函数名称] [参数量] | [接口ID]
+	//                            [函数ID]
+	namespace Request
+	{
+		_L_ENUM_BEGIN(IRenderable)
+		IRenderable_Render = 0x00010000,
+		_L_ENUM_JOIN(IClickable)
+		IClickable_CheckClick = 0x02010001,
+		IClickable_ClickEventHandler = 0x01020001,
+		_L_ENUM_END
+	}
 }
 
 typedef struct {

@@ -1,11 +1,8 @@
 #include "TextureBuilder.h"
 
 _L_BEGIN
-TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize)
+TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }),pixelFormat(pixelFormat),byteSize(byteSize)
 {
-	this->boundary = { MAXLONG, MINLONG, MINLONG, MAXLONG };
-	this->pixelFormat = pixelFormat;
-	this->byteSize = byteSize;
 	if (!(pxLength = Texture::GetPixelLength(pixelFormat, byteSize)))
 		throw exception("Unsupported pixel format.");
 }
@@ -31,10 +28,9 @@ bool TextureBuilder::AppendConponent(TextureConponent conponent)
 
 Texture *TextureBuilder::Make()
 {
-	if (!textures.size())
+	if (textures.empty())
 		return nullptr;
 
-	long dstOffset = 0, srcOffset = 0;
 	Size size = { boundary.Right - boundary.Left, boundary.Top - boundary.Bottom };
 	long length = size.Width * size.Height * pxLength;
 
@@ -44,14 +40,14 @@ Texture *TextureBuilder::Make()
 	int x, y;
 
 	// Copy the value of each pixel.
-	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // Copy pixels here.
+	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
 	{
 		TextureConponent &ref = *it;
 		const unsigned char *textureData = ref.Texture->GetData();
 		const Size textureSize = ref.Texture->GetSize();
 		
-		dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
-		srcOffset = 0;
+		long dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
+		long srcOffset = 0;
 
 		int nextLine = (size.Width - textureSize.Width) * pxLength;
 
@@ -76,18 +72,18 @@ Texture *TextureBuilder::Make()
 		continue;
 	}
 #ifdef _DEBUG
-	dstOffset = 0;
+	long dstOffset = 0;
 	for (y = 0; y < size.Height; y++)
 	{
 		for (x = 0; x < size.Width * pxLength; x++)
 		{
-			if (y == 0 || y == size.Height - 1 || x < 4 || x > size.Width * pxLength - 5)
+			if (y == 0 || y == size.Height - 1 || x < pxLength || x > (size.Width - 1) * pxLength - 1)
 				*(buffer + dstOffset) = 0xFF;
 			dstOffset++;
 		}
 	}
 #endif
-
+	
 	// Ending.
 	Texture *texture = new Texture();
 	texture->Set(length, buffer, size, pixelFormat, byteSize);
@@ -98,7 +94,7 @@ Texture *TextureBuilder::Make()
 
 TextureBuilder::~TextureBuilder()
 {
-	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); it++) // it == Texture **
+	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // it == Texture **
 	{
 		if (it->Texture)
 		{

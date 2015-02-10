@@ -1,9 +1,9 @@
 #pragma once
 #include "Preprocess.h"
-#include "ITexture.h"
+#include "TextureBase.h"
 
 _L_BEGIN
-class _L_ Texture : public ITexture
+class _L_ Texture : public TextureBase
 {
 public:
 	Texture();
@@ -33,7 +33,7 @@ public:
 	}
 	virtual inline const unsigned char GetPixelLength() override final
 	{
-		return available ? GetPixelLength(pixelFormat, byteSize) : 0;
+		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
 	virtual inline const bool IsAvailable() override final
 	{
@@ -54,6 +54,8 @@ public:
 	void Generate();
 	~Texture();
 private:
+	bool available = false;
+	bool informative = false;
 	unsigned long dataLength = 0;
 	unsigned char *data = nullptr;
 	GLuint index = 0;

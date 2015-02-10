@@ -1,14 +1,14 @@
-#include "FreeType.h"
+#include "LibFreeType.h"
 
 _L_BEGIN
-FreeType::FreeType()
+LibFreeType::LibFreeType()
 {
 	// Create a handle to the freetype lib.
 	if (FT_Init_FreeType(&library))
 		return;
 }
 
-Font *FreeType::NewFont(wchar_t *path)
+Font *LibFreeType::NewFont(wchar_t *path)
 {
 	unsigned char *buffer;
 	long long length;
@@ -31,7 +31,7 @@ Font *FreeType::NewFont(wchar_t *path)
 	return new Font(buffer, length, faceIndex, library);
 }
 
-FreeType::~FreeType()
+LibFreeType::~LibFreeType()
 {
 	FT_Done_FreeType(library);
 }

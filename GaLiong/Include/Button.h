@@ -9,8 +9,8 @@ class _L_ Button : public Entity, public IClickable
 {
 public:
 	Button();
-	bool IClickable::CheckClick(Size window, Point point) override final;
-	void IClickable::ClickEventHandler(Point point) override final;
+	bool CheckClick(Size window, Point point) override final;
+	void ClickEventHandler(Point point) override final;
 	~Button();
 };
 _L_END

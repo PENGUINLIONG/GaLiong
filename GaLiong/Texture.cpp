@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 _L_BEGIN
-Texture::Texture()
+Texture::Texture() : size({ 0, 0 })
 {
 }
 

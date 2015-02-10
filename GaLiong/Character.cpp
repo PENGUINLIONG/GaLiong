@@ -1,9 +1,10 @@
 #include "Character.h"
 
 _L_BEGIN
-Character::Character()
+Character::Character() : pos_Original({ 0, 0 })
 {
-	this->implemented = ImplementedInterface::IRenderable;
+	Entity::Entity();
+	this->implemented = ControlInterface::IRenderable;
 }
 
 void Character::Render()
@@ -11,7 +12,7 @@ void Character::Render()
 	if (!visible)
 		return;
 
-	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++) // Go to Entity::Render for details.
+	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
 	{
 		if (!(*it) || !(*it)->IsAvailable())
 		{
@@ -19,9 +20,9 @@ void Character::Render()
 			return;
 		}
 		if (this->displayMode == CharacterDisplayMode::Normal)
-			Renderer::DrawRectangle((*it)->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
-			Renderer::DrawRectangleUpsideDown((*it)->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		if (fx != CharacterFX::Normal)
 			ProcessFX();
 	}

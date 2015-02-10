@@ -59,6 +59,7 @@ Texture *Font::RenderString(wchar_t *text, Size border)
 		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
 		bitmap = bitmapGlyph->bitmap;
 
+#pragma region Avoid the risk
 		// Check whether the bitmap is not empty.
 		if (!bitmap.width || !bitmap.rows)
 		{
@@ -72,11 +73,12 @@ Texture *Font::RenderString(wchar_t *text, Size border)
 			break;
 		}
 
-		if (bitmap.width + offset.X > border.Width)
+		if ((face->glyph->metrics.horiAdvance >> 6) + offset.X > border.Width)
 		{
 			offset.X = 0;
 			offset.Y -= advance.Height;
 		}
+#pragma endregion
 
 		// Kerning.
 		if (previousIndex) // If the current glyph is not the first one in the $text,
@@ -142,13 +144,13 @@ Texture *Font::RenderString(wchar_t *text, Size border)
 					{
 						unsigned char *pixel = buffer + dstOffset;
 						*(pixel + 0) = (unsigned char)((unsigned short)(*(pixel + 0) * (255 - alpha)) >> 8) +
-							(unsigned char)(((unsigned short)(fontColor.Red * alpha)) >> 8);
+							(unsigned char)(((unsigned short)(fontColor.Red * alpha)) >> 8) + 1;
 						*(pixel + 1) = (unsigned char)((unsigned short)(*(pixel + 1) * (255 - alpha)) >> 8) +
-							(unsigned char)(((unsigned short)(fontColor.Green * alpha)) >> 8);
+							(unsigned char)(((unsigned short)(fontColor.Green * alpha)) >> 8) + 1;
 						*(pixel + 2) = (unsigned char)((unsigned short)(*(pixel + 2) * (255 - alpha)) >> 8) +
-							(unsigned char)(((unsigned short)(fontColor.Blue * alpha)) >> 8);
+							(unsigned char)(((unsigned short)(fontColor.Blue * alpha)) >> 8) + 1;
 						*(pixel + 3) = (unsigned char)((unsigned short)(*(pixel + 3) * (255 - alpha)) >> 8) +
-							(unsigned char)(((unsigned short)(alpha * alpha)) >> 8);
+							(unsigned char)(((unsigned short)(alpha * alpha)) >> 8) + 1;
 					}
 					dstOffset += 4;
 					srcOffset++;

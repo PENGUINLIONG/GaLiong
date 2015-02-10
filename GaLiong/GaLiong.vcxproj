@@ -40,11 +40,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>P:\freetype-2.5.3\include;$(IncludePath)</IncludePath>
+    <IncludePath>P:\freetype-2.5.3\include;P:\GaLiong\GaLiong\Include;$(IncludePath)</IncludePath>
     <LibraryPath>P:\freetype-2.5.3\objs\win32\vc2010;$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>P:\GaLiong\GaLiong\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -55,7 +57,7 @@
       <CallingConvention>Cdecl</CallingConvention>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
-      <AdditionalIncludeDirectories>P:\freetype-2.5.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>P:\freetype-2.5.3\include;P:\GaLiong\GaLiong\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <SmallerTypeCheck>true</SmallerTypeCheck>
     </ClCompile>
@@ -66,18 +68,18 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GALIONG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>P:\freetype-2.5.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>P:\freetype-2.5.3\include;P:\GaLiong\GaLiong\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <CallingConvention>Cdecl</CallingConvention>
       <MinimalRebuild>true</MinimalRebuild>
@@ -88,6 +90,7 @@
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,7 +99,8 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FreeType.cpp" />
+    <ClCompile Include="Lable.cpp" />
+    <ClCompile Include="LibFreeType.cpp" />
     <ClCompile Include="ImageFormat.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Storage.cpp" />
@@ -109,30 +113,6 @@
     <ClCompile Include="WindowsAudioSession.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BMP.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Entrance.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="FreeType.h" />
-    <ClInclude Include="IClickable.h" />
-    <ClInclude Include="ImageFormat.h" />
-    <ClInclude Include="IRenderable.h" />
-    <ClInclude Include="ITexture.h" />
-    <ClInclude Include="Preprocess.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="SoundCommon.h" />
-    <ClInclude Include="Storage.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureBuffer.h" />
-    <ClInclude Include="TextureBuilder.h" />
-    <ClInclude Include="WAV.h" />
-    <ClInclude Include="WaveOut.h" />
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="WindowsAudioSession.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\freetype-2.5.3\builds\windows\vc2010\freetype.vcxproj">
       <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
       <Private>true</Private>
@@ -141,6 +121,32 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\BMP.h" />
+    <ClInclude Include="Include\Button.h" />
+    <ClInclude Include="Include\Character.h" />
+    <ClInclude Include="Include\Control.h" />
+    <ClInclude Include="Include\Entity.h" />
+    <ClInclude Include="Include\Entrance.h" />
+    <ClInclude Include="Include\Font.h" />
+    <ClInclude Include="Include\LibFreeType.h" />
+    <ClInclude Include="Include\IClickable.h" />
+    <ClInclude Include="Include\ImageFormat.h" />
+    <ClInclude Include="Include\IRenderable.h" />
+    <ClInclude Include="Include\TextureBase.h" />
+    <ClInclude Include="Include\Preprocess.h" />
+    <ClInclude Include="Include\Renderer.h" />
+    <ClInclude Include="Include\SoundCommon.h" />
+    <ClInclude Include="Include\Storage.h" />
+    <ClInclude Include="Include\Texture.h" />
+    <ClInclude Include="Include\TextureBuffer.h" />
+    <ClInclude Include="Include\TextureBuilder.h" />
+    <ClInclude Include="Include\WAV.h" />
+    <ClInclude Include="Include\WaveOut.h" />
+    <ClInclude Include="Include\Window.h" />
+    <ClInclude Include="Include\WindowsAudioSession.h" />
+    <ClInclude Include="Lable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

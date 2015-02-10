@@ -1,9 +1,8 @@
 #include "WAV.h"
 
 _L_BEGIN
-WAV::WAV(ifstream *stream)
+WAV::WAV(ifstream *stream) : stream(stream)
 {
-	this->stream = stream;
 	data.Data = nullptr;
 }
 
@@ -68,14 +67,16 @@ void WAV::ReadData(wchar_t *path)
 
 void WAV::SelectFromTo(unsigned int offsetTime, unsigned int duration)
 {
-	offset = (format.BitsPerSample * format.SamplesPerSec * format.Channels * offsetTime) >> 3;
 	if (duration == 0)
 	{
-		endpoint = data.Size - 1;
+		endpoint = data.Size;
 		return;
 	}
+	offset = (format.BitsPerSample * format.SamplesPerSec * format.Channels * offsetTime) >> 3;
 	
 	endpoint = offset + ((format.BitsPerSample * format.SamplesPerSec * format.Channels * duration) >> 3);
+	if (endpoint > data.Size)
+		endpoint = data.Size;
 }
 
 void WAV::Dispose()

@@ -1,10 +1,10 @@
 #pragma once
 #include "Preprocess.h"
 #include "Texture.h"
-#include "ITexture.h"
+#include "TextureBase.h"
 
 _L_BEGIN
-class _L_ TextureBuffer : public ITexture
+class _L_ TextureBuffer : public TextureBase
 {
 public:
 	TextureBuffer();
@@ -54,8 +54,10 @@ public:
 	TextureBuffer &MoveFor(unsigned char steps);
 	void Append(Texture *source);
 	~TextureBuffer();
-	friend void TextureBuffer::Append(Texture *source);
+	friend void Append(Texture *source);
 private:
+	bool available = false;
+	bool informative = false;
 	unsigned char max = 0;
 	Texture *textures = nullptr, *last = nullptr, *current = nullptr, *append = nullptr;
 };

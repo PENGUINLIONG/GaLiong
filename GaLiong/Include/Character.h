@@ -29,20 +29,20 @@ class _L_ Character : public Entity
 {
 public:
 	Character();
-	void IRenderable::Render() override;
-	void inline SetPosition(PointD position) override
+	virtual void Render() override;
+	inline void SetPosition(PointD position) override
 	{
 		Entity::SetPosition(position);
 		fxCounter = 0;
 		pos_Original = position;
 	}
-	void inline SetSize(SizeD size) override
+	inline void SetSize(SizeD size) override
 	{
 		Entity::SetSize(size);
 		fxCounter = 0;
 		pos = pos_Original;
 	}
-	void inline SwitchDisplayMode(CharacterDisplayMode displayMode)
+	inline void SwitchDisplayMode(CharacterDisplayMode displayMode)
 	{
 		if (displayMode == CharacterDisplayMode::Inherit)
 			return;
@@ -52,7 +52,7 @@ public:
 			visible = true;
 		this->displayMode = displayMode;
 	}
-	void inline SwitchFX(CharacterFX fx)
+	inline void SwitchFX(CharacterFX fx)
 	{
 		if (fx == CharacterFX::Inherit)
 			return;

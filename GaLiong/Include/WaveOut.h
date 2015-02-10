@@ -7,18 +7,18 @@ class _L_ WaveOut
 {
 public:
 	WaveOut();
-	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop);
-	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt);
-	void Reset();
-	void Pause();
-	void Restart();
+	inline void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop);
+	inline void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt);
+	inline void Reset();
+	inline void Pause();
+	inline void Restart();
 	static void CALLBACK Callback(HWAVEOUT hWaveOut, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2);
 	~WaveOut();
 private:
 	bool loop = true;
 	bool playing = false;
-	char *buffer;
-	unsigned int bufferLength;
+	char *buffer = nullptr;
+	unsigned int bufferLength = 0;
 	WAVEFORMATEX waveFormatEx;
 	HWAVEOUT hWaveOut;
 	WAVEHDR waveHDR;

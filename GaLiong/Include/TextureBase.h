@@ -4,7 +4,7 @@
 _L_BEGIN
 class Texture;
 
-interface _L_ ITexture
+interface _L_ TextureBase
 {
 public:
 	virtual inline Texture &Get() = 0;
@@ -15,8 +15,5 @@ public:
 	virtual inline const bool IsAvailable() = 0;
 	virtual inline const bool IsInformative() = 0;
 	virtual inline const bool SameType(WORD pixelFormat, WORD byteSize) = 0;
-protected:
-	bool available = false;
-	bool informative = false;
 };
 _L_END

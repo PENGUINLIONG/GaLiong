@@ -28,9 +28,6 @@
     <Filter Include="头文件\Control">
       <UniqueIdentifier>{9713ef5a-889a-4f94-a4c6-c30cc40896dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Interface">
-      <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Texture">
       <UniqueIdentifier>{d6ce3103-28f0-4541-8f69-3b3b60f939d4}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,9 @@
     </Filter>
     <Filter Include="源文件\Font">
       <UniqueIdentifier>{d8ca0166-9e5e-4833-90c5-832d27b5ce4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Control\Interface">
+      <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,79 +96,88 @@
     <ClCompile Include="Font.cpp">
       <Filter>源文件\Font</Filter>
     </ClCompile>
-    <ClCompile Include="FreeType.cpp">
-      <Filter>源文件\Font</Filter>
-    </ClCompile>
     <ClCompile Include="TextureBuilder.cpp">
       <Filter>源文件\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="LibFreeType.cpp">
+      <Filter>源文件\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Lable.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entrance.h">
+    <ClInclude Include="Include\Entrance.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Preprocess.h">
+    <ClInclude Include="Include\Preprocess.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
+    <ClInclude Include="Include\BMP.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Button.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Include\Character.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="IClickable.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="BMP.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="WAV.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="WaveOut.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowsAudioSession.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundCommon.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureBuffer.h">
-      <Filter>头文件\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>头文件\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderable.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Storage.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageFormat.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>头文件\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>头文件\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
+    <ClInclude Include="Include\Font.h">
       <Filter>头文件\Font</Filter>
     </ClInclude>
-    <ClInclude Include="FreeType.h">
-      <Filter>头文件\Font</Filter>
+    <ClInclude Include="Include\Entity.h">
+      <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="TextureBuilder.h">
+    <ClInclude Include="Include\IClickable.h">
+      <Filter>头文件\Control\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ImageFormat.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\IRenderable.h">
+      <Filter>头文件\Control\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Renderer.h">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SoundCommon.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Storage.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Texture.h">
       <Filter>头文件\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="ITexture.h">
-      <Filter>头文件\Interface</Filter>
+    <ClInclude Include="Include\TextureBuffer.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureBuilder.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WindowsAudioSession.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WaveOut.h">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WAV.h">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Window.h">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\LibFreeType.h">
+      <Filter>头文件\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Lable.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureBase.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Control.h">
+      <Filter>头文件\Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

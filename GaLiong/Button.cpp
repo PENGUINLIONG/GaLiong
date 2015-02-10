@@ -3,7 +3,8 @@
 _L_BEGIN
 Button::Button()
 {
-	this->implemented = ImplementedInterface::IRenderable | ImplementedInterface::IClickable;
+	Entity::Entity();
+	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
 }
 
 bool Button::CheckClick(Size window, Point point)
@@ -16,7 +17,7 @@ bool Button::CheckClick(Size window, Point point)
 	if (x0 > point.X || point.X > x1 || y0 > point.Y || point.Y > y1)
 		return false;
 
-	for (list<Texture *>::iterator it = textures.begin(); it != textures.end(); it++)
+	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it)
 	{
 		if ((*it)->SameType(GL_BGR_EXT, GL_RGB))
 			return true;

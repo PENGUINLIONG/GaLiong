@@ -1,23 +1,23 @@
 #include "Renderer.h"
 
 _L_BEGIN
-#define 左上 0.0f, 1.0f
-#define 左下 0.0f, 0.0f
-#define 右上 1.0f, 1.0f
-#define 右下 1.0f, 0.0f
+#define UPPER_LEFT 0.0f, 1.0f
+#define LOWER_LEFT 0.0f, 0.0f
+#define UPPER_RIGHT 1.0f, 1.0f
+#define LOWER_RIGHT 1.0f, 0.0f
 
 void Renderer::DrawRectangle(GLuint textureID, RectD rect)
 {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);
 	{
-		glTexCoord2f(左上);
+		glTexCoord2f(UPPER_LEFT);
 		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(左下);
+		glTexCoord2f(LOWER_LEFT);
 		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(右下);
+		glTexCoord2f(LOWER_RIGHT);
 		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(右上);
+		glTexCoord2f(UPPER_RIGHT);
 		glVertex2d(rect.Right, rect.Top);
 	}
 	glEnd();
@@ -28,13 +28,13 @@ void Renderer::DrawRectangleUpsideDown(GLuint textureID, RectD rect)
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);
 	{
-		glTexCoord2f(左下);
+		glTexCoord2f(LOWER_LEFT);
 		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(左上);
+		glTexCoord2f(UPPER_LEFT);
 		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(右上);
+		glTexCoord2f(UPPER_RIGHT);
 		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(右下);
+		glTexCoord2f(LOWER_RIGHT);
 		glVertex2d(rect.Right, rect.Top);
 	}
 	glEnd();
@@ -82,6 +82,7 @@ void Renderer::DrawWithoutTexture(RectD rect)
 		glVertex2d(rect.Left, rect.Bottom);
 	}
 	glEnd();
+	glColor4ub(255, 255, 255, 255);
 }
 
 void Renderer::DrawTestImage()
@@ -111,5 +112,11 @@ void Renderer::DrawTestImage()
 	}
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
+	glColor4ub(255, 255, 255, 255);
 }
+
+#undef UPPER_LEFT
+#undef LOWER_LEFT
+#undef UPPER_RIGHT
+#undef LOWER_RIGHT
 _L_END

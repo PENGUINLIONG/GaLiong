@@ -138,10 +138,10 @@ void Window::Click(Point point)
 	{
 		if (!*control)
 			continue;
-		if ((*control)->Implemented(ControlInterface::IClickable))
+		if ((*control)->Implemented(ImplementedInterface::IClickable))
 		{
-			IClickable *iClickable = dynamic_cast<IClickable *>(*control);
-			iClickable->CheckClick(size, point);
+			IClickable *iClickable = static_cast<IClickable *>(*control);
+			if (iClickable && iClickable->CheckClick(size, point))
 			{
 				iClickable->ClickEventHandler(point);
 				return;
@@ -156,7 +156,7 @@ void Window::Render()
 	{
 		if (!control)
 			return;
-		if (control->Implemented(ControlInterface::IRenderable))
+		if (control->Implemented(ImplementedInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
 			if (iRenderable)
@@ -209,7 +209,7 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 Window::~Window()
 {
-	for_each(controls.begin(), controls.end(), [](Control *&entity){
+	for_each(controls.begin(), controls.end(), [](IControlBase *&entity){
 		if (!entity)
 			return;
 		delete entity;
