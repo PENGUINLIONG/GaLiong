@@ -99,7 +99,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="Lable.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="LibFreeType.cpp" />
     <ClCompile Include="ImageFormat.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -130,7 +130,7 @@
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\Entrance.h" />
     <ClInclude Include="Include\Font.h" />
-    <ClInclude Include="Include\Lable.h" />
+    <ClInclude Include="Include\Label.h" />
     <ClInclude Include="Include\LibFreeType.h" />
     <ClInclude Include="Include\IClickable.h" />
     <ClInclude Include="Include\ImageFormat.h" />

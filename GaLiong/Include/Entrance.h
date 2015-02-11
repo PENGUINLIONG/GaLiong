@@ -8,7 +8,7 @@
 #include "IClickable.h"
 #include "ImageFormat.h"
 #include "IRenderable.h"
-#include "Lable.h"
+#include "Label.h"
 #include "Preprocess.h"
 #include "Renderer.h"
 #include "SoundCommon.h"

@@ -6,10 +6,10 @@
 #include "Texture.h"
 
 _L_BEGIN
-class _L_ Lable : public Entity
+class _L_ Label : public Entity
 {
 public:
-	Lable();
+	Label();
 	virtual void Render() override;
 	virtual void BindTexture(TextureBase *texture){}
 	inline void BindFont(Font &font)
@@ -18,16 +18,16 @@ public:
 		visible = available = true;
 		Clear();
 	}
-	void AppendText(const wchar_t *text);
-	void ChangeText(const wchar_t *text);
+	bool AppendText(const wchar_t *text);
+	bool ChangeText(const wchar_t *text);
 	inline void Clear()
 	{
 		empty = true;
-		text = L"";
+		text.clear();
 		fontSize = { 0, 0 };
 		ClearTextures();
 	}
-	~Lable();
+	~Label();
 private:
 	bool available = false, empty = true;
 	SizeD fontSize;

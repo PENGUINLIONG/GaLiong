@@ -1,44 +1,49 @@
-#include "Lable.h"
+#include "Label.h"
 
 _L_BEGIN
-Lable::Lable() : fontSize({ 0, 0 })
+Label::Label() : fontSize({ 0, 0 })
 {
 	implemented = ControlInterface::IRenderable;
 }
 
-void Lable::AppendText(const wchar_t *text)
+bool Label::AppendText(const wchar_t *text)
 {
-	if (!available)
-		return;
-
+	if (!available || !wcslen(text))
+		return false;
+	
 	this->text.append(text);
 
 	ClearTextures();
-	TextureBase *t = font->RenderString(this->text.c_str(), { size.Width * 7.2, size.Height * 7.2 });
+	TextureBase *t = font->RenderString(this->text.c_str(), {
+		size.Width * (double)windowSize->Height * 0.01,
+		size.Height * (double)windowSize->Height * 0.01
+	});
+
+	if (!t)
+		return false;
+
 	const Size &&s = t->GetSize();
-	fontSize = { s.Width / 7.2, s.Height / 7.2 };
+	fontSize = {
+		(double)s.Width * 100.0 / (double)windowSize->Height,
+		(double)s.Height * 100.0 / (double)windowSize->Height
+	};
 	textures.push_back(t);
 	empty = false;
+
+	return true;
 }
 
-void Lable::ChangeText(const wchar_t *text)
+bool Label::ChangeText(const wchar_t *text)
 {
 	if (!available)
-		return;
+		return false;
 
-	this->text = text;
-	if (!this->text.length())
-		Clear();
-
-	ClearTextures();
-	TextureBase *t = font->RenderString(this->text.c_str(), { size.Width * 7.2, size.Height * 7.2 });
-	const Size &&s = t->GetSize();
-	fontSize = { s.Width / 7.2, s.Height / 7.2 };
-	textures.push_back(t);
-	empty = false;
+	Clear();
+	AppendText(text);
+	return true;
 }
 
-void Lable::Render()
+void Label::Render()
 {
 	if (!visible && !available && empty)
 		return;
@@ -56,7 +61,7 @@ void Lable::Render()
 	}
 }
 
-Lable::~Lable()
+Label::~Label()
 {
 }
 _L_END

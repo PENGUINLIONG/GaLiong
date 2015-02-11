@@ -102,7 +102,7 @@
     <ClCompile Include="LibFreeType.cpp">
       <Filter>源文件\Font</Filter>
     </ClCompile>
-    <ClCompile Include="Lable.cpp">
+    <ClCompile Include="Label.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,7 +176,7 @@
     <ClInclude Include="Include\Control.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Lable.h">
+    <ClInclude Include="Include\Label.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
   </ItemGroup>

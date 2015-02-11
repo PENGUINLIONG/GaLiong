@@ -13,9 +13,6 @@ Font::Font(unsigned char *file, unsigned long length, long index, FT_Library lib
 
 Texture *Font::RenderString(const wchar_t *text, Size border)
 {
-	if (!fontColor.Alpha) // If font color is null, there will be nothing happen.
-		fontColor.Alpha = 0xFF;
-
 	if (border.Width == 0)
 		border.Width = MAXLONG;
 	if (border.Height == 0)
@@ -30,7 +27,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 	Texture *texture = nullptr;
 	TextureBuilder builder(GL_RGBA, GL_UNSIGNED_BYTE);
 
-	for (unsigned int i = 0; i < strLength; i++)
+	for (unsigned long i = 0; i < strLength; i++)
 	{
 		if (*(text + i) == L'\n')
 		{

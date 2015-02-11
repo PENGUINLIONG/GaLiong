@@ -4,6 +4,7 @@
 _L_BEGIN
 class _L_ Control
 {
+	friend class Window;
 public:
 	virtual const inline bool Implemented(unsigned long long key) final
 	{
@@ -11,5 +12,6 @@ public:
 	}
 protected:
 	unsigned long long implemented = 0x00000000;
+	Size *windowSize;
 };
 _L_END
