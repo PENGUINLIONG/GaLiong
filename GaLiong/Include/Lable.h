@@ -1,6 +1,7 @@
 #pragma once
 #include "Preprocess.h"
 #include "Entity.h"
+#include "Font.h"
 #include "Renderer.h"
 #include "Texture.h"
 
@@ -9,31 +10,28 @@ class _L_ Lable : public Entity
 {
 public:
 	Lable();
-	virtual void Render() override final
+	virtual void Render() override;
+	virtual void BindTexture(TextureBase *texture){}
+	inline void BindFont(Font &font)
 	{
-		if (!visible)
-			return;
-
-		for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
-		{
-			if (!(*it) || !(*it)->IsAvailable())
-			{
-				Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-				return;
-			}
-			// Rendering image upside-down will be much faster processing data in the memory.
-			// * NOTE: rendered fonts' image are upside-down in general.
-			Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-		}
+		this->font = &font;
+		visible = available = true;
+		Clear();
 	}
-	inline virtual void SetPosition(PointD position)
+	void AppendText(const wchar_t *text);
+	void ChangeText(const wchar_t *text);
+	inline void Clear()
 	{
-		this->pos = position;
-	}
-	inline virtual void SetSize(SizeD size)
-	{
-		this->size = size;
+		empty = true;
+		text = L"";
+		fontSize = { 0, 0 };
+		ClearTextures();
 	}
 	~Lable();
+private:
+	bool available = false, empty = true;
+	SizeD fontSize;
+	wstring text = L"";
+	Font *font;
 };
 _L_END

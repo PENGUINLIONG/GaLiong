@@ -23,5 +23,6 @@ void Entity::Render()
 
 Entity::~Entity()
 {
+	ClearTextures();
 }
 _L_END

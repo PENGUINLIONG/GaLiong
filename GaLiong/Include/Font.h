@@ -35,7 +35,7 @@ public:
 		outlineWidth = width;
 		FT_Stroker_Set(stroker, width * 64.0, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 	}
-	Texture *RenderString(wchar_t *text, Size border);
+	Texture *RenderString(const wchar_t *text, Size border);
 	~Font();
 private:
 	unsigned char *file;

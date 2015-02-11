@@ -3,7 +3,6 @@
 _L_BEGIN
 Button::Button()
 {
-	Entity::Entity();
 	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
 }
 

@@ -130,6 +130,7 @@
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\Entrance.h" />
     <ClInclude Include="Include\Font.h" />
+    <ClInclude Include="Include\Lable.h" />
     <ClInclude Include="Include\LibFreeType.h" />
     <ClInclude Include="Include\IClickable.h" />
     <ClInclude Include="Include\ImageFormat.h" />
@@ -146,7 +147,6 @@
     <ClInclude Include="Include\WaveOut.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Include\WindowsAudioSession.h" />
-    <ClInclude Include="Lable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

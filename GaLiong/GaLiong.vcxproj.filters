@@ -170,13 +170,13 @@
     <ClInclude Include="Include\LibFreeType.h">
       <Filter>头文件\Font</Filter>
     </ClInclude>
-    <ClInclude Include="Lable.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Include\TextureBase.h">
       <Filter>头文件\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Include\Control.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Lable.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
   </ItemGroup>

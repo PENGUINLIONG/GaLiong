@@ -11,7 +11,7 @@ Font::Font(unsigned char *file, unsigned long length, long index, FT_Library lib
 	fontColor = outlineColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 }
 
-Texture *Font::RenderString(wchar_t *text, Size border)
+Texture *Font::RenderString(const wchar_t *text, Size border)
 {
 	if (!fontColor.Alpha) // If font color is null, there will be nothing happen.
 		fontColor.Alpha = 0xFF;

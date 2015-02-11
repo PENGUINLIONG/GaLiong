@@ -3,7 +3,6 @@
 _L_BEGIN
 Character::Character() : pos_Original({ 0, 0 })
 {
-	Entity::Entity();
 	this->implemented = ControlInterface::IRenderable;
 }
 

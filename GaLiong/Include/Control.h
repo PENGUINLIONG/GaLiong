@@ -5,7 +5,7 @@ _L_BEGIN
 class _L_ Control
 {
 public:
-	virtual const inline bool Implemented(unsigned long long key)
+	virtual const inline bool Implemented(unsigned long long key) final
 	{
 		return (key & implemented) ? true : false;
 	}

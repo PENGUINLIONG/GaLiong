@@ -25,6 +25,17 @@ public:
 	{
 		this->size = size;
 	}
+protected:
+	inline void ClearTextures()
+	{
+		if (!textures.size())
+			return;
+		for_each(textures.begin(), textures.end(), [](TextureBase *&texture)
+		{
+			delete texture;
+		});
+		textures.clear();
+	}
 	~Entity();
 protected:
 	bool visible = true;
