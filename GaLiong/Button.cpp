@@ -18,9 +18,11 @@ bool Button::CheckClick(Size window, Point point)
 
 	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it)
 	{
-		if ((*it)->SameType(GL_BGR_EXT, GL_RGB))
+		if (!(*it)->IsInformative())
+			continue;
+		if ((*it)->SameType(GL_BGR_EXT, GL_UNSIGNED_BYTE) || (*it)->SameType(GL_RGB, GL_UNSIGNED_BYTE))
 			return true;
-		else if ((*it)->SameType(GL_BGRA_EXT, GL_RGBA))
+		else if ((*it)->SameType(GL_RGBA, GL_UNSIGNED_BYTE))
 		{
 			int pixelLength = (*it)->GetPixelLength();
 			if (pixelLength < 5)

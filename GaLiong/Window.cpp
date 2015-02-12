@@ -141,7 +141,7 @@ void Window::Click(Point point)
 		if ((*control)->Implemented(ControlInterface::IClickable))
 		{
 			IClickable *iClickable = dynamic_cast<IClickable *>(*control);
-			iClickable->CheckClick(size, point);
+			if (iClickable->CheckClick(size, point))
 			{
 				iClickable->ClickEventHandler(point);
 				return;

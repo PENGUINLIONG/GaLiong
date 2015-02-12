@@ -1,14 +1,14 @@
 #include "Label.h"
 
 _L_BEGIN
-Label::Label() : fontSize({ 0, 0 })
+Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 {
 	implemented = ControlInterface::IRenderable;
 }
 
 bool Label::AppendText(const wchar_t *text)
 {
-	if (!available || !wcslen(text))
+	if (!font || !available || !wcslen(text))
 		return false;
 	
 	this->text.append(text);
@@ -27,19 +27,11 @@ bool Label::AppendText(const wchar_t *text)
 		(double)s.Width * 100.0 / (double)windowSize->Height,
 		(double)s.Height * 100.0 / (double)windowSize->Height
 	};
+	fontPos = {pos.X + ((size.Width - fontSize.Width) / 2), pos.Y - ((size.Height - fontSize.Height) / 2)};
+
 	textures.push_back(t);
 	empty = false;
 
-	return true;
-}
-
-bool Label::ChangeText(const wchar_t *text)
-{
-	if (!available)
-		return false;
-
-	Clear();
-	AppendText(text);
 	return true;
 }
 
@@ -52,12 +44,12 @@ void Label::Render()
 	{
 		if (!(*it) || !(*it)->IsAvailable())
 		{
-			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + fontSize.Width, pos.Y - fontSize.Height });
+			Renderer::DrawWithoutTexture({ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height });
 			return;
 		}
 		// Rendering image upside-down will be much faster processing data in the memory.
 		// * NOTE: rendered fonts' image are upside-down in general.
-		Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + fontSize.Width, pos.Y - fontSize.Height });
+		Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height });
 	}
 }
 

@@ -23,7 +23,7 @@ public:
 	void Render();
 	inline Control *AppendEntity(Control *control)
 	{
-		control->windowSize = &this->size;
+		control->SetWindowSize(&this->size);
 		controls.push_back(control);
 		return control;
 	}

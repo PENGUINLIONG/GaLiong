@@ -45,7 +45,7 @@ public:
 	}
 	virtual inline const bool SameType(WORD pixelFormat, WORD byteSize) override final
 	{
-		return this->pixelFormat == pixelFormat && this->byteSize == byteSize;
+		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
 	inline const GLuint GetIndex()
 	{

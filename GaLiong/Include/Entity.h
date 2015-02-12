@@ -28,7 +28,7 @@ public:
 protected:
 	inline void ClearTextures()
 	{
-		if (!textures.size())
+		if (textures.empty())
 			return;
 		for_each(textures.begin(), textures.end(), [](TextureBase *&texture)
 		{

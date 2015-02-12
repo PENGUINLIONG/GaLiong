@@ -105,6 +105,9 @@
     <ClCompile Include="Label.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
+    <ClCompile Include="Include\TextEntity.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Entrance.h">
@@ -177,6 +180,9 @@
       <Filter>头文件\Control</Filter>
     </ClInclude>
     <ClInclude Include="Include\Label.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextEntity.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
   </ItemGroup>

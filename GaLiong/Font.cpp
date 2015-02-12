@@ -20,6 +20,8 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 
 	FT_Glyph glyph, _glyph;
 	unsigned long strLength = wcslen(text);
+	
+	long ceiling = 0;
 	FT_UInt previousIndex = 0;
 	Point offset = { 0, 0 };
 	Size advance = { 0, 0 };
@@ -36,6 +38,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 			continue;
 		}
 
+#pragma region Initialization
 		long dstOffset = 0,
 			srcOffset = 0;
 		Size outlineOffset = { 0, 0 },
@@ -46,6 +49,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 		Rect rect;
 		FT_BitmapGlyph bitmapGlyph, _bitmapGlyph;
 		FT_Bitmap bitmap, _bitmap;
+#pragma endregion
 
 		if (FT_Load_Glyph(face, index, FT_LOAD_RENDER | FT_LOAD_TARGET_NORMAL))
 			throw exception("Failed in rendering font glyph.");
@@ -56,32 +60,37 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
 		bitmap = bitmapGlyph->bitmap;
 
-#pragma region Avoid the risk
-		// Check whether the bitmap is not empty.
-		if (!bitmap.width || !bitmap.rows)
-		{
-			offset.X += face->glyph->metrics.horiAdvance >> 6;
-			continue;
-		}
-		
-		if (bitmap.rows - offset.Y > border.Height)
-		{
-			FT_Done_Glyph(glyph);
-			break;
-		}
-
-		if ((face->glyph->metrics.horiAdvance >> 6) + offset.X > border.Width)
-		{
-			offset.X = 0;
-			offset.Y -= advance.Height;
-		}
-#pragma endregion
+		if (bitmap.rows > ceiling && !offset.Y)
+			ceiling = bitmap.rows;
 
 		// Kerning.
 		if (previousIndex) // If the current glyph is not the first one in the $text,
 			// Make the final output more aesthetic.
 			FT_Get_Kerning(face, previousIndex, index, FT_KERNING_DEFAULT, &delta);
 		offset.X += (delta.x >> 6);
+
+#pragma region Avoid the risk
+		// Check whether the bitmap is empty.
+		if (!bitmap.width || !bitmap.rows)
+		{
+			offset.X += face->glyph->metrics.horiAdvance >> 6;
+			continue;
+		}
+		
+		// Check whether the current glyph gets out of the max size in X coord.
+		if ((face->glyph->metrics.horiAdvance >> 6) + offset.X > border.Width)
+		{
+			offset.X = 0;
+			offset.Y -= advance.Height;
+		}
+		
+		// Check whether the current glyph gets out of the max size in Y coord.
+		if (bitmap.rows - bitmapGlyph->top - offset.Y + ceiling > border.Height)
+		{
+			FT_Done_Glyph(glyph);
+			break;
+		}
+#pragma endregion
 
 		unsigned long length;
 		unsigned char *buffer;
