@@ -30,10 +30,10 @@ public:
 	WAV(ifstream *stream);
 	void ReadData(wchar_t *path);
 	void SelectFromTo(unsigned int offset, unsigned int duration);
-	inline void Dispose();
-	inline char *GetSelected();
-	inline unsigned int GetSelectedLength();
-	inline PCMFormat GetPCMFormat();
+	void Dispose();
+	char *GetSelected();
+	unsigned int GetSelectedLength();
+	PCMFormat GetPCMFormat();
 	~WAV();
 private:
 	bool available = false;

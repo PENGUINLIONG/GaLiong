@@ -9,7 +9,7 @@ class _L_ Button : public TextEntity, public IClickable
 public:
 	Button();
 	bool CheckClick(Size window, Point point) override final;
-	inline virtual void BindTexture(TextureBase *texture)
+	virtual void BindTexture(TextureBase *texture)
 	{
 		Entity::BindTexture(texture);
 	}

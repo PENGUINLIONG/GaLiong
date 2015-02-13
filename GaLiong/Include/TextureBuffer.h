@@ -19,7 +19,7 @@ public:
 		current = new Texture();
 		current->Set(dataLength, data, size, pixelFormat, byteSize);
 	}
-	inline void Set(Texture *source)
+	void Set(Texture *source)
 	{
 		current = source;
 	}
@@ -47,7 +47,7 @@ public:
 	{
 		return current->SameType(pixelFormat, byteSize);
 	}
-	inline TextureBuffer &MoveNext()
+	TextureBuffer &MoveNext()
 	{
 		return MoveFor(1);
 	}

@@ -42,7 +42,7 @@ public:
 		fxCounter = 0;
 		pos = pos_Original;
 	}
-	inline void SwitchDisplayMode(CharacterDisplayMode displayMode)
+	void SwitchDisplayMode(CharacterDisplayMode displayMode)
 	{
 		if (displayMode == CharacterDisplayMode::Inherit)
 			return;
@@ -52,7 +52,7 @@ public:
 			visible = true;
 		this->displayMode = displayMode;
 	}
-	inline void SwitchFX(CharacterFX fx)
+	void SwitchFX(CharacterFX fx)
 	{
 		if (fx == CharacterFX::Inherit)
 			return;

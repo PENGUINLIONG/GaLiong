@@ -21,11 +21,11 @@ public:
 		this->text.append(text);
 		return GenerateFont();
 	}
-	inline void BindFont(Font &font)
+	void BindFont(Font &font)
 	{
 		this->font = &font;
 		visible = available = true;
-		ClearText();
+		ClearTextures();
 	}
 	virtual void BindTexture(TextureBase *texture){}
 	bool ChangeText(const wchar_t *text)
@@ -37,7 +37,7 @@ public:
 		AppendText(text);
 		return true;
 	}
-	inline void ClearText()
+	void ClearText()
 	{
 		empty = true;
 		text.clear();

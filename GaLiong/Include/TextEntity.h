@@ -9,7 +9,7 @@ class _L_ TextEntity : public Entity
 {
 public:
 	TextEntity();
-	inline bool AppendText(const wchar_t *text)
+	bool AppendText(const wchar_t *text)
 	{
 		return label.AppendText(text);
 	}
@@ -22,16 +22,16 @@ public:
 	{
 		return label.ChangeText(text);
 	}
-	inline void ClearText()
+	void ClearText()
 	{
 		label.ClearText();
 	}
-	inline virtual void Render() override
+	virtual void Render() override
 	{
 		Entity::Render();
 		label.Render();
 	}
-	inline virtual void Resize() override
+	virtual void Resize() override
 	{
 		label.Resize();
 	}
@@ -49,7 +49,7 @@ public:
 protected:
 	Label label;
 
-	inline virtual void SetWindowSize(Size *windowSize) override
+	virtual void SetWindowSize(Size *windowSize) override
 	{
 		Entity::SetWindowSize(windowSize);
 		label.SetWindowSize(windowSize);

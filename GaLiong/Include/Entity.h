@@ -12,22 +12,22 @@ public:
 	Entity();
 	virtual void Render() override;
 	virtual void Resize() override {}
-	inline void BindTexture(TextureBase *texture)
+	void BindTexture(TextureBase *texture)
 	{
 		if (!texture || !texture->IsAvailable())
 			return;
 		textures.push_back(texture);
 	}
-	inline virtual void SetPosition(PointD position)
+	virtual void SetPosition(PointD position)
 	{
 		this->pos = position;
 	}
-	inline virtual void SetSize(SizeD size)
+	virtual void SetSize(SizeD size)
 	{
 		this->size = size;
 	}
 protected:
-	inline void ClearTextures()
+	void ClearTextures()
 	{
 		if (textures.empty())
 			return;

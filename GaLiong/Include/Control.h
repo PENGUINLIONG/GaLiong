@@ -14,7 +14,7 @@ protected:
 	unsigned long long implemented = 0x00000000;
 	Size *windowSize = nullptr;
 
-	inline virtual void SetWindowSize(Size *windowSize)
+	virtual void SetWindowSize(Size *windowSize)
 	{
 		this->windowSize = windowSize;
 	}

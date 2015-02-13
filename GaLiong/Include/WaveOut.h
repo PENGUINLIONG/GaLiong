@@ -7,11 +7,11 @@ class _L_ WaveOut
 {
 public:
 	WaveOut();
-	inline void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop);
-	inline void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt);
-	inline void Reset();
-	inline void Pause();
-	inline void Restart();
+	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop);
+	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt);
+	void Reset();
+	void Pause();
+	void Restart();
 	static void CALLBACK Callback(HWAVEOUT hWaveOut, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2);
 	~WaveOut();
 private:

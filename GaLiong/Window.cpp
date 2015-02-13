@@ -30,7 +30,7 @@ bool Window::Create()
 		return false;
 	}
 
-	style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
+	style = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 	exStyle = WS_EX_WINDOWEDGE | WS_EX_APPWINDOW;
 
 	AdjustWindowRectEx((RECT *)&windowRect, style, FALSE, exStyle); // Let: $windowRect = the size of border + area that wa are requiring.
@@ -81,6 +81,7 @@ bool Window::Create()
 	SetForegroundWindow(hWindow);
 	SetFocus(hWindow);
 	Resize(size);
+	pos = { 200, 100 };
 
 	glShadeModel(GL_FLAT);
 	glEnable(GL_TEXTURE_2D);
@@ -109,8 +110,11 @@ void Window::Remove()
 		hInstance = 0;
 }
 
-void Window::Resize(Size size)
+void Window::Resize(Size size, bool reposition)
 {
+	if (reposition)
+		SetWindowPos(hWindow, nullptr, pos.X, pos.Y, size.Width, size.Height, NULL);
+
 	double &&w = (double)size.Width;
 	double &&h = (double)size.Height;
 	if (h == 0)
@@ -131,12 +135,12 @@ void Window::Resize(Size size)
 	gluLookAt(0.0f, 0.0f, 50.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	this->size = size;
 	
-	for_each(controls.begin(), controls.end(), [](Control *control)
+	for_each(controls.begin(), controls.end(), [](Control *&control)
 	{
+		if (!control)
+			return;
 		if (control->Implemented(ControlInterface::IRenderable))
 		{
-			if (!control)
-				return;
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
 			iRenderable->Resize();
 		}
@@ -195,6 +199,13 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case WM_KEYDOWN:
 			if (wParam != VK_ESCAPE)
 				break;
+		case WM_MOVE:
+			window->pos = { LOWORD(lParam), HIWORD(lParam) };
+			return 0;
+		case WM_SIZE:
+			if (wParam == SIZE_MAXIMIZED)
+				window->Resize({ LOWORD(lParam), HIWORD(lParam) }, false);
+			return 0;
 		case WM_DESTROY:
 		case WM_CLOSE:
 		{
@@ -211,9 +222,6 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			window->Click({ LOWORD(lParam), HIWORD(lParam) });
 			return 0;
 		}
-		case WM_SIZE:
-			window->Resize({ LOWORD(lParam), HIWORD(lParam) });
-			break;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }

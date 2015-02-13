@@ -13,8 +13,12 @@ class _L_ Window
 public:
 	Window(Size size);
 	bool Create();
-	void Resize(Size size);
-	inline void Flush()
+	void Resize(Size size)
+	{
+		Resize(size, true);
+	}
+	void Resize(Size size, bool reposition);
+	void Flush()
 	{
 		glFlush();
 		SwapBuffers(hDeviceContext);
@@ -22,13 +26,13 @@ public:
 	void Remove();
 	void Click(Point point);
 	void Render();
-	inline Control *AppendEntity(Control *control)
+	Control *AppendEntity(Control *control)
 	{
 		control->SetWindowSize(&this->size);
 		controls.push_back(control);
 		return control;
 	}
-	inline HDC GetDeviceContext()
+	HDC GetDeviceContext()
 	{
 		return hDeviceContext;
 	}
@@ -41,6 +45,7 @@ private:
 	HWND hWindow;
 	UINT uTimer;
 
+	Point pos;
 	Size size;
 	list<Control *> controls;
 };

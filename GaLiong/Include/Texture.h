@@ -47,11 +47,11 @@ public:
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
-	inline const GLuint GetIndex()
+	const GLuint GetIndex()
 	{
 		return index;
 	}
-	inline void Generate()
+	void Generate()
 	{
 		Generate(GL_LINEAR);
 	}

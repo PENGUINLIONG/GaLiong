@@ -231,6 +231,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 	}
 
 	texture = builder.Make();
+	if (texture && texture->IsAvailable())
 	texture->Generate(GL_NEAREST);
 	return texture;
 }
