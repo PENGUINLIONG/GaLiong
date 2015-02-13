@@ -6,7 +6,7 @@ class _L_ Control
 {
 	friend class Window;
 public:
-	virtual const inline bool Implemented(unsigned long long key) final
+	virtual const bool Implemented(unsigned long long key) final
 	{
 		return (key & implemented) ? true : false;
 	}

@@ -38,7 +38,7 @@ unsigned char Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
 	return 0;
 }
 
-void Texture::Generate()
+void Texture::Generate(WORD filter)
 {
 	if (!pixelFormat || !size.Width || !size.Height || !byteSize || !data)
 		return;
@@ -49,8 +49,8 @@ void Texture::Generate()
 	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
 	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 	index = textureIndex;
 	available = true;
 }

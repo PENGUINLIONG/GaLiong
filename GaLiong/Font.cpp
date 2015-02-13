@@ -230,7 +230,9 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 		previousIndex = index;
 	}
 
-	return builder.Make();
+	texture = builder.Make();
+	texture->Generate(GL_NEAREST);
+	return texture;
 }
 
 Font::~Font()

@@ -6,14 +6,21 @@
 #include "TextureBase.h"
 
 _L_BEGIN
-class TextureBase;
+interface TextureBase;
 
 class _L_ Label : public Entity
 {
 	friend class TextEntity;
 public:
 	Label();
-	bool AppendText(const wchar_t *text);
+	bool AppendText(const wchar_t *text)
+	{
+		if (!font || !available || !wcslen(text))
+			return false;
+
+		this->text.append(text);
+		return GenerateFont();
+	}
 	inline void BindFont(Font &font)
 	{
 		this->font = &font;
@@ -37,7 +44,12 @@ public:
 		fontSize = { 0, 0 };
 		ClearTextures();
 	}
+	bool GenerateFont();
 	virtual void Render() override;
+	virtual void Resize() override
+	{
+		GenerateFont();
+	}
 	~Label();
 private:
 	bool available = false;

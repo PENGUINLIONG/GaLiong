@@ -1,5 +1,6 @@
 #pragma once
 #include "Preprocess.h"
+#include <WinUser.h>
 #include "Control.h"
 #include "Button.h"
 #include "Character.h"
@@ -32,7 +33,6 @@ public:
 		return hDeviceContext;
 	}
 	~Window();
-
 	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 private:
 	HGLRC hRenderingContext = NULL;

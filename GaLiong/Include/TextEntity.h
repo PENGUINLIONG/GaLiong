@@ -31,12 +31,16 @@ public:
 		Entity::Render();
 		label.Render();
 	}
-	virtual inline void SetPosition(PointD position) override
+	inline virtual void Resize() override
+	{
+		label.Resize();
+	}
+	virtual void SetPosition(PointD position) override
 	{
 		Entity::SetPosition(position);
 		label.pos = position;
 	}
-	virtual inline void SetSize(SizeD size) override
+	virtual void SetSize(SizeD size) override
 	{
 		Entity::SetSize(size);
 		label.size = size;

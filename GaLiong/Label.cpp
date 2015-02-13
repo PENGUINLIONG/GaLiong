@@ -6,14 +6,11 @@ Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 	implemented = ControlInterface::IRenderable;
 }
 
-bool Label::AppendText(const wchar_t *text)
+bool Label::GenerateFont()
 {
-	if (!font || !available || !wcslen(text))
-		return false;
-	
-	this->text.append(text);
-
 	ClearTextures();
+	empty = true;
+
 	TextureBase *t = font->RenderString(this->text.c_str(), {
 		size.Width * (double)windowSize->Height * 0.01,
 		size.Height * (double)windowSize->Height * 0.01
@@ -27,7 +24,7 @@ bool Label::AppendText(const wchar_t *text)
 		(double)s.Width * 100.0 / (double)windowSize->Height,
 		(double)s.Height * 100.0 / (double)windowSize->Height
 	};
-	fontPos = {pos.X + ((size.Width - fontSize.Width) / 2), pos.Y - ((size.Height - fontSize.Height) / 2)};
+	fontPos = { pos.X + ((size.Width - fontSize.Width) / 2), pos.Y - ((size.Height - fontSize.Height) / 2) };
 
 	textures.push_back(t);
 	empty = false;

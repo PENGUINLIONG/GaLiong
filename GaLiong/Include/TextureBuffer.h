@@ -9,11 +9,11 @@ class _L_ TextureBuffer : public TextureBase
 public:
 	TextureBuffer();
 	TextureBuffer(unsigned char length);
-	virtual inline Texture &Get() override final
+	virtual Texture &Get() override final
 	{
 		return *current;
 	}
-	virtual inline void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
+	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
 	{
 		delete current;
 		current = new Texture();
@@ -23,27 +23,27 @@ public:
 	{
 		current = source;
 	}
-	virtual inline const unsigned char *GetData() override final
+	virtual const unsigned char *GetData() override final
 	{
 		return current->GetData();
 	}
-	virtual inline const Size GetSize() override final
+	virtual const Size GetSize() override final
 	{
 		return current->GetSize();
 	}
-	virtual inline const unsigned char GetPixelLength() override final
+	virtual const unsigned char GetPixelLength() override final
 	{
 		return current->GetPixelLength();
 	}
-	virtual inline const bool IsAvailable() override final
+	virtual const bool IsAvailable() override final
 	{
 		return current->IsAvailable();
 	}
-	virtual inline const bool IsInformative() override final
+	virtual const bool IsInformative() override final
 	{
 		return current->IsInformative();
 	}
-	virtual inline const bool SameType(WORD pixelFormat, WORD byteSize) override final
+	virtual const bool SameType(WORD pixelFormat, WORD byteSize) override final
 	{
 		return current->SameType(pixelFormat, byteSize);
 	}

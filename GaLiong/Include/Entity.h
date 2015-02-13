@@ -11,17 +11,18 @@ class _L_ Entity : public Control, public IRenderable
 public:
 	Entity();
 	virtual void Render() override;
+	virtual void Resize() override {}
 	inline void BindTexture(TextureBase *texture)
 	{
 		if (!texture || !texture->IsAvailable())
 			return;
 		textures.push_back(texture);
 	}
-	virtual inline void SetPosition(PointD position)
+	inline virtual void SetPosition(PointD position)
 	{
 		this->pos = position;
 	}
-	virtual inline void SetSize(SizeD size)
+	inline virtual void SetSize(SizeD size)
 	{
 		this->size = size;
 	}

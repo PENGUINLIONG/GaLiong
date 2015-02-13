@@ -87,7 +87,6 @@ Texture *TextureBuilder::Make()
 	// Ending.
 	Texture *texture = new Texture();
 	texture->Set(length, buffer, size, pixelFormat, byteSize);
-	texture->Generate();
 
 	return texture;
 }

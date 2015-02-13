@@ -30,13 +30,13 @@ class _L_ Character : public Entity
 public:
 	Character();
 	virtual void Render() override;
-	virtual inline void SetPosition(PointD position) override
+	virtual void SetPosition(PointD position) override
 	{
 		__super::SetPosition(position);
 		fxCounter = 0;
 		pos_Original = position;
 	}
-	virtual inline void SetSize(SizeD size) override
+	virtual void SetSize(SizeD size) override
 	{
 		__super::SetSize(size);
 		fxCounter = 0;

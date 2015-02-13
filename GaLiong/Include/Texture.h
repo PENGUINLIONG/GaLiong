@@ -8,11 +8,11 @@ class _L_ Texture : public TextureBase
 public:
 	Texture();
 	static unsigned char GetPixelLength(WORD pixelFormat, WORD byteSize);
-	virtual inline Texture &Get() override final
+	virtual Texture &Get() override final
 	{
 		return *this;
 	}
-	virtual inline void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
+	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
 	{
 		this->dataLength = dataLength;
 		this->data = data;
@@ -23,27 +23,27 @@ public:
 			informative = true;
 		available = true;
 	}
-	virtual inline const unsigned char *GetData() override final
+	virtual const unsigned char *GetData() override final
 	{
 		return data;
 	}
-	virtual inline const Size GetSize() override final
+	virtual const Size GetSize() override final
 	{
 		return size;
 	}
-	virtual inline const unsigned char GetPixelLength() override final
+	virtual const unsigned char GetPixelLength() override final
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
-	virtual inline const bool IsAvailable() override final
+	virtual const bool IsAvailable() override final
 	{
 		return available;
 	}
-	virtual inline const bool IsInformative() override final
+	virtual const bool IsInformative() override final
 	{
 		return informative;
 	}
-	virtual inline const bool SameType(WORD pixelFormat, WORD byteSize) override final
+	virtual const bool SameType(WORD pixelFormat, WORD byteSize) override final
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
@@ -51,7 +51,11 @@ public:
 	{
 		return index;
 	}
-	void Generate();
+	inline void Generate()
+	{
+		Generate(GL_LINEAR);
+	}
+	void Generate(WORD filter);
 	~Texture();
 private:
 	bool available = false;

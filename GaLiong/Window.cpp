@@ -76,7 +76,7 @@ bool Window::Create()
 		return false;
 	}
 
-	SetWindowLong(hWindow, GWLP_USERDATA, (LONG)this);
+	SetWindowLongPtr(hWindow, GWLP_USERDATA, (LONG_PTR)this);
 	ShowWindow(hWindow, SW_SHOW);
 	SetForegroundWindow(hWindow);
 	SetFocus(hWindow);
@@ -111,8 +111,8 @@ void Window::Remove()
 
 void Window::Resize(Size size)
 {
-	GLfloat w = (GLfloat)size.Width;
-	GLfloat h = (GLfloat)size.Height;
+	double &&w = (double)size.Width;
+	double &&h = (double)size.Height;
 	if (h == 0)
 		h = 1;
 	glViewport(0, 0, size.Width, size.Height);
@@ -130,6 +130,17 @@ void Window::Resize(Size size)
 	//       |    摄像机位置   |       中心      |     朝上的点     |
 	gluLookAt(0.0f, 0.0f, 50.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	this->size = size;
+	
+	for_each(controls.begin(), controls.end(), [](Control *control)
+	{
+		if (control->Implemented(ControlInterface::IRenderable))
+		{
+			if (!control)
+				return;
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
+			iRenderable->Resize();
+		}
+	});
 }
 
 void Window::Click(Point point)
@@ -167,7 +178,7 @@ void Window::Render()
 
 LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	Window *window = reinterpret_cast<Window *>(GetWindowLong(hWnd, GWL_USERDATA));
+	Window *window = reinterpret_cast<Window *>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
 	switch (uMsg)
 	{
