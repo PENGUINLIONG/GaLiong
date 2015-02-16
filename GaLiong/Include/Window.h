@@ -17,7 +17,6 @@ public:
 	{
 		Resize(size, true);
 	}
-	void Resize(Size size, bool reposition);
 	void Flush()
 	{
 		glFlush();
@@ -44,9 +43,9 @@ private:
 	HINSTANCE hInstance = NULL;
 	HWND hWindow;
 	UINT uTimer;
-
-	Point pos;
-	Size size;
+	Size size, border;
 	list<Control *> controls;
+
+	void Resize(Size size, bool outer);
 };
 _L_END

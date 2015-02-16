@@ -6,6 +6,10 @@ Character::Character() : pos_Original({ 0, 0 })
 	this->implemented = ControlInterface::IRenderable;
 }
 
+Character::~Character()
+{
+}
+
 void Character::Render()
 {
 	if (!visible)
@@ -18,11 +22,11 @@ void Character::Render()
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 			return;
 		}
-		if (this->displayMode == CharacterDisplayMode::Normal)
+		if (this->displayMode == DisplayMode::Normal)
 			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
 			Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-		if (fx != CharacterFX::Normal)
+		if (fx != FX::Normal)
 			ProcessFX();
 	}
 }
@@ -31,7 +35,7 @@ void Character::ProcessFX()
 {
 	switch (fx)
 	{
-		case CharacterFX::Shaky:
+		case FX::Shaky:
 		{
 			if (fxCounter >= 360)
 			{
@@ -51,7 +55,7 @@ void Character::ProcessFX()
 			pos.X += sin((double)fxCounter) / 10.0f;
 			return;
 		}
-		case CharacterFX::Flowing:
+		case FX::Flowing:
 		{
 			if (fxCounter >= 250)
 			{
@@ -71,7 +75,7 @@ void Character::ProcessFX()
 			size.Height += cos(fxCounter / 10.0f) / 15.0f;
 			return;
 		}
-		case CharacterFX::Abnormal:
+		case FX::Abnormal:
 		{
 			switch (fxCounter)
 			{
@@ -121,7 +125,7 @@ void Character::ProcessFX()
 			fxCounter++;
 			return;
 		}
-		case CharacterFX::ExAbnormal:
+		case FX::ExAbnormal:
 		{
 			switch (fxCounter)
 			{
@@ -171,7 +175,7 @@ void Character::ProcessFX()
 			fxCounter++;
 			return;
 		}
-		case CharacterFX::ExExAbnormal:
+		case FX::ExExAbnormal:
 		{
 			switch (fxCounter)
 			{
@@ -222,9 +226,5 @@ void Character::ProcessFX()
 			return;
 		}
 	}
-}
-
-Character::~Character()
-{
 }
 _L_END

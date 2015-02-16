@@ -8,7 +8,6 @@ bool BMP::InitHeader(Size &size, unsigned long &length)
 {
 	FileHeader f;
 	InfoHeader i;
-	BITMAPFILEHEADER *bf = reinterpret_cast<BITMAPFILEHEADER *>(&f);
 	stream.read((char *)&f, sizeof(FileHeader));
 	if (f.Type != 0x4D42)
 		return false;
@@ -30,7 +29,7 @@ unsigned char *BMP::ReadData(unsigned long length)
 	return data;
 }
 
-void BMP::ToTexture(wchar_t *path, TextureBase &texture, FileReadOption option)
+void BMP::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 {
 	if (stream.is_open())
 		stream.close();
@@ -42,9 +41,9 @@ void BMP::ToTexture(wchar_t *path, TextureBase &texture, FileReadOption option)
 	{
 		unsigned char *data = ReadData(dataLength);
 
-		texture.Set(dataLength, data, size, GL_BGR_EXT, GL_UNSIGNED_BYTE);
+		texture->Set(dataLength, data, size, GL_BGR_EXT, GL_UNSIGNED_BYTE);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
-			texture.Generate();
+			texture->Generate();
 	}
 	if ((option & FileReadOption::NoClose) == FileReadOption::None)
 		stream.close();

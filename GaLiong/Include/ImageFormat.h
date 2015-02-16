@@ -17,10 +17,10 @@ enum class ImageFileFormat
 class _L_ ImageFormat
 {
 public:
-	static ImageFileFormat Detect(ifstream &stream, wchar_t * path);
+	static ImageFileFormat Detect(ifstream &stream, wchar_t *path);
 	static bool Assert(ifstream &stream, wchar_t * path, ImageFileFormat format);
-	static void DetectAndRead(ifstream &stream, wchar_t *path, TextureBase &target);
+	static void DetectAndRead(ifstream &stream, wchar_t *path, TextureBase *target);
 private:
-	static ImageFileFormat DoDetect(ifstream &stream, wchar_t * path);
+	static ImageFileFormat DoDetect(ifstream &stream, wchar_t *path);
 };
 _L_END

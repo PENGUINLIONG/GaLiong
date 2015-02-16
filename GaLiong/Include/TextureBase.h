@@ -4,7 +4,7 @@
 _L_BEGIN
 class Texture;
 
-interface _L_ TextureBase
+class _L_ TextureBase
 {
 public:
 	virtual const bool IsAvailable() = 0;
@@ -17,5 +17,7 @@ public:
 	virtual const Size GetSize() = 0;
 	virtual const bool SameType(WORD pixelFormat, WORD byteSize) = 0;
 	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) = 0;
+private:
+	bool isFromInstance;
 };
 _L_END

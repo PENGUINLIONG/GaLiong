@@ -9,6 +9,7 @@ class _L_ TextEntity : public Entity
 {
 public:
 	TextEntity();
+	virtual ~TextEntity() override;
 	bool AppendText(const wchar_t *text)
 	{
 		return label.AppendText(text);
@@ -45,7 +46,6 @@ public:
 		Entity::SetSize(size);
 		label.size = size;
 	}
-	~TextEntity();
 protected:
 	Label label;
 

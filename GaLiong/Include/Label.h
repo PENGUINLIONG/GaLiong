@@ -13,6 +13,8 @@ class _L_ Label : public Entity
 	friend class TextEntity;
 public:
 	Label();
+	virtual ~Label() override;
+
 	bool AppendText(const wchar_t *text)
 	{
 		if (!font || !available || !wcslen(text))
@@ -50,7 +52,6 @@ public:
 	{
 		GenerateFont();
 	}
-	~Label();
 private:
 	bool available = false;
 	bool empty = true;

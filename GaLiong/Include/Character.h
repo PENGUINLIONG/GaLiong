@@ -4,31 +4,31 @@
 #include "Entity.h"
 
 _L_BEGIN
-enum class CharacterDisplayMode {
+class _L_ Character : public Entity
+{
+public:
+enum class DisplayMode {
 	Inherit = 0,
 	Hidden = 1,
 	Normal = 2,
 	UpsideDown = 3
 };
+enum class FX {
+		Inherit = 0,
+		Normal = 1,
+		Shaky = 2,
+		Flowing = 3,
+		Abnormal = 4,
+		ExAbnormal = 5,
+		ExExAbnormal = 6 //////////////////////Need Implementation.//////////////////////
+		// Accessory
+		/*Intimate,
+		Joyful,
+		Jetting,*/
+	};
 
-enum class CharacterFX {
-	Inherit = 0,
-	Normal = 1,
-	Shaky = 2,
-	Flowing = 3,
-	Abnormal = 4,
-	ExAbnormal = 5,
-	ExExAbnormal = 6 //////////////////////Need Implementation.//////////////////////
-	// Accessory
-	/*Intimate,
-	Joyful,
-	Jetting,*/
-};
-
-class _L_ Character : public Entity
-{
-public:
 	Character();
+	virtual ~Character() override;
 	virtual void Render() override;
 	virtual void SetPosition(PointD position) override
 	{
@@ -42,30 +42,29 @@ public:
 		fxCounter = 0;
 		pos = pos_Original;
 	}
-	void SwitchDisplayMode(CharacterDisplayMode displayMode)
+	void SwitchDisplayMode(DisplayMode displayMode)
 	{
-		if (displayMode == CharacterDisplayMode::Inherit)
+		if (displayMode == DisplayMode::Inherit)
 			return;
-		if (displayMode == CharacterDisplayMode::Hidden)
+		if (displayMode == DisplayMode::Hidden)
 			visible = false;
 		else
 			visible = true;
 		this->displayMode = displayMode;
 	}
-	void SwitchFX(CharacterFX fx)
+	void SwitchFX(FX fx)
 	{
-		if (fx == CharacterFX::Inherit)
+		if (fx == FX::Inherit)
 			return;
 		this->fx = fx;
 		fxCounter = 0;
 		pos = pos_Original;
 	}
-	~Character();
 private:
 	short fxCounter = 0;
 	PointD pos_Original;
-	CharacterDisplayMode displayMode = CharacterDisplayMode::Normal;
-	CharacterFX fx = CharacterFX::Normal;
+	DisplayMode displayMode = DisplayMode::Normal;
+	FX fx = FX::Normal;
 
 	void ProcessFX();
 };

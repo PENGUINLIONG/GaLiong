@@ -10,23 +10,13 @@ class _L_ Entity : public Control, public IRenderable
 {
 public:
 	Entity();
-	virtual void Render() override;
-	virtual void Resize() override {}
+	virtual ~Entity() override;
 	void BindTexture(TextureBase *texture)
 	{
 		if (!texture || !texture->IsAvailable())
 			return;
 		textures.push_back(texture);
 	}
-	virtual void SetPosition(PointD position)
-	{
-		this->pos = position;
-	}
-	virtual void SetSize(SizeD size)
-	{
-		this->size = size;
-	}
-protected:
 	void ClearTextures()
 	{
 		if (textures.empty())
@@ -37,11 +27,21 @@ protected:
 		});
 		textures.clear();
 	}
-	~Entity();
+	virtual void Render() override;
+	virtual void Resize() override {}
+	virtual void SetPosition(PointD position)
+	{
+		this->pos = position;
+	}
+	virtual void SetSize(SizeD size)
+	{
+		this->size = size;
+	}
 protected:
 	bool visible = true;
 	list<TextureBase *> textures;
 	PointD pos;
 	SizeD size;
+
 };
 _L_END

@@ -14,6 +14,7 @@ protected:
 	unsigned long long implemented = 0x00000000;
 	Size *windowSize = nullptr;
 
+	virtual ~Control() {}
 	virtual void SetWindowSize(Size *windowSize)
 	{
 		this->windowSize = windowSize;

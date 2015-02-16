@@ -6,16 +6,16 @@ _L_BEGIN
 typedef DWORDLONG Signature;
 template<class T> struct Chunk
 {
-	DWORD Length;
-	DWORD ChunkType;
+	DWORD32 Length;
+	DWORD32 ChunkType;
 	T ChunkData;
-	DWORD CRC;
+	DWORD32 CRC;
 };
 
 struct ChunkData_Critical_IHDR
 {
-	DWORD Width;
-	DWORD Height;
+	DWORD32 Width;
+	DWORD32 Height;
 	BYTE BitDepth;
 	BYTE ColorDepth;
 	BYTE CompressionMethod;
@@ -48,10 +48,10 @@ class _L_ PNG
 public:
 	PNG();
 	unsigned char *ReadChunk(unsigned long length);
-	void ToTexture(wchar_t *path, TextureBase &texture, FileReadOption option = FileReadOption::None);
+	void ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option = FileReadOption::None);
 	~PNG();
 private:
 	ifstream stream;
-	static const DWORD chunkTypeList[4];
+	static const DWORD32 chunkTypeList[4];
 };
 _L_END

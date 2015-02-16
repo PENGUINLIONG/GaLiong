@@ -51,6 +51,9 @@ void TextureBuffer::Append(Texture *source) //Incompleted
 TextureBuffer::~TextureBuffer()
 {
 	if (textures)
-		delete [] textures;
+	{
+		delete[] textures;
+		textures = nullptr;
+	}
 }
 _L_END

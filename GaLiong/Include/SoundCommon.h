@@ -3,8 +3,8 @@
 
 typedef struct {
 	WORD Channels; // The number of channels: 1->Mono; 2->Stereo
-	DWORD SamplesPerSec;
-	DWORD AvgBytesPerSec;
+	DWORD32 SamplesPerSec;
+	DWORD32 AvgBytesPerSec;
 	WORD BlockAlign; // (Length of each block of data)
 	WORD BitsPerSample; // (width of PCM sample)
 } PCMFormat;
