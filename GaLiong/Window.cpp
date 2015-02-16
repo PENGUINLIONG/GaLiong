@@ -193,8 +193,7 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			window->pos = { LOWORD(lParam), HIWORD(lParam) };
 			return 0;
 		case WM_SIZE:
-			if (wParam == SIZE_MAXIMIZED)
-				window->Resize({ LOWORD(lParam), HIWORD(lParam) }, false);
+			window->Resize({ LOWORD(lParam), HIWORD(lParam) }, false);
 			return 0;
 		case WM_DESTROY:
 		case WM_CLOSE:

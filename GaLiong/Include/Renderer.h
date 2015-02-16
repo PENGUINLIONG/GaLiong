@@ -9,8 +9,7 @@ class _L_ Renderer
 public:
 	static void DrawRectangle(GLuint textureID, RectD rect);
 	static void DrawRectangleUpsideDown(GLuint textureID, RectD rect);
-	static void DrawBackGroundImage(Texture &texture);
-	static void DrawBackGroundImage(TextureBuffer &texture);
+	static void DrawBackGroundImage(TextureBase &texture);
 	static void DrawWithoutTexture(RectD rect);
 	static void DrawTestImage();
 };

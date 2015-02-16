@@ -111,7 +111,10 @@
     <ClCompile Include="TextBar.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Timer.cpp">
+    <ClCompile Include="PNG.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
   </ItemGroup>

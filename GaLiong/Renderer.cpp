@@ -40,15 +40,10 @@ void Renderer::DrawRectangleUpsideDown(GLuint textureID, RectD rect)
 	glEnd();
 }
 
-void Renderer::DrawBackGroundImage(Texture &texture)
+void Renderer::DrawBackGroundImage(TextureBase &texture)
 {
 	double &&ratio = (double)texture.GetSize().Width / (double)texture.GetSize().Height;
-	DrawRectangle(texture.Get().GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
-}
-void Renderer::DrawBackGroundImage(TextureBuffer &texture)
-{
-	double ratio = (double)texture.GetSize().Width / (double)texture.GetSize().Height;
-	DrawRectangle(texture.Get().GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
+	DrawRectangle(texture.GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
 }
 
 void Renderer::DrawWithoutTexture(RectD rect)

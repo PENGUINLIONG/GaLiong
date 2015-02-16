@@ -33,7 +33,6 @@ public:
 	bool InitHeader(Size &size, unsigned long &length);
 	unsigned char *ReadData(unsigned long length);
 	void ToTexture(wchar_t *path, TextureBase &texture, FileReadOption option = FileReadOption::None);
-	void Automatic_Unsafe(wchar_t *path, TextureBase &texture);
 	~BMP();
 private:
 	ifstream stream;
