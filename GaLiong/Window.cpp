@@ -1,7 +1,7 @@
 #include "Window.h"
 
 _L_BEGIN
-Window::Window(Size size) : size(size)
+Window::Window(Size size) :pos({ 0, 0 }), size(size)
 {
 }
 
@@ -186,16 +186,6 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	switch (uMsg)
 	{
-		case WM_SYSCOMMAND:
-		{
-			switch (wParam)
-			{
-				case SC_SCREENSAVE:
-				case SC_MONITORPOWER:
-					return 0;
-			}
-			break;
-		}
 		case WM_KEYDOWN:
 			if (wParam != VK_ESCAPE)
 				break;

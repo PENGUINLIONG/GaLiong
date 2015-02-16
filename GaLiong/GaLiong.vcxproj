@@ -180,11 +180,13 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Include\TextEntity.cpp" />
+    <ClCompile Include="Include\Timer.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LibFreeType.cpp" />
     <ClCompile Include="ImageFormat.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="TextBar.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureBuffer.cpp" />
     <ClCompile Include="TextureBuilder.cpp" />
@@ -211,6 +213,7 @@
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\Entrance.h" />
     <ClInclude Include="Include\Font.h" />
+    <ClInclude Include="Include\PNG.h" />
     <ClInclude Include="Include\TextEntity.h" />
     <ClInclude Include="Include\Label.h" />
     <ClInclude Include="Include\LibFreeType.h" />
@@ -225,10 +228,12 @@
     <ClInclude Include="Include\Texture.h" />
     <ClInclude Include="Include\TextureBuffer.h" />
     <ClInclude Include="Include\TextureBuilder.h" />
+    <ClInclude Include="Include\Timer.h" />
     <ClInclude Include="Include\WAV.h" />
     <ClInclude Include="Include\WaveOut.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Include\WindowsAudioSession.h" />
+    <ClInclude Include="TextBar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

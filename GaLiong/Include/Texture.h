@@ -12,20 +12,26 @@ public:
 	{
 		return *this;
 	}
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
+	virtual const bool IsAvailable() override final
 	{
-		this->dataLength = dataLength;
-		this->data = data;
-		this->size = size;
-		this->pixelFormat = pixelFormat;
-		this->byteSize = byteSize;
-		if (data)
-			informative = true;
-		available = true;
+		return available;
 	}
+	virtual const bool IsInformative() override final
+	{
+		return informative;
+	}
+	virtual void Generate()
+	{
+		Generate(GL_LINEAR);
+	}
+	void Generate(WORD filter);
 	virtual const unsigned char *GetData() override final
 	{
 		return data;
+	}
+	virtual const GLuint GetIndex() override final
+	{
+		return index;
 	}
 	virtual const Size GetSize() override final
 	{
@@ -35,27 +41,23 @@ public:
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
-	virtual const bool IsAvailable() override final
-	{
-		return available;
-	}
-	virtual const bool IsInformative() override final
-	{
-		return informative;
-	}
 	virtual const bool SameType(WORD pixelFormat, WORD byteSize) override final
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
-	const GLuint GetIndex()
+	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
 	{
-		return index;
+		if (this->data)
+			delete this->data;
+		this->dataLength = dataLength;
+		this->data = data;
+		this->size = size;
+		this->pixelFormat = pixelFormat;
+		this->byteSize = byteSize;
+		if (data)
+			informative = true;
+		available = true;
 	}
-	void Generate()
-	{
-		Generate(GL_LINEAR);
-	}
-	void Generate(WORD filter);
 	~Texture();
 private:
 	bool available = false;

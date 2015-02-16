@@ -1,9 +1,12 @@
 #pragma once
 // Standard library
 #include <algorithm>
+#include <chrono>
 #include <fstream>
+#include <future>
 #include <iostream>
 #include <string>
+#include <thread>
 // STL
 #include <list>
 #include <tuple>
@@ -37,6 +40,8 @@ using namespace std;
 #define _L_ __declspec(dllimport)
 #endif
 
+#pragma pack(1) // Prevent error occuring while file reading
+
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
@@ -60,6 +65,21 @@ namespace ControlInterface
 		IClickable = 1 << 1
 	};
 }
+
+enum class FileReadOption : unsigned char
+{
+	None = 0x00,
+	NoClose = 0x01,
+	NoGenerate = 0x02
+};
+
+template<class T> inline T operator~ (T a) { return (T)~(int)a; }
+template<class T> inline T operator| (T a, T b) { return (T)((int)a | (int)b); }
+template<class T> inline T operator& (T a, T b) { return (T)((int)a & (int)b); }
+template<class T> inline T operator^ (T a, T b) { return (T)((int)a ^ (int)b); }
+template<class T> inline T& operator|= (T& a, T b) { return (T&)((int&)a |= (int)b); }
+template<class T> inline T& operator&= (T& a, T b) { return (T&)((int&)a &= (int)b); }
+template<class T> inline T& operator^= (T& a, T b) { return (T&)((int&)a ^= (int)b); }
 
 typedef struct {
 	long Width;

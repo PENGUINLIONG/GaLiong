@@ -108,6 +108,12 @@
     <ClCompile Include="Include\TextEntity.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
+    <ClCompile Include="TextBar.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Timer.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Entrance.h">
@@ -184,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="Include\TextEntity.h">
       <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBar.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Timer.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PNG.h">
+      <Filter>头文件\FileSys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
