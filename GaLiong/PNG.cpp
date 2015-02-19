@@ -4,7 +4,7 @@ _L_BEGIN
 PNG::PNG()
 {
 	//                                 IHDR        PLTE        IDAT        IEND
-	const DWORD32 chunkTypeList[4] = { 0x52444849, 0x45547680, 0x54414449, 0x444E4549 };
+	const Byte4 chunkTypeList[4] = { 0x52444849, 0x45547680, 0x54414449, 0x444E4549 };
 }
 PNG::~PNG()
 {
@@ -19,6 +19,12 @@ void PNG::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 	stream.read((char *)s, 8);
 	if (s != 0x0A1A0A0D474E5089)
 		return;
+
+	//
+	//
+	//        WAKE UP AND USE LIBPNG!!!
+	//
+	//
 
 	unsigned int size = 0;
 	unsigned int chunkType = 0;

@@ -30,7 +30,7 @@ public:
 	{
 		return current->GetData();
 	}
-	virtual const GLuint GetIndex() override final
+	virtual const TextureID GetIndex() override final
 	{
 		return current->GetIndex();
 	}
@@ -47,7 +47,7 @@ public:
 	{
 		return MoveFor(1);
 	}
-	virtual const bool SameType(WORD pixelFormat, WORD byteSize) override final
+	virtual const bool SameType(PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		return current->SameType(pixelFormat, byteSize);
 	}
@@ -55,7 +55,7 @@ public:
 	{
 		current = source;
 	}
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
+	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		current->Set(dataLength, data, size, pixelFormat, byteSize);
 	}

@@ -52,6 +52,9 @@
     <Filter Include="头文件\Control\Interface">
       <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Dependence">
+      <UniqueIdentifier>{b9ed50eb-4296-4ba1-a95b-440e9d897209}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BMP.cpp">
@@ -202,6 +205,18 @@
     </ClInclude>
     <ClInclude Include="Include\PNG.h">
       <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\Include\png.h">
+      <Filter>头文件\Dependence</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\Include\pngconf.h">
+      <Filter>头文件\Dependence</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\Include\zconf.h">
+      <Filter>头文件\Dependence</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\Include\zlib.h">
+      <Filter>头文件\Dependence</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

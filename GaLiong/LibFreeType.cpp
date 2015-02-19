@@ -10,7 +10,7 @@ LibFreeType::LibFreeType()
 
 Font *LibFreeType::NewFont(wchar_t *path)
 {
-	unsigned char *buffer;
+	Buffer buffer;
 	long long length;
 
 	// A UTF-8 hack, the freetype lib does not support UTF-8 originally.
@@ -28,7 +28,18 @@ Font *LibFreeType::NewFont(wchar_t *path)
 
 	faceIndex++;
 
-	return new Font(buffer, length, faceIndex, library);
+	Font *font = new Font();
+
+	font->file = buffer;
+
+	FT_New_Memory_Face(library, buffer, length, faceIndex, &font->face);
+	FT_Select_Charmap(font->face, FT_ENCODING_UNICODE);
+	FT_Stroker_New(library, &font->stroker);
+
+	font->size = { 0, 0 };
+	font->fontColor = font->outlineColor = { 0xFF, 0xFF, 0xFF, 0xFF };
+
+	return font;
 }
 
 LibFreeType::~LibFreeType()

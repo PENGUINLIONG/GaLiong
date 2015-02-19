@@ -39,7 +39,7 @@ ImageFileFormat ImageFormat::DoDetect(ifstream &stream, wchar_t *path)
 {
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 
-	DWORD32 tag = 0;
+	Byte4 tag = 0;
 	stream.read((char *)&tag, 4);
 	if ((tag & 0x0000FFFF) == 0x00004D42)
 		return ImageFileFormat::BMP;

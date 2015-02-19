@@ -3,39 +3,39 @@
 #include "TextureBase.h"
 
 _L_BEGIN
-typedef DWORDLONG Signature;
+typedef Byte8 Signature;
 template<class T> struct Chunk
 {
-	DWORD32 Length;
-	DWORD32 ChunkType;
+	Byte4 Length;
+	Byte4 ChunkType;
 	T ChunkData;
-	DWORD32 CRC;
+	Byte4 CRC;
 };
 
 struct ChunkData_Critical_IHDR
 {
-	DWORD32 Width;
-	DWORD32 Height;
-	BYTE BitDepth;
-	BYTE ColorDepth;
-	BYTE CompressionMethod;
-	BYTE FilterMethod;
-	BYTE InterlaceMethod;
+	Byte4 Width;
+	Byte4 Height;
+	Byte1 BitDepth;
+	Byte1 ColorDepth;
+	Byte1 CompressionMethod;
+	Byte1 FilterMethod;
+	Byte1 InterlaceMethod;
 };
 typedef Chunk<struct ChunkData_Critical_IHDR> Chunk_IHDR;
 struct ChunkData_Critical_PLTE
 {
 	struct PaletteRGB
 	{
-		BYTE Red;
-		BYTE Green;
-		BYTE Blue;
+		Byte1 Red;
+		Byte1 Green;
+		Byte1 Blue;
 	} *Colors;
 };
 typedef Chunk<struct ChunkData_Critical_PLTE> Chunk_PLTE;
 struct ChunkData_Critical_IDAT
 {
-	unsigned char *Data;
+	Buffer Data;
 };
 typedef Chunk<struct ChunkData_Critical_IDAT> Chunk_IDAT;
 struct ChunkData_Critical_IEND
@@ -52,6 +52,6 @@ public:
 	~PNG();
 private:
 	ifstream stream;
-	static const DWORD32 chunkTypeList[4];
+	static const Byte4 chunkTypeList[4];
 };
 _L_END

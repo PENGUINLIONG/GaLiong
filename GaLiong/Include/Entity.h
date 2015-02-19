@@ -42,6 +42,5 @@ protected:
 	list<TextureBase *> textures;
 	PointD pos;
 	SizeD size;
-
 };
 _L_END

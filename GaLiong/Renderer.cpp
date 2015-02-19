@@ -6,7 +6,7 @@ _L_BEGIN
 #define UPPER_RIGHT 1.0f, 1.0f
 #define LOWER_RIGHT 1.0f, 0.0f
 
-void Renderer::DrawRectangle(GLuint textureID, RectD rect)
+void Renderer::DrawRectangle(TextureID textureID, RectD rect)
 {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);
@@ -23,7 +23,7 @@ void Renderer::DrawRectangle(GLuint textureID, RectD rect)
 	glEnd();
 }
 
-void Renderer::DrawRectangleUpsideDown(GLuint textureID, RectD rect)
+void Renderer::DrawRectangleUpsideDown(TextureID textureID, RectD rect)
 {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);

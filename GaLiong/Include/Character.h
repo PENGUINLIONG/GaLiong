@@ -1,5 +1,5 @@
 #pragma once
-#include <cmath>
+#include "cmath"
 #include "Preprocess.h"
 #include "Entity.h"
 
@@ -20,7 +20,7 @@ enum class FX {
 		Flowing = 3,
 		Abnormal = 4,
 		ExAbnormal = 5,
-		ExExAbnormal = 6 //////////////////////Need Implementation.//////////////////////
+		ExExAbnormal = 6 //////////////////////Need Implementation/////////////////////
 		// Accessory
 		/*Intimate,
 		Joyful,
@@ -32,13 +32,13 @@ enum class FX {
 	virtual void Render() override;
 	virtual void SetPosition(PointD position) override
 	{
-		__super::SetPosition(position);
+		Entity::SetPosition(position);
 		fxCounter = 0;
 		pos_Original = position;
 	}
 	virtual void SetSize(SizeD size) override
 	{
-		__super::SetSize(size);
+		Entity::SetSize(size);
 		fxCounter = 0;
 		pos = pos_Original;
 	}

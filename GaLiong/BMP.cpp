@@ -41,7 +41,7 @@ void BMP::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 	{
 		unsigned char *data = ReadData(dataLength);
 
-		texture->Set(dataLength, data, size, GL_BGR_EXT, GL_UNSIGNED_BYTE);
+		texture->Set(dataLength, data, size, TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
 			texture->Generate();
 	}

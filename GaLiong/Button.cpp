@@ -22,9 +22,10 @@ bool Button::CheckClick(Size window, Point point)
 	{
 		if (!(*it)->IsInformative())
 			continue;
-		if ((*it)->SameType(GL_BGR_EXT, GL_UNSIGNED_BYTE) || (*it)->SameType(GL_RGB, GL_UNSIGNED_BYTE))
+		if ((*it)->SameType(TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte) ||
+			(*it)->SameType(TextureBase::PixelFormat::RGB, TextureBase::ByteSize::UByte))
 			return true;
-		else if ((*it)->SameType(GL_RGBA, GL_UNSIGNED_BYTE))
+		else if ((*it)->SameType(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte))
 		{
 			int pixelLength = (*it)->GetPixelLength();
 			if (pixelLength < 5)

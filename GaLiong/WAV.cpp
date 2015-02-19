@@ -8,14 +8,14 @@ WAV::WAV(ifstream *stream) : stream(stream)
 
 void WAV::InitHeader()
 {
-	DWORD32 tag;
+	Byte4 tag;
 	offset = 12;
 
 	stream->read((char *)&header, sizeof(RIFFWaveHeaderChunk));
 	if (header.RIFF != 0x46464952 || header.WAVE != 0x45564157) // 'RIFF' 'WAVE'
 		return;
 
-	stream->read((char *)&tag, sizeof(DWORD32));
+	stream->read((char *)&tag, sizeof(Byte4));
 	if (tag == 0x20746D66) // 'fmt '
 	{
 		format.Size = 0;
@@ -26,19 +26,19 @@ void WAV::InitHeader()
 	}
 	else return;
 
-	stream->read((char *)&tag, sizeof(DWORD32));
+	stream->read((char *)&tag, sizeof(Byte4));
 	if (tag == 0x74636166) // 'fact'
 	{
-		DWORD32 size;
-		stream->read((char *)&size, sizeof(DWORD32));
+		Byte4 size;
+		stream->read((char *)&size, sizeof(Byte4));
 		stream->seekg(size, stream->cur);
-		stream->read((char *)&tag, sizeof(DWORD32));
+		stream->read((char *)&tag, sizeof(Byte4));
 		offset += size + 12;
 	}
 
 	if (tag == 0x61746164) // 'data'
 	{
-		stream->read((char *)&data, sizeof(DWORD32));
+		stream->read((char *)&data, sizeof(Byte4));
 		offset += 8;
 	}
 	else return;

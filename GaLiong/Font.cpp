@@ -1,17 +1,42 @@
 ﻿#include "Font.h"
 
 _L_BEGIN
-Font::Font(unsigned char *file, unsigned long length, long index, FT_Library library)
+Font::Font()
 {
-	this->file = file;
-	FT_New_Memory_Face(library, file, length, index, &face);
-	FT_Select_Charmap(face, FT_ENCODING_UNICODE);
-	FT_Stroker_New(library, &stroker);
-	size = { 0, 0 };
-	fontColor = outlineColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 }
 
-Texture *Font::RenderString(const wchar_t *text, Size border)
+void Font::SetSizeQ26_6(Size size)
+{
+	FT_Set_Char_Size(face, size.Width, size.Height, 72, 72);
+}
+
+void Font::SetSizeQ26_6(Size size, unsigned int resolution_X, unsigned int resolution_Y)
+{
+	FT_Set_Char_Size(face, size.Width, size.Height, resolution_X, resolution_Y);
+	this->size = { size.Width >> 6, size.Height >> 6 };
+}
+
+void Font::SetSizeAbsolute(Size size)
+{
+	FT_Set_Pixel_Sizes(face, size.Width, size.Height);
+	this->size = size;
+}
+
+void Font::SetColor(Color fontColor, Color outlineColor)
+{
+	if (fontColor.Red || fontColor.Green || fontColor.Blue || fontColor.Alpha)
+		this->fontColor = fontColor;
+	if (outlineColor.Red || outlineColor.Green || outlineColor.Blue || outlineColor.Alpha)
+		this->outlineColor = outlineColor;
+}
+
+void Font::SetOutlineWidth(double width)
+{
+	outlineWidth = width;
+	FT_Stroker_Set(stroker, width * 64.0, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
+}
+
+Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 {
 	if (border.Width == 0)
 		border.Width = MAXLONG;
@@ -27,7 +52,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 	Size advance = { 0, 0 };
 
 	Texture *texture = nullptr;
-	TextureBuilder builder(GL_RGBA, GL_UNSIGNED_BYTE);
+	TextureBuilder builder(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte);
 
 	for (unsigned long i = 0; i < strLength; i++)
 	{
@@ -217,13 +242,20 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 
 		offset.X += advance.Width;
 
+		Size used = { bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height };
 		texture = new Texture();
 		texture->Set(length,
 			buffer,
-			{ bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height },
-			GL_RGBA,
-			GL_UNSIGNED_BYTE);
+			used,
+			Texture::PixelFormat::RGBA,
+			Texture::ByteSize::UByte);
 		builder.AppendConponent({ rect, texture });
+
+		if (spare)
+		{
+			spare->Width = border.Width - used.Width;
+			spare->Height = border.Height - used.Height;
+		}
 
 		FT_Done_Glyph(glyph);
 
@@ -232,7 +264,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border)
 
 	texture = builder.Make();
 	if (texture && texture->IsAvailable())
-	texture->Generate(GL_NEAREST);
+	texture->Generate(Texture::Filter::Nearest);
 	return texture;
 }
 

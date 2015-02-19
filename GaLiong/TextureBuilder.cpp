@@ -1,7 +1,7 @@
 #include "TextureBuilder.h"
 
 _L_BEGIN
-TextureBuilder::TextureBuilder(WORD pixelFormat, WORD byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }),pixelFormat(pixelFormat),byteSize(byteSize)
+TextureBuilder::TextureBuilder(TextureBase::PixelFormat pixelFormat, TextureBase::ByteSize byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }), pixelFormat(pixelFormat), byteSize(byteSize)
 {
 	if (!(pxLength = Texture::GetPixelLength(pixelFormat, byteSize)))
 		throw exception("Unsupported pixel format.");

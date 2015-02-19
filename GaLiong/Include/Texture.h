@@ -7,7 +7,7 @@ class _L_ Texture : public TextureBase
 {
 public:
 	Texture();
-	static unsigned char GetPixelLength(WORD pixelFormat, WORD byteSize);
+	static unsigned char GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize);
 	virtual Texture &Get() override final
 	{
 		return *this;
@@ -22,14 +22,14 @@ public:
 	}
 	virtual void Generate()
 	{
-		Generate(GL_LINEAR);
+		Generate(Filter::Linear);
 	}
-	void Generate(WORD filter);
+	void Generate(Filter filter);
 	virtual const unsigned char *GetData() override final
 	{
 		return data;
 	}
-	virtual const GLuint GetIndex() override final
+	virtual const TextureID GetIndex() override final
 	{
 		return index;
 	}
@@ -41,11 +41,11 @@ public:
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
-	virtual const bool SameType(WORD pixelFormat, WORD byteSize) override final
+	virtual const bool SameType(PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, WORD pixelFormat, WORD byteSize) override final
+	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		if (this->data)
 			delete this->data;
@@ -64,9 +64,10 @@ private:
 	bool informative = false;
 	unsigned long dataLength = 0;
 	unsigned char *data = nullptr;
-	GLuint index = 0;
+	TextureID index = 0;
 	Size size;
-	WORD pixelFormat, byteSize;
+	PixelFormat pixelFormat;
+	ByteSize byteSize;
 };
 
 typedef struct

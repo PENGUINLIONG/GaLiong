@@ -10,19 +10,20 @@ bool Label::GenerateFont()
 {
 	ClearTextures();
 	empty = true;
-
-	TextureBase *t = font->RenderString(this->text.c_str(), {
-		size.Width * (double)windowSize->Height * 0.01,
+	Size maximum = {
+		size.Width * (double)windowSize->Height * 0.01, // You can try using windowSize->Width instead of windowSize->Height.
 		size.Height * (double)windowSize->Height * 0.01
-	});
+	};
+	Size spare = { 0, 0 };
+	TextureBase *t = font->RenderString(this->text.c_str(), maximum, &spare);
 
 	if (!t)
 		return false;
 
 	const Size &&s = t->GetSize();
 	fontSize = {
-		(double)s.Width * 100.0 / (double)windowSize->Height,
-		(double)s.Height * 100.0 / (double)windowSize->Height
+		s.Width * 100.0 / (double)windowSize->Height,
+		s.Height * 100.0 / (double)windowSize->Height
 	};
 	fontPos = { pos.X + ((size.Width - fontSize.Width) / 2), pos.Y - ((size.Height - fontSize.Height) / 2) };
 

@@ -8,25 +8,25 @@ class _L_ BMP
 public:
 	typedef struct
 	{
-		WORD Type;
-		DWORD32 Size;
-		WORD Reserved1;
-		WORD Reserved2;
-		DWORD32 OffBits;
+		Byte2 Type;
+		Byte4 Size;
+		Byte2 Reserved1;
+		Byte2 Reserved2;
+		Byte4 OffBits;
 	} FileHeader;
 	typedef struct
 	{
-		DWORD32 Size;
-		LONG Width;
-		LONG Height;
-		WORD Planes;
-		WORD BitCount;
-		DWORD32 Compression;
-		DWORD32 SizeImage;
-		LONG XPelsPerMeter;
-		LONG YPelsPerMeter;
-		DWORD32 ClrUsed;
-		DWORD32 ClrImportant;
+		Byte4 Size;
+		long Width;
+		long Height;
+		Byte2 Planes;
+		Byte2 BitCount;
+		Byte4 Compression;
+		Byte4 SizeImage;
+		long XPelsPerMeter;
+		long YPelsPerMeter;
+		Byte4 ClrUsed;
+		Byte4 ClrImportant;
 	} InfoHeader;
 
 	BMP();

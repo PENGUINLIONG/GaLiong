@@ -6,7 +6,7 @@
 #include "TextureBase.h"
 
 _L_BEGIN
-interface TextureBase;
+class TextureBase;
 
 class _L_ Label : public Entity
 {

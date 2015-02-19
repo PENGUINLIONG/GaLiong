@@ -13,12 +13,13 @@
 #include <vector>
 // Windows
 #include <Windows.h>
+#ifdef _INSIDER_COMPILATION
 // OpenGL
 #include <gl\GL.h>
 #include <gl\GLU.h>
 // FreeType
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include "freetype\ft2build.h"
+#include "freetype\freetype.h"
 #include FT_GLYPH_H
 #include FT_STROKER_H
 
@@ -27,11 +28,14 @@
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 
+#endif
+
 // Not a good habit. Must be deleted after the complement of basic features.
 using namespace std;
 
-// I forgot what this used for.
-#pragma warning( disable: 4251 )
+// Ignore annoying warnings.
+//#pragma warning( disable: 4251 )
+//#pragma warning( disable: 1083 )
 
 // Get ready for export the dll.
 #ifdef GALIONG_EXPORTS
@@ -39,8 +43,6 @@ using namespace std;
 #else
 #define _L_ __declspec(dllimport)
 #endif
-
-#pragma pack(1) // Prevent error occuring while file reading
 
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
@@ -80,6 +82,15 @@ template<class T> inline T operator^ (T a, T b) { return (T)((int)a ^ (int)b); }
 template<class T> inline T& operator|= (T& a, T b) { return (T&)((int&)a |= (int)b); }
 template<class T> inline T& operator&= (T& a, T b) { return (T&)((int&)a &= (int)b); }
 template<class T> inline T& operator^= (T& a, T b) { return (T&)((int&)a ^= (int)b); }
+
+typedef unsigned __int8  Byte1;
+typedef unsigned __int16 Byte2;
+typedef unsigned __int32 Byte4;
+typedef unsigned __int64 Byte8;
+
+typedef unsigned char *Buffer;
+typedef unsigned __int16 Flag;
+typedef unsigned long LongFlag;
 
 typedef struct {
 	long Width;
@@ -121,4 +132,6 @@ typedef struct {
 	unsigned char Blue;
 	unsigned char Alpha;
 } Color;
+
+typedef unsigned int TextureID;
 _L_END

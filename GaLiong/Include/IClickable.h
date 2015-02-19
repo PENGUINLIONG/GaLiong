@@ -2,7 +2,7 @@
 #include "Preprocess.h"
 
 _L_BEGIN
-interface _L_ IClickable
+class _L_ IClickable
 {	
 public:
 	virtual bool CheckClick(Size window, Point point) = 0;

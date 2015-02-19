@@ -5,32 +5,32 @@ Texture::Texture() : size({ 0, 0 })
 {
 }
 
-unsigned char Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
+unsigned char Texture::GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize)
 {
-	if (byteSize == GL_UNSIGNED_BYTE)
+	if (byteSize == ByteSize::UByte)
 	{
 		switch (pixelFormat)
 		{
-			case GL_ALPHA:
+			case PixelFormat::Alpha:
 				return 1;
-			case GL_BGR_EXT:
-			case GL_RGB:
+			case PixelFormat::BGR:
+			case PixelFormat::RGB:
 				return 3;
-			case GL_RGBA:
-			case GL_BGRA_EXT:
+			case PixelFormat::RGBA:
+			case PixelFormat::BGRA:
 				return 4;
 			default: break;
 		}
 	}
-	else if (byteSize == GL_UNSIGNED_SHORT)
+	else if (byteSize == ByteSize::UShort)
 	{
 		switch (pixelFormat)
 		{
-			case GL_RGB:
+			case PixelFormat::RGB:
 				return 6;
-			case GL_RGBA:
+			case PixelFormat::RGBA:
 				return 8;
-			case GL_ALPHA:
+			case PixelFormat::Alpha:
 				return 2;
 			default: break;
 		}
@@ -38,19 +38,19 @@ unsigned char Texture::GetPixelLength(WORD pixelFormat, WORD byteSize)
 	return 0;
 }
 
-void Texture::Generate(WORD filter)
+void Texture::Generate(Filter filter)
 {
-	if (!pixelFormat || !size.Width || !size.Height || !byteSize || !data)
+	if (!size.Width || !size.Height || !data)
 		return;
-	GLuint textureIndex;
+	TextureID textureIndex;
 
 	glGenTextures(1, &textureIndex);
 	glBindTexture(GL_TEXTURE_2D, textureIndex);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
 	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, static_cast<GLenum>(pixelFormat), static_cast<GLenum>(byteSize), data); // After
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
 	index = textureIndex;
 	available = true;
 }

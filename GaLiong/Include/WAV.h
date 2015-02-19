@@ -4,23 +4,23 @@
 
 _L_BEGIN
 typedef struct {
-	DWORD32 RIFF;
-	DWORD32 Length;
-	DWORD32 WAVE;
+	Byte4 RIFF;
+	Byte4 Length;
+	Byte4 WAVE;
 } RIFFWaveHeaderChunk;
 
 typedef struct {
-	DWORD32 Size;
-	WORD FormatTag;
-	WORD Channels;
-	DWORD32 SamplesPerSec;
-	DWORD32 AvgBytesPerSec;
-	WORD BlockAlign;
-	WORD BitsPerSample;
+	Byte4 Size;
+	Byte2 FormatTag;
+	Byte2 Channels;
+	Byte4 SamplesPerSec;
+	Byte4 AvgBytesPerSec;
+	Byte2 BlockAlign;
+	Byte2 BitsPerSample;
 } RIFFWaveFormatChunk;
 
 typedef struct {
-	DWORD32 Size;
+	Byte4 Size;
 	char *Data;
 } RIFFWaveDataChunk;
 
