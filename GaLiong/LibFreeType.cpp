@@ -4,8 +4,7 @@ _L_BEGIN
 LibFreeType::LibFreeType()
 {
 	// Create a handle to the freetype lib.
-	if (FT_Init_FreeType(&library))
-		return;
+	FT_Init_FreeType(reinterpret_cast<FT_Library *>(&library));
 }
 
 Font *LibFreeType::NewFont(wchar_t *path)
@@ -32,9 +31,9 @@ Font *LibFreeType::NewFont(wchar_t *path)
 
 	font->file = buffer;
 
-	FT_New_Memory_Face(library, buffer, length, faceIndex, &font->face);
+	FT_New_Memory_Face(reinterpret_cast<FT_Library>(library), buffer, length, faceIndex, &font->face);
 	FT_Select_Charmap(font->face, FT_ENCODING_UNICODE);
-	FT_Stroker_New(library, &font->stroker);
+	FT_Stroker_New(reinterpret_cast<FT_Library>(library), &font->stroker);
 
 	font->size = { 0, 0 };
 	font->fontColor = font->outlineColor = { 0xFF, 0xFF, 0xFF, 0xFF };
@@ -44,6 +43,6 @@ Font *LibFreeType::NewFont(wchar_t *path)
 
 LibFreeType::~LibFreeType()
 {
-	FT_Done_FreeType(library);
+	FT_Done_FreeType(reinterpret_cast<FT_Library>(library));
 }
 _L_END

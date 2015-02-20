@@ -2,7 +2,7 @@
 #include "Preprocess.h"
 
 _L_BEGIN
-class _L_ Control
+class _L_ ControlBase
 {
 	friend class Window;
 public:
@@ -14,7 +14,7 @@ protected:
 	unsigned long long implemented = 0x00000000;
 	Size *windowSize = nullptr;
 
-	virtual ~Control() {}
+	virtual ~ControlBase() {}
 	virtual void SetWindowSize(Size *windowSize)
 	{
 		this->windowSize = windowSize;

@@ -3,7 +3,7 @@
 _L_BEGIN
 Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 {
-	implemented = ControlInterface::IRenderable;
+	implemented = ControlBaseInterface::IRenderable;
 }
 
 bool Label::GenerateFont()

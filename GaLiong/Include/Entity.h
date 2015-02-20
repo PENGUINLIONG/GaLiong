@@ -1,12 +1,12 @@
 #pragma once
 #include "Preprocess.h"
-#include "Control.h"
+#include "ControlBase.h"
 #include "Renderer.h"
 #include "Texture.h"
 #include "IRenderable.h"
 
 _L_BEGIN
-class _L_ Entity : public Control, public IRenderable
+class _L_ Entity : public ControlBase, public IRenderable
 {
 public:
 	Entity();

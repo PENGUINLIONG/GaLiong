@@ -10,7 +10,7 @@ Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })
 
 Window::~Window()
 {
-	for_each(controls.begin(), controls.end(), [](Control *&entity){
+	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&entity){
 		if (!entity)
 			return;
 		delete entity;
@@ -18,11 +18,11 @@ Window::~Window()
 	});
 }
 
-Control *Window::AppendEntity(Control *control)
+ControlBase *Window::AppendEntity(ControlBase *ControlBase)
 {
-	control->SetWindowSize(&this->size);
-	controls.push_back(control);
-	return control;
+	ControlBase->SetWindowSize(&this->size);
+	ControlBases.push_back(ControlBase);
+	return ControlBase;
 }
 
 void Window::Clear()
@@ -34,13 +34,13 @@ void Window::Click(Point point)
 {
 	cout << "Check click... At (" << point.X << ", " << point.Y << ")." << endl;
 
-	for (list<Control *>::iterator control = controls.begin(); control != controls.end(); ++control)
+	for (list<ControlBase *>::iterator ControlBase = ControlBases.begin(); ControlBase != ControlBases.end(); ++ControlBase)
 	{
-		if (!*control)
+		if (!*ControlBase)
 			continue;
-		if ((*control)->Implemented(ControlInterface::IClickable))
+		if ((*ControlBase)->Implemented(ControlBaseInterface::IClickable))
 		{
-			IClickable *iClickable = dynamic_cast<IClickable *>(*control);
+			IClickable *iClickable = dynamic_cast<IClickable *>(*ControlBase);
 			if (iClickable->CheckClick(size, point))
 			{
 				iClickable->ClickEventHandler(point);
@@ -163,13 +163,13 @@ void Window::Remove()
 
 void Window::Render()
 {
-	for_each(controls.begin(), controls.end(), [](Control *&control)
+	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&ControlBase)
 	{
-		if (!control)
+		if (!ControlBase)
 			return;
-		if (control->Implemented(ControlInterface::IRenderable))
+		if (ControlBase->Implemented(ControlBaseInterface::IRenderable))
 		{
-			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
 			if (iRenderable)
 				iRenderable->Render();
 		}
@@ -195,7 +195,7 @@ void Window::Resize(Size size, bool outer)
 			dm.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
 
 			ChangeDisplaySettings(&dm, NULL);
-			SetWindowLongPtr(hWindow, GWL_STYLE, WS_POPUP | WS_SYSMENU);
+			SetWindowLongPtr(hWindow, GWL_STYLE, /*WS_POPUP | */WS_SYSMENU);
 			SetWindowLongPtr(hWindow, GWL_EXSTYLE, WS_EX_APPWINDOW);
 			// The SWP_SHOWWINDOW CANNOT be removed or it will be a white-blank and when you try clicking it,
 			// the window underneath will receive the WM_#BUTTON#### message but not this window.
@@ -231,13 +231,13 @@ void Window::Resize(Size size, bool outer)
 	previous = this->size;
 	this->size = size;
 	
-	for_each(controls.begin(), controls.end(), [](Control *&control)
+	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&ControlBase)
 	{
-		if (!control)
+		if (!ControlBase)
 			return;
-		if (control->Implemented(ControlInterface::IRenderable))
+		if (ControlBase->Implemented(ControlBaseInterface::IRenderable))
 		{
-			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
 			iRenderable->Resize();
 		}
 	});

@@ -1,7 +1,7 @@
 #pragma once
 #include "Preprocess.h"
-#include "WinUser.h"
-#include "Control.h"
+#include <WinUser.h>
+#include "ControlBase.h"
 #include "Button.h"
 #include "Character.h"
 #include "IClickable.h"
@@ -13,7 +13,7 @@ class _L_ Window
 public:
 	Window(Size size);
 	~Window();
-	Control *AppendEntity(Control *control);
+	ControlBase *AppendEntity(ControlBase *ControlBase);
 	void Clear();
 	void Click(Point point);
 	bool Create();
@@ -30,7 +30,7 @@ private:
 	HWND hWindow = NULL;
 	Point pos;
 	Size size, border, previous;
-	list<Control *> controls;
+	list<ControlBase *> ControlBases;
 
 	DWORD style = WS_OVERLAPPEDWINDOW ^ WS_MAXIMIZEBOX ^ WS_THICKFRAME;
 	DWORD exStyle = WS_EX_OVERLAPPEDWINDOW;

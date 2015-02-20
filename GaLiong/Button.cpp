@@ -3,7 +3,7 @@
 _L_BEGIN
 Button::Button()
 {
-	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
+	implemented = ControlBaseInterface::IRenderable | ControlBaseInterface::IClickable;
 }
 
 Button::~Button()

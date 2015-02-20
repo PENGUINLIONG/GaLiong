@@ -9,7 +9,6 @@
 #include <thread>
 // STL
 #include <list>
-#include <tuple>
 #include <vector>
 // Windows
 #include <Windows.h>
@@ -19,7 +18,7 @@
 #include <gl\GLU.h>
 // FreeType
 #include "freetype\ft2build.h"
-#include "freetype\freetype.h"
+#include FT_FREETYPE_H
 #include FT_GLYPH_H
 #include FT_STROKER_H
 
@@ -27,8 +26,11 @@
 //#pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
-
 #endif
+
+#pragma warning(disable: 4251)
+
+#pragma pack(1)
 
 // Not a good habit. Must be deleted after the complement of basic features.
 using namespace std;
@@ -59,9 +61,9 @@ using namespace std;
 _L_BEGIN
 // 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
 // 看上去就像是EntityType这个enum class（其实是namespace）里面的项
-namespace ControlInterface
+namespace ControlBaseInterface
 {
-	enum ControlInterface
+	enum ControlBaseInterface
 	{
 		IRenderable = 1,
 		IClickable = 1 << 1

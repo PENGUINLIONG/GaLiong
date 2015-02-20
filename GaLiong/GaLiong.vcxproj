@@ -67,7 +67,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(SolutionDir)Lib\Include;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -75,7 +74,9 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>SolutionDir)Lib\Include;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -84,28 +85,18 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GALIONG_EXPORTS;_INSIDER_COMPILATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
       <CallingConvention>Cdecl</CallingConvention>
-      <TreatWarningAsError>false</TreatWarningAsError>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>$(SolutionDir)GaLiong\Include;$(SolutionDir)Lib\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <SmallerTypeCheck>true</SmallerTypeCheck>
-      <StructMemberAlignment>1Byte</StructMemberAlignment>
       <CompileAs>CompileAsCpp</CompileAs>
-      <DisableSpecificWarnings>4251;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)\Lib\zlib_x86.lib;$(SolutionDir)\Lib\libpng_x86.lib;$(SolutionDir)\Lib\freetype_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <Profile>true</Profile>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib\Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,31 +125,19 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GALIONG_EXPORTS;_INSIDER_COMPILATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)GaLiong\Include;$(SolutionDir)Lib\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <CallingConvention>Cdecl</CallingConvention>
-      <MinimalRebuild>true</MinimalRebuild>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <DisableSpecificWarnings>4251;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <SubSystem>NotSet</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <Profile>true</Profile>
       <AdditionalDependencies>$(SolutionDir)\Lib\zlib_x86.lib;$(SolutionDir)\Lib\libpng_x86.lib;$(SolutionDir)\Lib\freetype_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>P:\GaLiong\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Version>
       </Version>
     </Link>
@@ -211,14 +190,10 @@
     <ClCompile Include="WindowsAudioSession.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lib\Include\png.h" />
-    <ClInclude Include="..\Lib\Include\pngconf.h" />
-    <ClInclude Include="..\Lib\Include\zconf.h" />
-    <ClInclude Include="..\Lib\Include\zlib.h" />
     <ClInclude Include="Include\BMP.h" />
     <ClInclude Include="Include\Button.h" />
     <ClInclude Include="Include\Character.h" />
-    <ClInclude Include="Include\Control.h" />
+    <ClInclude Include="Include\ControlBase.h" />
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\Entrance.h" />
     <ClInclude Include="Include\Font.h" />
@@ -242,6 +217,7 @@
     <ClInclude Include="Include\WaveOut.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Include\WindowsAudioSession.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="TextBar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
