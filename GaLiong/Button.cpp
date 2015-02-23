@@ -45,6 +45,6 @@ bool Button::CheckClick(Size window, Point point)
 
 void Button::ClickEventHandler(Point point)
 {
-	cout << "Button clicked!" << endl;
+	Log << L"Button clicked!" << EndLog;
 }
 _L_END

@@ -233,6 +233,7 @@ $RECYCLE.BIN/
 
 
 #Liong's personal definition
-ConsoleApplication1/*.*
-UnitTest1/*.*
+ConsoleApplication1/
+UnitTest1/
 *.7z
+UnitTest1/UnitTest1.vcxproj

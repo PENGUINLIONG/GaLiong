@@ -32,7 +32,7 @@ void Window::Clear()
 
 void Window::Click(Point point)
 {
-	cout << "Check click... At (" << point.X << ", " << point.Y << ")." << endl;
+	Log << L"Check click... At (" << point.X << L", " << point.Y << L")." << EndLog;
 
 	for (vector<ControlBase *>::iterator ControlBase = controls.begin(); ControlBase != controls.end(); ++ControlBase)
 	{
@@ -265,12 +265,12 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					case VK_F11:
 						if (window->isFullScreen)
 						{
-							cout << "Try to switch to fullscreen mode..." << endl;
+							Log << L"Try to switch to fullscreen mode..." << EndLog;
 							window->Resize({ GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) });
 						}
 						else
 						{
-							cout << "Try to switch to window mode..." << endl;
+							Log << L"Try to switch to window mode..." << EndLog;
 							window->Resize(window->previous);
 						}
 						break;

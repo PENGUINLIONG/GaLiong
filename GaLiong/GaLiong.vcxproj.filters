@@ -215,16 +215,5 @@
     <ClInclude Include="Include\TextBar.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="Include\TypeDefine.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GaLiong.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

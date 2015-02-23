@@ -1,12 +1,14 @@
 #include "Timer.h"
 
 _L_BEGIN
+Timer::Timer()
+{
+}
 Timer::Timer(void *userData, unsigned long interval) : userData(userData), interval(interval)
 {
 	if (interval)
 		available = true;
 }
-
 Timer::Timer(void *userData, unsigned long interval, TimerExecuteMode mode) : userData(userData), interval(interval), mode(mode)
 {
 	if (interval)
@@ -18,10 +20,10 @@ void Timer::DoElapsed()
 	while (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startTime) < interval && enabled)
 		this_thread::yield();
 
-	if (!enabled)
+	if (!enabled || !available)
 		return;
 	
-	if (!callbacks.empty())
+	if (!callbacks.empty() && available)
 	{
 		for_each(callbacks.begin(), callbacks.end(), [&](TimerCallbackFunction &callback)
 		{

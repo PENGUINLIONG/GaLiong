@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "IClickable.h"
 #include "IRenderable.h"
+#include "Logger.h"
 
 _L_BEGIN
 class _L_ Window

@@ -40,6 +40,40 @@ void Renderer::DrawRectangleUpsideDown(TextureID textureID, RectD rect)
 	glEnd();
 }
 
+void Renderer::DrawRectangleLaterallyReversed(TextureID textureID, RectD rect)
+{
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(UPPER_RIGHT);
+		glVertex2d(rect.Left, rect.Top);
+		glTexCoord2f(LOWER_RIGHT);
+		glVertex2d(rect.Left, rect.Bottom);
+		glTexCoord2f(LOWER_LEFT);
+		glVertex2d(rect.Right, rect.Bottom);
+		glTexCoord2f(UPPER_LEFT);
+		glVertex2d(rect.Right, rect.Top);
+	}
+	glEnd();
+}
+
+void Renderer::DrawRectangleCompletelyReversed(TextureID textureID, RectD rect)
+{
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(LOWER_RIGHT);
+		glVertex2d(rect.Left, rect.Top);
+		glTexCoord2f(UPPER_RIGHT);
+		glVertex2d(rect.Left, rect.Bottom);
+		glTexCoord2f(UPPER_LEFT);
+		glVertex2d(rect.Right, rect.Bottom);
+		glTexCoord2f(LOWER_LEFT);
+		glVertex2d(rect.Right, rect.Top);
+	}
+	glEnd();
+}
+
 void Renderer::DrawBackGroundImage(TextureBase &texture)
 {
 	double &&ratio = (double)texture.GetSize().Width / (double)texture.GetSize().Height;
