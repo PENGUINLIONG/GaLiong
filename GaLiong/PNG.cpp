@@ -9,35 +9,50 @@ PNG::PNG()
 }
 PNG::~PNG()
 {
-	png_destroy_info_struct(pngPtr, &pngInfoPtr);
-	png_destroy_read_struct(&pngPtr, &pngInfoPtr, &pngInfoPtr);
+	png_destroy_read_struct(&pngPtr, &pngInfoPtr, nullptr);
 }
 
-bool PNG::InitHeader(Size &size, BufferLength &length, TextureBase::PixelFormat &pixelFormat, TextureBase::ByteSize &byteSize)
+bool PNG::InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureBase::ByteSize &byteSize)
 {
 	// Check the signature.
 	Byte signature[8];
 	stream.read(reinterpret_cast<char *>(signature), 8);
 	if (png_sig_cmp(signature, 0, 7))
+	{
+		Log << L"PNG: Unexpected signature.";
 		return false;
+	}
 	png_set_sig_bytes(pngPtr, 8);
 	png_read_info(pngPtr, pngInfoPtr);
-	png_get_IHDR(pngPtr, pngInfoPtr, &_width, &_height, &bit_depth, &color_type, &interlace_type, &compression_type, &filter_method);
-	size = { png_get_image_width(pngPtr, pngInfoPtr), png_get_image_width(pngPtr, pngInfoPtr) };
+	Chunk_IHDR ihdr;
+	png_get_IHDR(pngPtr, pngInfoPtr, &ihdr.Width, &ihdr.Height, &ihdr.BitDepth, &ihdr.ColorType, &ihdr.InterlaceMethod, &ihdr.CompressionMethod, &ihdr.FilterMethod);
+	if (!ihdr.ColorType)
+		goto failed;
+	size = { ihdr.Width, ihdr.Height };
+
 	// PixelFormat
-	if (png_get_color_type(pngPtr, pngInfoPtr) & 0x01)
+	if (ihdr.ColorType & 0x01)
 	{
-		Log << L"U"
+		png_set_palette_to_rgb(pngPtr);
+		pixelFormat = TextureBase::PixelFormat::RGB;
 	}
-	switch (png_get_color_type(pngPtr, pngInfoPtr))
+	else
 	{
-		case :
-			break;
-		case :
-			break;
+		switch (ihdr.ColorType)
+		{
+			case 2:
+				pixelFormat = TextureBase::PixelFormat::RGB;
+				break;
+			case 6:
+				pixelFormat = TextureBase::PixelFormat::RGBA;
+				break;
+			default:
+				goto failed;
+		}
 	}
+
 	// ByteSize
-	switch (png_get_bit_depth(pngPtr, pngInfoPtr))
+	switch (ihdr.BitDepth)
 	{
 		case 8:
 			byteSize = TextureBase::ByteSize::UByte;
@@ -55,35 +70,56 @@ failed:
 	return false;
 }
 
-Buffer ReadChunk(BufferLength length)
+Buffer PNG::ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength)
 {
+	BufferLength advance = size.Width * pixelLength;
+	dataLength = advance * size.Height;
+	Buffer data = new Byte[dataLength];
+	Buffer *rowArray = new Buffer[size.Height];
 
+	for (long i = 0; i < size.Height; i++)
+	{
+		long revRowIndex = (size.Height - i - 1) * advance;
+		rowArray[i] = data + revRowIndex;
+	}
+	png_read_image(pngPtr, rowArray);
+	delete [] rowArray;
+
+	return data;
 }
 
 void PNG::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 {
-	Log << L"PNG: Try loading " << path << L"...";
+	Log << L"PNG: Try loading " << path << L"..." << EndLog;
 	if (stream.is_open())
 		stream.close();
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 	
 	Size size;
-	BufferLength dataLength;
 	TextureBase::PixelFormat pixelFormat;
 	TextureBase::ByteSize byteSize;
 
-	if (!InitHeader())
+	if (InitHeader(size, pixelFormat, byteSize))
 	{
-		Log.Log(L"PNG: Unexpected signature.", Logger::WarningLevel::Warn);
+		BufferLength dataLength;
+		Buffer data = ReadData(size, dataLength, Texture::GetPixelLength(pixelFormat, byteSize));
+
+		texture->Set(dataLength, data, size, pixelFormat, byteSize);
+		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
+			texture->Generate();
+	}
+	else
+	{
+		Log.Log((L"PNG: Failed in loading " + wstring(path) + L"!").c_str(), Logger::WarningLevel::Warn);
 		return;
 	}
-
-
-
-	Log << L"PNG: Succeeded.";
+	
+	if ((option & FileReadOption::NoClose) == FileReadOption::None)
+		stream.close();
+	Log << L"PNG: Succeeded." << EndLog;
 }
 
-void ReadDataUsingFileStream(png_structp pngPtr, png_bytep data, png_size_t length)
+void PNG::ReadDataUsingFileStream(png_structp pngPtr, png_bytep data, png_size_t length)
 {
 	(reinterpret_cast<ifstream *>(png_get_io_ptr(pngPtr)))->read(reinterpret_cast<char *>(data), length);
 }

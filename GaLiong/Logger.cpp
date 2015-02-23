@@ -204,6 +204,8 @@ Logger &EndLog(Logger &logger)
 	return logger;
 }
 
+
+
 Logger &EndLine(Logger &logger)
 {
 	if (logger.console)

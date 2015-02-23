@@ -29,8 +29,11 @@ void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureBase *ta
 			break;
 		}
 		case ImageFileFormat::PNG:
-			// ... 
+		{
+			PNG png;
+			png.ToTexture(path, target);
 			break;
+		}
 		default: break;
 	}
 }

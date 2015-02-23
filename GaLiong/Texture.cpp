@@ -13,12 +13,12 @@ unsigned char Texture::GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize
 		{
 			case PixelFormat::Alpha:
 				return 1;
-			case PixelFormat::BGR:
-			case PixelFormat::RGB:
-				return 3;
 			case PixelFormat::RGBA:
 			case PixelFormat::BGRA:
 				return 4;
+			case PixelFormat::RGB:
+			case PixelFormat::BGR:
+				return 3;
 			default: break;
 		}
 	}
