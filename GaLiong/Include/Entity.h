@@ -39,7 +39,7 @@ public:
 	}
 protected:
 	bool visible = true;
-	list<TextureBase *> textures;
+	vector<TextureBase *> textures;
 	PointD pos;
 	SizeD size;
 };

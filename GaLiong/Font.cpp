@@ -117,8 +117,8 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 		}
 #pragma endregion
 
-		unsigned long length;
-		unsigned char *buffer;
+		BufferLength length;
+		Buffer buffer;
 
 		if (outlineWidth)
 		{
@@ -139,7 +139,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 
 			length = (_bitmap.width * _bitmap.rows) << 2;
 			// The buffer will be deleted in 'Texture' so just keep it alive.
-			buffer = new unsigned char[length];
+			buffer = new Byte[length];
 			memset(buffer, 0, length);
 
 #pragma region Transfer data
@@ -173,7 +173,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 					unsigned char alpha = *(bitmap.buffer + srcOffset);
 					if (alpha)
 					{
-						unsigned char *pixel = buffer + dstOffset;
+						Buffer pixel = buffer + dstOffset;
 						*(pixel + 0) = (unsigned char)((unsigned short)(*(pixel + 0) * (255 - alpha)) >> 8) +
 							(unsigned char)(((unsigned short)(fontColor.Red * alpha)) >> 8) + 1;
 						*(pixel + 1) = (unsigned char)((unsigned short)(*(pixel + 1) * (255 - alpha)) >> 8) +
@@ -205,7 +205,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 #pragma region No outline
 			length = (bitmap.width * bitmap.rows) << 2;
 			// The buffer will be deleted in 'Texture' so just keep it alive.
-			buffer = new unsigned char[length];
+			buffer = new Byte[length];
 			memset(buffer, 0, length);
 
 #pragma region Transfer data

@@ -3,7 +3,7 @@
 _L_BEGIN
 Button::Button()
 {
-	implemented = ControlBaseInterface::IRenderable | ControlBaseInterface::IClickable;
+	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
 }
 
 Button::~Button()
@@ -18,7 +18,7 @@ bool Button::CheckClick(Size window, Point point)
 	if (x0 > point.X || point.X > x1 || y0 > point.Y || point.Y > y1)
 		return false;
 
-	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it)
+	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it)
 	{
 		if (!(*it)->IsInformative())
 			continue;
@@ -30,7 +30,7 @@ bool Button::CheckClick(Size window, Point point)
 			int pixelLength = (*it)->GetPixelLength();
 			if (pixelLength < 5)
 			{
-				if (*(unsigned char *)((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
+				if (*(Buffer )((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
 					return true;
 			}
 			else

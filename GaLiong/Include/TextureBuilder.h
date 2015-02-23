@@ -15,6 +15,6 @@ private:
 	Rect boundary;
 	TextureBase::PixelFormat pixelFormat;
 	TextureBase::ByteSize byteSize;
-	list<TextureConponent> textures;
+	vector<TextureConponent> textures;
 };
 _L_END

@@ -6,12 +6,12 @@ class _L_ ControlBase
 {
 	friend class Window;
 public:
-	virtual const bool Implemented(unsigned long long key) final
+	virtual const bool Implemented(BufferLength key) final
 	{
 		return (key & implemented) ? true : false;
 	}
 protected:
-	unsigned long long implemented = 0x00000000;
+	BufferLength implemented = 0x00000000;
 	Size *windowSize = nullptr;
 
 	virtual ~ControlBase() {}

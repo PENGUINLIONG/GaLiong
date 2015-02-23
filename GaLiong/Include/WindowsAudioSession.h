@@ -11,7 +11,7 @@
 	|Using this module could be *UNSAFE*. Please think over seriously before you decide to use.|
 	|__________________________________________________________________________________________|
 */
-
+/*
 #pragma once
 #include "Preprocess.h"
 #include <Audioclient.h>
@@ -31,7 +31,7 @@ public:
 	~WindowsAudioSession();
 private:
 	bool available = false;
-	unsigned char *buffer;
+	Buffer buffer;
 	unsigned int bufferSize = 0;
 	REFERENCE_TIME requestedDuration = 10000000;
 	IMMDeviceEnumerator *pDeviceEnumerator = nullptr;
@@ -43,3 +43,4 @@ private:
 	void Dispose();
 };
 _L_END
+*/

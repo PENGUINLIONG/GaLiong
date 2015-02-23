@@ -10,7 +10,7 @@ void Entity::Render()
 	if (!visible)
 		return;
 
-	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // The order to render the textures is to
+	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // The order to render the textures is to
 	{
 		if (!(*it) || !(*it)->IsAvailable())
 		{

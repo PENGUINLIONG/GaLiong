@@ -2,13 +2,17 @@
 // Standard library
 #include <algorithm>
 #include <chrono>
+#include <ctime>
 #include <fstream>
 #include <future>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <thread>
 // STL
 #include <list>
+#include <tuple>
 #include <vector>
 // Windows
 #include <Windows.h>
@@ -21,9 +25,13 @@
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 #include FT_STROKER_H
-
+// LibPNG
+#include "libpng\png.h"
+// ZLib
+#include "zlib\zlib.h"
+#include "zlib\zconf.h"
 // Import libraries
-//#pragma comment (lib, "winmm.lib")
+#pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 #endif
@@ -49,10 +57,6 @@ using namespace std;
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
-#define _L_ENUM_BEGIN(name) enum name {
-#define _L_ENUM_JOIN(name) }; enum name {
-#define _L_ENUM_END };
-
 #ifdef _WHITE_BOX_TESTING // White-box testing
 #define private public
 #define protected public
@@ -61,12 +65,12 @@ using namespace std;
 _L_BEGIN
 // 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
 // 看上去就像是EntityType这个enum class（其实是namespace）里面的项
-namespace ControlBaseInterface
+namespace ControlInterface
 {
-	enum ControlBaseInterface
+	enum ControlInterface
 	{
-		IRenderable = 1,
-		IClickable = 1 << 1
+		IClickable = 0x01,
+		IRenderable = 0x02
 	};
 }
 
@@ -77,20 +81,15 @@ enum class FileReadOption : unsigned char
 	NoGenerate = 0x02
 };
 
-template<class T> inline T operator~ (T a) { return (T)~(int)a; }
-template<class T> inline T operator| (T a, T b) { return (T)((int)a | (int)b); }
-template<class T> inline T operator& (T a, T b) { return (T)((int)a & (int)b); }
-template<class T> inline T operator^ (T a, T b) { return (T)((int)a ^ (int)b); }
-template<class T> inline T& operator|= (T& a, T b) { return (T&)((int&)a |= (int)b); }
-template<class T> inline T& operator&= (T& a, T b) { return (T&)((int&)a &= (int)b); }
-template<class T> inline T& operator^= (T& a, T b) { return (T&)((int&)a ^= (int)b); }
-
 typedef unsigned __int8  Byte1;
 typedef unsigned __int16 Byte2;
 typedef unsigned __int32 Byte4;
 typedef unsigned __int64 Byte8;
 
+typedef unsigned char Byte;
 typedef unsigned char *Buffer;
+typedef unsigned long long BufferLength;
+typedef std::tuple<const Buffer &, const BufferLength> InformativeBuffer;
 typedef unsigned __int16 Flag;
 typedef unsigned long LongFlag;
 
@@ -136,4 +135,12 @@ typedef struct {
 } Color;
 
 typedef unsigned int TextureID;
+
+template<class T> inline T operator~ (T a) { return (T)~(int)a; }
+template<class T> inline T operator| (T a, T b) { return (T)((int)a | (int)b); }
+template<class T> inline T operator& (T a, T b) { return (T)((int)a & (int)b); }
+template<class T> inline T operator^ (T a, T b) { return (T)((int)a ^ (int)b); }
+template<class T> inline T& operator|= (T& a, T b) { return (T&)((int&)a |= (int)b); }
+template<class T> inline T& operator&= (T& a, T b) { return (T&)((int&)a &= (int)b); }
+template<class T> inline T& operator^= (T& a, T b) { return (T&)((int&)a ^= (int)b); }
 _L_END

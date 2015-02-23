@@ -55,6 +55,9 @@
     <Filter Include="头文件\Log">
       <UniqueIdentifier>{d4704d55-ec8e-43e4-9846-b52198d4275d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Log">
+      <UniqueIdentifier>{191a9912-66ce-405f-97d0-d0f574e3f346}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BMP.cpp">
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>源文件\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,20 +200,23 @@
     <ClInclude Include="Include\TextEntity.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
-    <ClInclude Include="TextBar.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Timer.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
     <ClInclude Include="Include\PNG.h">
       <Filter>头文件\FileSys</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>头文件\Log</Filter>
-    </ClInclude>
     <ClInclude Include="Include\ControlBase.h">
       <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Logger.h">
+      <Filter>头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextBar.h">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TypeDefine.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Preprocess.h"
+#include "Logger.h"
 #include "TextureBase.h"
 
 _L_BEGIN
@@ -30,10 +31,10 @@ public:
 	} InfoHeader;
 
 	BMP();
-	bool InitHeader(Size &size, unsigned long &length);
-	unsigned char *ReadData(unsigned long length);
-	void ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option = FileReadOption::None);
 	~BMP();
+	bool InitHeader(Size &size, BufferLength &length);
+	Buffer ReadData(BufferLength length);
+	void ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option = FileReadOption::None);
 private:
 	ifstream stream;
 };

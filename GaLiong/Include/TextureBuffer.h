@@ -26,7 +26,7 @@ public:
 	{
 		return *current;
 	}
-	virtual const unsigned char *GetData() override final
+	virtual const Buffer GetData() override final
 	{
 		return current->GetData();
 	}
@@ -55,7 +55,7 @@ public:
 	{
 		current = source;
 	}
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
+	virtual void Set(BufferLength dataLength, Buffer data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		current->Set(dataLength, data, size, pixelFormat, byteSize);
 	}

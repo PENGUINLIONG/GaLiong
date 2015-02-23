@@ -3,7 +3,7 @@
 _L_BEGIN
 Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 {
-	implemented = ControlBaseInterface::IRenderable;
+	implemented = ControlInterface::IRenderable;
 }
 
 bool Label::GenerateFont()
@@ -38,7 +38,7 @@ void Label::Render()
 	if (!visible && !available && empty)
 		return;
 
-	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
+	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
 	{
 		if (!(*it) || !(*it)->IsAvailable())
 		{

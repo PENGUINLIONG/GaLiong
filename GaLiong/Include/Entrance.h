@@ -9,6 +9,7 @@
 #include "IRenderable.h"
 #include "Label.h"
 #include "LibFreeType.h"
+#include "Logger.h"
 #include "PNG.h"
 #include "Preprocess.h"
 #include "Renderer.h"

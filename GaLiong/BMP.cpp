@@ -4,7 +4,7 @@ _L_BEGIN
 BMP::BMP() {}
 BMP::~BMP() {}
 
-bool BMP::InitHeader(Size &size, unsigned long &length)
+bool BMP::InitHeader(Size &size, BufferLength &length)
 {
 	FileHeader f;
 	InfoHeader i;
@@ -21,9 +21,9 @@ bool BMP::InitHeader(Size &size, unsigned long &length)
 	return true;
 }
 
-unsigned char *BMP::ReadData(unsigned long length)
+Buffer BMP::ReadData(BufferLength length)
 {
-	unsigned char *data = new unsigned char[length]; // NEED TO BE DELETED.
+	Buffer data = new Byte[length]; // NEED TO BE DELETED.
 	stream.read((char *)data, length);
 
 	return data;
@@ -31,15 +31,16 @@ unsigned char *BMP::ReadData(unsigned long length)
 
 void BMP::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 {
+	Log << L"BMP: Try loading " << path << L"...";
 	if (stream.is_open())
 		stream.close();
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 
 	Size size;
-	unsigned long dataLength;
+	BufferLength dataLength;
 	if (InitHeader(size, dataLength))
 	{
-		unsigned char *data = ReadData(dataLength);
+		Buffer data = ReadData(dataLength);
 
 		texture->Set(dataLength, data, size, TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
@@ -47,5 +48,6 @@ void BMP::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
 	}
 	if ((option & FileReadOption::NoClose) == FileReadOption::None)
 		stream.close();
+	Log << L"BMP: Succeeded!";
 }
 _L_END

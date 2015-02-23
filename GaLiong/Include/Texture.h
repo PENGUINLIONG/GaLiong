@@ -25,7 +25,7 @@ public:
 		Generate(Filter::Linear);
 	}
 	void Generate(Filter filter);
-	virtual const unsigned char *GetData() override final
+	virtual const Buffer GetData() override final
 	{
 		return data;
 	}
@@ -45,7 +45,7 @@ public:
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
+	virtual void Set(BufferLength dataLength, Buffer data, Size size, PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		if (this->data)
 			delete this->data;
@@ -62,8 +62,8 @@ public:
 private:
 	bool available = false;
 	bool informative = false;
-	unsigned long dataLength = 0;
-	unsigned char *data = nullptr;
+	BufferLength dataLength = 0;
+	Buffer data = nullptr;
 	TextureID index = 0;
 	Size size;
 	PixelFormat pixelFormat;

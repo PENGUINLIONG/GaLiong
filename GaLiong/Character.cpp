@@ -3,7 +3,7 @@
 _L_BEGIN
 Character::Character() : pos_Original({ 0, 0 })
 {
-	this->implemented = ControlBaseInterface::IRenderable;
+	this->implemented = ControlInterface::IRenderable;
 }
 
 Character::~Character()
@@ -15,7 +15,7 @@ void Character::Render()
 	if (!visible)
 		return;
 
-	for (list<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
+	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
 	{
 		if (!(*it) || !(*it)->IsAvailable())
 		{

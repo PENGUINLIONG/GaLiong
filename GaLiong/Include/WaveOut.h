@@ -7,8 +7,8 @@ class _L_ WaveOut
 {
 public:
 	WaveOut();
-	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop);
-	void Write(char *buffer, unsigned int bufferLength, PCMFormat fmt);
+	void Write(Buffer buffer, BufferLength bufferLength, PCMFormat fmt, bool loop);
+	void Write(Buffer buffer, BufferLength bufferLength, PCMFormat fmt);
 	void Reset();
 	void Pause();
 	void Restart();

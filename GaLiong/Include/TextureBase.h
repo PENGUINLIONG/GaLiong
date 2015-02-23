@@ -29,11 +29,11 @@ public:
 	virtual const bool IsInformative() = 0;
 	virtual void Generate() = 0;
 	virtual Texture &Get() = 0;
-	virtual const unsigned char *GetData() = 0;
+	virtual const Buffer GetData() = 0;
 	virtual const TextureID GetIndex() = 0;
 	virtual const unsigned char GetPixelLength() = 0;
 	virtual const Size GetSize() = 0;
 	virtual const bool SameType(PixelFormat pixelFormat, ByteSize byteSize) = 0;
-	virtual void Set(unsigned long dataLength, unsigned char *data, Size size, PixelFormat pixelFormat, ByteSize byteSize) = 0;
+	virtual void Set(BufferLength dataLength, Buffer data, Size size, PixelFormat pixelFormat, ByteSize byteSize) = 0;
 };
 _L_END

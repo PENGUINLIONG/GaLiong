@@ -10,6 +10,7 @@
 _L_BEGIN
 class _L_ Window
 {
+	friend class Logger;
 public:
 	Window(Size size);
 	~Window();
@@ -30,7 +31,7 @@ private:
 	HWND hWindow = NULL;
 	Point pos;
 	Size size, border, previous;
-	list<ControlBase *> ControlBases;
+	vector<ControlBase *> controls;
 
 	DWORD style = WS_OVERLAPPEDWINDOW ^ WS_MAXIMIZEBOX ^ WS_THICKFRAME;
 	DWORD exStyle = WS_EX_OVERLAPPEDWINDOW;

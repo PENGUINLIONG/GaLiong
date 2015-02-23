@@ -454,12 +454,12 @@
     /* If pnglibconf.h is missing, you can
      * copy scripts/pnglibconf.h.prebuilt to pnglibconf.h
      */
-#   include "pnglibconf.h"
+#   include "libpng\pnglibconf.h"
 #endif
 
 #ifndef PNG_VERSION_INFO_ONLY
    /* Machine specific configuration. */
-#  include "pngconf.h"
+#  include "libpng\pngconf.h"
 #endif
 
 /*

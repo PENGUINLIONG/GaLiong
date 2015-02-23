@@ -6,8 +6,8 @@
 _L_BEGIN
 class _L_ Font
 {
-public:
 	friend class LibFreeType;
+public:
 	Font();
 	void SetSizeQ26_6(Size size);
 	void SetSizeQ26_6(Size size, unsigned int resolution_X, unsigned int resolution_Y);
@@ -16,12 +16,12 @@ public:
 	void SetOutlineWidth(double width);
 	Texture *RenderString(const wchar_t *text, Size border, Size *spare = nullptr);
 	~Font();
-#ifdef _INSIDER_COMPILATION
 private:
-	unsigned char *file;
+	Buffer file;
 	double outlineWidth = 0;
 	Size size;
 	Color fontColor, outlineColor;
+#ifdef _INSIDER_COMPILATION
 	FT_Face face;
 	FT_Stroker stroker;
 #endif

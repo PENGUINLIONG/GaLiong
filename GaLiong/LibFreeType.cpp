@@ -20,7 +20,7 @@ Font *LibFreeType::NewFont(wchar_t *path)
 		return nullptr;
 
 	length = stream.seekg(stream.beg, stream.end).tellg();
-	buffer = new unsigned char[length];
+	buffer = new Byte[length];
 	stream.seekg(stream.beg);
 	stream.read((char *)buffer, length);
 	stream.close();

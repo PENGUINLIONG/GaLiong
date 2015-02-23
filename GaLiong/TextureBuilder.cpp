@@ -34,16 +34,16 @@ Texture *TextureBuilder::Make()
 	Size size = { boundary.Right - boundary.Left, boundary.Top - boundary.Bottom };
 	long length = size.Width * size.Height * pxLength;
 
-	unsigned char *buffer = new unsigned char[length];
+	Buffer buffer = new Byte[length];
 	memset(buffer, 0, length); // Prevent the black background appearing.
 
 	int x, y;
 
 	// Copy the value of each pixel.
-	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
+	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
 	{
 		TextureConponent &ref = *it;
-		const unsigned char *textureData = ref.Texture->GetData();
+		const Buffer textureData = ref.Texture->GetData();
 		const Size textureSize = ref.Texture->GetSize();
 		
 		long dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
@@ -93,7 +93,7 @@ Texture *TextureBuilder::Make()
 
 TextureBuilder::~TextureBuilder()
 {
-	for (list<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // it == Texture **
+	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // it == Texture **
 	{
 		if (it->Texture)
 		{

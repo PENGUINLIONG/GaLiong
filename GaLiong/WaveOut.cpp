@@ -18,12 +18,12 @@ void WaveOut::Init(PCMFormat fmt)
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &waveFormatEx, (DWORD_PTR)Callback, (DWORD_PTR)this, CALLBACK_FUNCTION);
 }
 
-void WaveOut::Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool loop)
+void WaveOut::Write(Buffer buffer, BufferLength bufferLength, PCMFormat fmt, bool loop)
 {
 	Init(fmt);
 	if (playing)
 		Reset();
-	waveHDR.lpData = buffer;
+	waveHDR.lpData = reinterpret_cast<LPSTR>(buffer);
 	waveHDR.dwBufferLength = bufferLength;
 	waveHDR.dwFlags = 0;
 	waveOutPrepareHeader(hWaveOut, &waveHDR, sizeof(WAVEHDR));
@@ -31,7 +31,7 @@ void WaveOut::Write(char *buffer, unsigned int bufferLength, PCMFormat fmt, bool
 	playing = true;
 	this->loop = loop;
 }
-void WaveOut::Write(char *buffer, unsigned int bufferLength, PCMFormat fmt)
+void WaveOut::Write(Buffer buffer, BufferLength bufferLength, PCMFormat fmt)
 {
 	Write(buffer, bufferLength, fmt, true);
 }

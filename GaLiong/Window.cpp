@@ -10,7 +10,7 @@ Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })
 
 Window::~Window()
 {
-	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&entity){
+	for_each(controls.begin(), controls.end(), [](ControlBase *&entity){
 		if (!entity)
 			return;
 		delete entity;
@@ -21,7 +21,7 @@ Window::~Window()
 ControlBase *Window::AppendEntity(ControlBase *ControlBase)
 {
 	ControlBase->SetWindowSize(&this->size);
-	ControlBases.push_back(ControlBase);
+	controls.push_back(ControlBase);
 	return ControlBase;
 }
 
@@ -34,11 +34,11 @@ void Window::Click(Point point)
 {
 	cout << "Check click... At (" << point.X << ", " << point.Y << ")." << endl;
 
-	for (list<ControlBase *>::iterator ControlBase = ControlBases.begin(); ControlBase != ControlBases.end(); ++ControlBase)
+	for (vector<ControlBase *>::iterator ControlBase = controls.begin(); ControlBase != controls.end(); ++ControlBase)
 	{
 		if (!*ControlBase)
 			continue;
-		if ((*ControlBase)->Implemented(ControlBaseInterface::IClickable))
+		if ((*ControlBase)->Implemented(ControlInterface::IClickable))
 		{
 			IClickable *iClickable = dynamic_cast<IClickable *>(*ControlBase);
 			if (iClickable->CheckClick(size, point))
@@ -163,11 +163,11 @@ void Window::Remove()
 
 void Window::Render()
 {
-	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&ControlBase)
+	for_each(controls.begin(), controls.end(), [](ControlBase *&ControlBase)
 	{
 		if (!ControlBase)
 			return;
-		if (ControlBase->Implemented(ControlBaseInterface::IRenderable))
+		if (ControlBase->Implemented(ControlInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
 			if (iRenderable)
@@ -231,11 +231,11 @@ void Window::Resize(Size size, bool outer)
 	previous = this->size;
 	this->size = size;
 	
-	for_each(ControlBases.begin(), ControlBases.end(), [](ControlBase *&ControlBase)
+	for_each(controls.begin(), controls.end(), [](ControlBase *&ControlBase)
 	{
 		if (!ControlBase)
 			return;
-		if (ControlBase->Implemented(ControlBaseInterface::IRenderable))
+		if (ControlBase->Implemented(ControlInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
 			iRenderable->Resize();
