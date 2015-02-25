@@ -25,10 +25,10 @@ void Timer::DoElapsed()
 	
 	if (!callbacks.empty() && available)
 	{
-		for_each(callbacks.begin(), callbacks.end(), [&](TimerCallbackFunction &callback)
+		for (const auto &callback : callbacks)
 		{
 			callback(*this, userData);
-		});
+		}
 	}
 }
 

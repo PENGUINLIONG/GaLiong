@@ -51,6 +51,7 @@ void Texture::Generate(Filter filter)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, static_cast<GLenum>(pixelFormat), static_cast<GLenum>(byteSize), data); // After
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
+
 	index = textureIndex;
 	available = true;
 }

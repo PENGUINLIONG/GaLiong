@@ -35,5 +35,6 @@ public:
 	virtual const Size GetSize() = 0;
 	virtual const bool SameType(PixelFormat pixelFormat, ByteSize byteSize) = 0;
 	virtual void Set(BufferLength dataLength, Buffer data, Size size, PixelFormat pixelFormat, ByteSize byteSize) = 0;
+	SizeD CalculateDuplication(Size &container);
 };
 _L_END

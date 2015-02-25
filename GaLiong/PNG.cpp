@@ -88,7 +88,7 @@ Buffer PNG::ReadData(const Size size, BufferLength &dataLength, const Byte pixel
 	return data;
 }
 
-void PNG::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
+void PNG::ToTexture(wchar_t *path, TextureBase *texture, Flag option)
 {
 	Log << L"PNG: Try loading " << path << L"..." << EndLog;
 	if (stream.is_open())

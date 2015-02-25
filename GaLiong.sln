@@ -7,11 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GaLiong", "GaLiong\GaLiong.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{D4C3E5EE-5C36-4BE3-808E-674B99BD66F3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest1", "UnitTest1\UnitTest1.vcxproj", "{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{070C445D-7686-4D37-974D-31ACE35728A1} = {070C445D-7686-4D37-974D-31ACE35728A1}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -46,17 +41,6 @@ Global
 		{D4C3E5EE-5C36-4BE3-808E-674B99BD66F3}.Release|Win32.Build.0 = Release|Win32
 		{D4C3E5EE-5C36-4BE3-808E-674B99BD66F3}.Release|x64.ActiveCfg = Release|x64
 		{D4C3E5EE-5C36-4BE3-808E-674B99BD66F3}.Release|x64.Build.0 = Release|x64
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|Win32.Build.0 = Debug|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|x64.ActiveCfg = Debug|x64
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Debug|x64.Build.0 = Debug|x64
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Release|Win32.ActiveCfg = Release|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Release|Win32.Build.0 = Release|Win32
-		{554F4EB6-B693-4A28-B6CE-E5D61FD2F8BA}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

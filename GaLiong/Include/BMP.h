@@ -7,15 +7,15 @@ _L_BEGIN
 class _L_ BMP
 {
 public:
-	typedef struct
+	struct FileHeader
 	{
 		Byte2 Type;
 		Byte4 Size;
 		Byte2 Reserved1;
 		Byte2 Reserved2;
 		Byte4 OffBits;
-	} FileHeader;
-	typedef struct
+	};
+	struct InfoHeader
 	{
 		Byte4 Size;
 		long Width;
@@ -28,13 +28,13 @@ public:
 		long YPelsPerMeter;
 		Byte4 ClrUsed;
 		Byte4 ClrImportant;
-	} InfoHeader;
+	};
 
 	BMP();
 	~BMP();
 	bool InitHeader(Size &size, BufferLength &length);
 	Buffer ReadData(BufferLength length);
-	void ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option = FileReadOption::None);
+	void ToTexture(wchar_t *path, TextureBase *texture, Flag option = FileReadOption::None);
 private:
 	ifstream stream;
 };

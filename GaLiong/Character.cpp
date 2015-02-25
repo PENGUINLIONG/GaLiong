@@ -25,7 +25,7 @@ void Character::Render()
 		if (this->displayMode == DisplayMode::Normal)
 			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
-			Renderer::DrawRectangleUpsideDown((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
 		if (fx != FX::Normal)
 			ProcessFX();
 	}

@@ -10,12 +10,13 @@ Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })
 
 Window::~Window()
 {
-	for_each(controls.begin(), controls.end(), [](ControlBase *&entity){
+	for(auto &entity : controls)
+	{
 		if (!entity)
 			return;
 		delete entity;
 		entity = nullptr;
-	});
+	}
 }
 
 ControlBase *Window::AppendEntity(ControlBase *ControlBase)
@@ -163,17 +164,17 @@ void Window::Remove()
 
 void Window::Render()
 {
-	for_each(controls.begin(), controls.end(), [](ControlBase *&ControlBase)
+	for (const auto &control : controls)
 	{
-		if (!ControlBase)
+		if (!control)
 			return;
-		if (ControlBase->Implemented(ControlInterface::IRenderable))
+		if (control->Implemented(ControlInterface::IRenderable))
 		{
-			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
 			if (iRenderable)
 				iRenderable->Render();
 		}
-	});
+	}
 }
 
 void Window::Resize(Size size)
@@ -231,16 +232,16 @@ void Window::Resize(Size size, bool outer)
 	previous = this->size;
 	this->size = size;
 	
-	for_each(controls.begin(), controls.end(), [](ControlBase *&ControlBase)
+	for (const auto &control : controls)
 	{
-		if (!ControlBase)
+		if (!control)
 			return;
-		if (ControlBase->Implemented(ControlInterface::IRenderable))
+		if (control->Implemented(ControlInterface::IRenderable))
 		{
-			IRenderable *iRenderable = dynamic_cast<IRenderable *>(ControlBase);
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
 			iRenderable->Resize();
 		}
-	});
+	}
 }
 
 LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

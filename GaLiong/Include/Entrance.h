@@ -15,6 +15,7 @@
 #include "Renderer.h"
 #include "SoundCommon.h"
 #include "Storage.h"
+#include "TextBar.h"
 #include "Texture.h"
 #include "TextureBase.h"
 #include "TextureBuffer.h"

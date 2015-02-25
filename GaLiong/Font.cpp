@@ -126,7 +126,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 			// Draw the outline.
 			if (FT_Load_Glyph(face, index, FT_LOAD_NO_BITMAP))
 				throw exception("Failed in rendering font glyph.");
-			FT_Get_Glyph(face->glyph, &_glyph);
+			FT_Error e = FT_Get_Glyph(face->glyph, &_glyph);
 
 			FT_Glyph_Stroke(&_glyph, stroker, true);
 

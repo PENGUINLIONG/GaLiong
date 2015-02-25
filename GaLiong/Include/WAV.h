@@ -3,27 +3,6 @@
 #include "SoundCommon.h"
 
 _L_BEGIN
-typedef struct {
-	Byte4 RIFF;
-	Byte4 Length;
-	Byte4 WAVE;
-} RIFFWaveHeaderChunk;
-
-typedef struct {
-	Byte4 Size;
-	Byte2 FormatTag;
-	Byte2 Channels;
-	Byte4 SamplesPerSec;
-	Byte4 AvgBytesPerSec;
-	Byte2 BlockAlign;
-	Byte2 BitsPerSample;
-} RIFFWaveFormatChunk;
-
-typedef struct {
-	Byte4 Size;
-	char *Data;
-} RIFFWaveDataChunk;
-
 class _L_ WAV
 {
 public:
@@ -40,9 +19,28 @@ private:
 	unsigned int offset = 0;
 	unsigned int endpoint = 0;
 	ifstream *stream = nullptr;
-	RIFFWaveHeaderChunk header;
-	RIFFWaveFormatChunk format;
-	RIFFWaveDataChunk data;
+
+	struct RIFFWaveHeaderChunk
+	{
+		Byte4 RIFF;
+		Byte4 Length;
+		Byte4 WAVE;
+	} header;
+	struct RIFFWaveFormatChunk
+	{
+		Byte4 Size;
+		Byte2 FormatTag;
+		Byte2 Channels;
+		Byte4 SamplesPerSec;
+		Byte4 AvgBytesPerSec;
+		Byte2 BlockAlign;
+		Byte2 BitsPerSample;
+	} format;
+	struct RIFFWaveDataChunk
+	{
+		Byte4 Size;
+		char *Data;
+	} data;
 
 	void InitHeader();
 };

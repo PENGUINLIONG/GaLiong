@@ -126,6 +126,9 @@
     <ClCompile Include="Logger.cpp">
       <Filter>源文件\Log</Filter>
     </ClCompile>
+    <ClCompile Include="TextureBase.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Entrance.h">
@@ -215,5 +218,8 @@
     <ClInclude Include="Include\TextBar.h">
       <Filter>头文件\Control</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

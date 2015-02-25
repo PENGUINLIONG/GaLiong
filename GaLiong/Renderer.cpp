@@ -1,75 +1,43 @@
 #include "Renderer.h"
 
 _L_BEGIN
-#define UPPER_LEFT 0.0f, 1.0f
+#define UPPER_LEFT 0.0f, textureCoord.Height
 #define LOWER_LEFT 0.0f, 0.0f
-#define UPPER_RIGHT 1.0f, 1.0f
-#define LOWER_RIGHT 1.0f, 0.0f
+#define UPPER_RIGHT textureCoord.Width, textureCoord.Height
+#define LOWER_RIGHT textureCoord.Width, 0.0f
 
-void Renderer::DrawRectangle(TextureID textureID, RectD rect)
+void Renderer::DrawRectangle(TextureID textureID, RectD rect, ReverseMethod reverseMethod, SizeD textureCoord)
 {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);
+	switch (reverseMethod)
 	{
-		glTexCoord2f(UPPER_LEFT);
-		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(LOWER_LEFT);
-		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(LOWER_RIGHT);
-		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(UPPER_RIGHT);
-		glVertex2d(rect.Right, rect.Top);
-	}
-	glEnd();
-}
-
-void Renderer::DrawRectangleUpsideDown(TextureID textureID, RectD rect)
-{
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f(LOWER_LEFT);
-		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(UPPER_LEFT);
-		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(UPPER_RIGHT);
-		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(LOWER_RIGHT);
-		glVertex2d(rect.Right, rect.Top);
-	}
-	glEnd();
-}
-
-void Renderer::DrawRectangleLaterallyReversed(TextureID textureID, RectD rect)
-{
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f(UPPER_RIGHT);
-		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(LOWER_RIGHT);
-		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(LOWER_LEFT);
-		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(UPPER_LEFT);
-		glVertex2d(rect.Right, rect.Top);
-	}
-	glEnd();
-}
-
-void Renderer::DrawRectangleCompletelyReversed(TextureID textureID, RectD rect)
-{
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2f(LOWER_RIGHT);
-		glVertex2d(rect.Left, rect.Top);
-		glTexCoord2f(UPPER_RIGHT);
-		glVertex2d(rect.Left, rect.Bottom);
-		glTexCoord2f(UPPER_LEFT);
-		glVertex2d(rect.Right, rect.Bottom);
-		glTexCoord2f(LOWER_LEFT);
-		glVertex2d(rect.Right, rect.Top);
+		case ReverseMethod::None:
+			glTexCoord2f(UPPER_LEFT);  glVertex2d(rect.Left, rect.Top);
+			glTexCoord2f(LOWER_LEFT);  glVertex2d(rect.Left, rect.Bottom);
+			glTexCoord2f(LOWER_RIGHT); glVertex2d(rect.Right, rect.Bottom);
+			glTexCoord2f(UPPER_RIGHT); glVertex2d(rect.Right, rect.Top);
+			break;
+		case ReverseMethod::Vertical:
+			glTexCoord2f(LOWER_LEFT);  glVertex2d(rect.Left, rect.Top);
+			glTexCoord2f(UPPER_LEFT);  glVertex2d(rect.Left, rect.Bottom);
+			glTexCoord2f(UPPER_RIGHT); glVertex2d(rect.Right, rect.Bottom);
+			glTexCoord2f(LOWER_RIGHT); glVertex2d(rect.Right, rect.Top);
+			break;
+		case ReverseMethod::Horizontal:
+			glTexCoord2f(UPPER_RIGHT); glVertex2d(rect.Left, rect.Top);
+			glTexCoord2f(LOWER_RIGHT); glVertex2d(rect.Left, rect.Bottom);
+			glTexCoord2f(LOWER_LEFT);  glVertex2d(rect.Right, rect.Bottom);
+			glTexCoord2f(UPPER_LEFT);  glVertex2d(rect.Right, rect.Top);
+			break;
+		case ReverseMethod::BothDirection:
+			glTexCoord2f(LOWER_RIGHT); glVertex2d(rect.Left, rect.Top);
+			glTexCoord2f(UPPER_RIGHT); glVertex2d(rect.Left, rect.Bottom);
+			glTexCoord2f(UPPER_LEFT);  glVertex2d(rect.Right, rect.Bottom);
+			glTexCoord2f(LOWER_LEFT);  glVertex2d(rect.Right, rect.Top);
+			break;
+		default:
+			break;
 	}
 	glEnd();
 }

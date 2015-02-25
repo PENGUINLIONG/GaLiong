@@ -11,7 +11,10 @@
 #include <string>
 #include <thread>
 // STL
+#include <array>
 #include <list>
+#include <map>
+#include <set>
 #include <tuple>
 #include <vector>
 // Windows
@@ -63,24 +66,6 @@ using namespace std;
 #endif
 
 _L_BEGIN
-// 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
-// 看上去就像是EntityType这个enum class（其实是namespace）里面的项
-namespace ControlInterface
-{
-	enum ControlInterface
-	{
-		IClickable = 0x01,
-		IRenderable = 0x02
-	};
-}
-
-enum class FileReadOption : unsigned char
-{
-	None = 0x00,
-	NoClose = 0x01,
-	NoGenerate = 0x02
-};
-
 typedef unsigned __int8  Byte1;
 typedef unsigned __int16 Byte2;
 typedef unsigned __int32 Byte4;
@@ -91,56 +76,69 @@ typedef unsigned char *Buffer;
 typedef unsigned long long BufferLength;
 typedef std::tuple<const Buffer &, const BufferLength> InformativeBuffer;
 typedef unsigned __int16 Flag;
+typedef unsigned int TextureID;
 typedef unsigned long LongFlag;
 
-typedef struct {
+struct SizeL
+{
 	long Width;
 	long Height;
-} SizeL;
-typedef struct {
+};
+struct PointL
+{
 	long X;
 	long Y;
-} PointL;
-typedef struct {
+};
+struct RectL
+{
 	long Left;
 	long Top;
 	long Right;
 	long Bottom;
-} RectL;
+};
 
 typedef SizeL Size;
 typedef PointL Point;
 typedef RectL Rect;
 
-typedef struct {
+struct SizeD
+{
 	double Width;
 	double Height;
-} SizeD;
-typedef struct {
+};
+struct PointD
+{
 	double X;
 	double Y;
-} PointD;
-typedef struct {
+};
+struct RectD
+{
 	double Left;
 	double Top;
 	double Right;
 	double Bottom;
-} RectD;
+};
 
-typedef struct {
+struct Color
+{
 	unsigned char Red;
 	unsigned char Green;
 	unsigned char Blue;
 	unsigned char Alpha;
-} Color;
+};
 
-typedef unsigned int TextureID;
+// 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
+// 看上去就像是EntityType这个enum class（其实是namespace）里面的项
+struct ControlInterface
+{
+	const static Flag IClickable  = 0x0001;
+	const static Flag IRenderable = 0x0002;
+};
 
-template<class T> inline T operator~ (T a) { return (T)~(int)a; }
-template<class T> inline T operator| (T a, T b) { return (T)((int)a | (int)b); }
-template<class T> inline T operator& (T a, T b) { return (T)((int)a & (int)b); }
-template<class T> inline T operator^ (T a, T b) { return (T)((int)a ^ (int)b); }
-template<class T> inline T& operator|= (T& a, T b) { return (T&)((int&)a |= (int)b); }
-template<class T> inline T& operator&= (T& a, T b) { return (T&)((int&)a &= (int)b); }
-template<class T> inline T& operator^= (T& a, T b) { return (T&)((int&)a ^= (int)b); }
+struct FileReadOption
+{
+	const static Flag None       = 0x0000;
+	const static Flag NoClose    = 0x0001;
+	const static Flag NoGenerate = 0x0002;
+};
 _L_END

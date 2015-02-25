@@ -9,7 +9,7 @@ _L_BEGIN
 class _L_ PNG
 {
 public:
-	typedef struct
+	struct Chunk_IHDR
 	{
 		Byte4 Width;
 		Byte4 Height;
@@ -18,13 +18,13 @@ public:
 		int CompressionMethod;
 		int FilterMethod;
 		int InterlaceMethod;
-	} Chunk_IHDR;
+	};
 
 	PNG();
 	~PNG();
 	bool InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureBase::ByteSize &byteSize);
 	Buffer ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength);
-	void ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option = FileReadOption::None);
+	void ToTexture(wchar_t *path, TextureBase *texture, Flag option = FileReadOption::None);
 #ifdef _INSIDER_COMPILATION
 private:
 	ifstream stream;

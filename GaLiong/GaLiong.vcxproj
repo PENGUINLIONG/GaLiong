@@ -164,6 +164,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Include\TextEntity.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="TextureBase.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LibFreeType.cpp" />
@@ -210,6 +211,9 @@
     <ClInclude Include="Include\WaveOut.h" />
     <ClInclude Include="Include\Window.h" />
     <ClInclude Include="Include\WindowsAudioSession.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

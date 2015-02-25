@@ -21,10 +21,10 @@ public:
 	{
 		if (textures.empty())
 			return;
-		for_each(textures.begin(), textures.end(), [](TextureBase *&texture)
+		for (const auto &texture : textures)
 		{
 			delete texture;
-		});
+		}
 		textures.clear();
 	}
 	virtual void Render() override;

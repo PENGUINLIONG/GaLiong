@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TextureBase" Collapsed="true">
+    <Position X="8.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAEAAABADQABAAAAAAAAAAAAAAIAAAAMAAAAA=</HashCode>
+      <FileName>include\texturebase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture" Collapsed="true">
+    <Position X="7.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAAAAEBAAhADQANAAAAAAAgAAAAAAIAIQAMABABA=</HashCode>
+      <FileName>include\texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureBuffer" Collapsed="true">
+    <Position X="9.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiAEAAAEFAABADQIFAAAAAAgAAgAQAAIAEAAMAAAgA=</HashCode>
+      <FileName>include\texturebuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureBuilder" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAAAAEAAAAACAQAAAAAAAAAQAAAAAAAAAAIAIBA=</HashCode>
+      <FileName>include\texturebuilder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMP" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAADAAAAAIAEAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>include\bmp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PNG" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAABAADAAAAAAAAAAAAAAABFAAACAAAAAAAAAA=</HashCode>
+      <FileName>include\png.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ImageFormat" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAIAAAIAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>include\imageformat.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Storage" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIQAAAAACAAAgAAAAAEAACAAAAAGAAgA=</HashCode>
+      <FileName>include\storage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WAV" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABgQABiABQAAIAEAACAAQAAAAAAAACAAQAAAAAAA=</HashCode>
+      <FileName>include\wav.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renderer" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAgAAAAAAAAAACAAYAAAAAAAEAAAgAAAAAA=</HashCode>
+      <FileName>include\renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Window" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAIMABMBAAQAEAGQgAhIACCFIAkA=</HashCode>
+      <FileName>include\window.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveOut" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAgIAAAAIAADAAAQAgAAAgAAAAAAAAAAABCAAEAQAI=</HashCode>
+      <FileName>include\waveout.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button" Collapsed="true">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAECAAA=</HashCode>
+      <FileName>include\button.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Character::DisplayMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\character.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Character::FX" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\character.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAEAAQAIAIAAAAAAAAAgACABAAAAAAOAA=</HashCode>
+      <FileName>include\character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlBase" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAMAAQAAAAAABAAAAA=</HashCode>
+      <FileName>include\controlbase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entity" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAEAABAACAIAIAIAAACAAAgAAABAACAEAAAA=</HashCode>
+      <FileName>include\entity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextBar" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAABABAAAAQAAAAAACAACAAAAAAIAEAAAA=</HashCode>
+      <FileName>Include\TextBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextEntity" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAABBAAAAAKAAAAAAAGAgAAABAAABkACAA=</HashCode>
+      <FileName>include\textentity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Label" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoAAAAAkASABAACAEACAAACAAAAAAAIABAAAAkACAA=</HashCode>
+      <FileName>include\label.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhIABAAQCAABACAAEHgAQCAAAAAEAAAIAAAAEAEAAA=</HashCode>
+      <FileName>include\timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IClickable" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>include\iclickable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IRenderable" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAEAAAA=</HashCode>
+      <FileName>include\irenderable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Font" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAgAAGAAAAAAIAAAAAAAASAAgAABAgAAACCABE=</HashCode>
+      <FileName>include\font.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibFreeType" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIBAAAIAAAAIAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>include\libfreetype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logger" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABQAAAAgAIAAAAAAACAAAAAAAgAAAAADQEAAEAAAAA=</HashCode>
+      <FileName>include\logger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SizeL" Collapsed="true">
+    <Position X="4.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PointL" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RectL" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SizeD" Collapsed="true">
+    <Position X="15.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PointD" Collapsed="true">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RectD" Collapsed="true">
+    <Position X="13.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Color" Collapsed="true">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAAAAAAAAAAAAAABAAAAAAABAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ControlInterface" Collapsed="true">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="FileReadOption" Collapsed="true">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEABAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TextureConponent" Collapsed="true">
+    <Position X="17.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>include\texture.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PCMFormat" Collapsed="true">
+    <Position X="17.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAACgAAgAAAAAAAAAAEAA=</HashCode>
+      <FileName>include\soundcommon.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="Byte1" Collapsed="true">
+    <Position X="17.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Byte2" Collapsed="true">
+    <Position X="12" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Byte4" Collapsed="true">
+    <Position X="13.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Byte8" Collapsed="true">
+    <Position X="15.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Byte" Collapsed="true">
+    <Position X="15.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Buffer" Collapsed="true">
+    <Position X="12" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BufferLength" Collapsed="true">
+    <Position X="13.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="InformativeBuffer" Collapsed="true">
+    <Position X="12" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Flag" Collapsed="true">
+    <Position X="17.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TextureID" Collapsed="true">
+    <Position X="15.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LongFlag" Collapsed="true">
+    <Position X="13.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Size" Collapsed="true">
+    <Position X="4.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Point" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Rect" Collapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\preprocess.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TimerCallbackFunction" Collapsed="true">
+    <Position X="17.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\timer.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

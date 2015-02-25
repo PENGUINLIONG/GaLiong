@@ -29,7 +29,7 @@ Buffer BMP::ReadData(BufferLength length)
 	return data;
 }
 
-void BMP::ToTexture(wchar_t *path, TextureBase *texture, FileReadOption option)
+void BMP::ToTexture(wchar_t *path, TextureBase *texture, Flag option)
 {
 	Log << L"BMP: Try loading " << path << L"...";
 	if (stream.is_open())

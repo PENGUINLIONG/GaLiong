@@ -70,9 +70,9 @@ private:
 	ByteSize byteSize;
 };
 
-typedef struct
+struct TextureConponent
 {
 	Rect Rect;
 	Texture *Texture;
-} TextureConponent;
+};
 _L_END

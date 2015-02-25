@@ -7,10 +7,14 @@ _L_BEGIN
 class _L_ Renderer
 {
 public:
-	static void DrawRectangle(TextureID textureID, RectD rect);
-	static void DrawRectangleUpsideDown(TextureID textureID, RectD rect);
-	static void DrawRectangleLaterallyReversed(TextureID textureID, RectD rect);
-	static void DrawRectangleCompletelyReversed(TextureID textureID, RectD rect);
+	enum class ReverseMethod
+	{
+		None,
+		Horizontal,
+		Vertical,
+		BothDirection
+	};
+	static void DrawRectangle(TextureID textureID, RectD rect, ReverseMethod reverseMethod = ReverseMethod::None, SizeD textureCoord = { 1.0, 1.0 });
 	static void DrawBackGroundImage(TextureBase &texture);
 	static void DrawWithoutTexture(RectD rect);
 	static void DrawTestImage();
