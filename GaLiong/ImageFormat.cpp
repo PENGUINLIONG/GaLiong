@@ -13,7 +13,7 @@ ImageFileFormat ImageFormat::Detect(ifstream &stream, wchar_t * path)
 	return format;
 }
 
-void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureBase *target)
+void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureRef target)
 {
 	if (stream.is_open())
 		stream.close();

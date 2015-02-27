@@ -1,3 +1,6 @@
+
+////////////////////MUST BE CHECKED
+
 #pragma once
 #include "Preprocess.h"
 #include "Texture.h"
@@ -24,7 +27,7 @@ public:
 	}
 	virtual Texture &Get() override final
 	{
-		return *current;
+		return current->Get();
 	}
 	virtual const Buffer GetData() override final
 	{

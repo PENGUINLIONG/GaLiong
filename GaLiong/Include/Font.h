@@ -14,7 +14,7 @@ public:
 	void SetSizeAbsolute(Size size);
 	void SetColor(Color fontColor, Color outlineColor);
 	void SetOutlineWidth(double width);
-	Texture *RenderString(const wchar_t *text, Size border, Size *spare = nullptr);
+	TextureRef RenderString(const wchar_t *text, Size border, Size *spare = nullptr);
 	~Font();
 private:
 	Buffer file;

@@ -24,7 +24,7 @@ public:
 	~PNG();
 	bool InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureBase::ByteSize &byteSize);
 	Buffer ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength);
-	void ToTexture(wchar_t *path, TextureBase *texture, Flag option = FileReadOption::None);
+	void ToTexture(wchar_t *path, TextureRef texture, Flag option = FileReadOption::None);
 #ifdef _INSIDER_COMPILATION
 private:
 	ifstream stream;

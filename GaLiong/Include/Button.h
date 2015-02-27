@@ -11,7 +11,7 @@ public:
 	Button();
 	virtual ~Button() override;
 	bool CheckClick(Size window, Point point) override final;
-	virtual void BindTexture(TextureBase *texture)
+	virtual void BindTexture(TextureRef texture)
 	{
 		Entity::BindTexture(texture);
 	}

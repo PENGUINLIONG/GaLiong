@@ -18,7 +18,7 @@ public:
 	{
 		label.BindFont(font);
 	}
-	virtual void BindTexture(TextureBase *texture) = 0;
+	virtual void BindTexture(TextureRef texture) = 0;
 	bool ChangeText(const wchar_t *text)
 	{
 		return label.ChangeText(text);

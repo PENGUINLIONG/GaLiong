@@ -11,7 +11,7 @@ class _L_ Entity : public ControlBase, public IRenderable
 public:
 	Entity();
 	virtual ~Entity() override;
-	void BindTexture(TextureBase *texture)
+	void BindTexture(TextureRef texture)
 	{
 		if (!texture || !texture->IsAvailable())
 			return;
@@ -21,10 +21,6 @@ public:
 	{
 		if (textures.empty())
 			return;
-		for (const auto &texture : textures)
-		{
-			delete texture;
-		}
 		textures.clear();
 	}
 	virtual void Render() override;
@@ -39,7 +35,7 @@ public:
 	}
 protected:
 	bool visible = true;
-	vector<TextureBase *> textures;
+	vector<TextureRef> textures;
 	PointD pos;
 	SizeD size;
 };

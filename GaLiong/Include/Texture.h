@@ -7,6 +7,8 @@ class _L_ Texture : public TextureBase
 {
 public:
 	Texture();
+	void ChangeFilter(Filter filter);
+	void CleanUpManagement();
 	static unsigned char GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize);
 	virtual Texture &Get() override final
 	{
@@ -41,6 +43,7 @@ public:
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
+	void Return();
 	virtual const bool SameType(PixelFormat pixelFormat, ByteSize byteSize) override final
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
@@ -69,10 +72,11 @@ private:
 	PixelFormat pixelFormat;
 	ByteSize byteSize;
 };
+typedef shared_ptr<Texture> TextureRef;
 
-struct TextureConponent
+struct TextureComponent
 {
 	Rect Rect;
-	Texture *Texture;
+	TextureRef Texture;
 };
 _L_END

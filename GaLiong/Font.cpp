@@ -36,7 +36,7 @@ void Font::SetOutlineWidth(double width)
 	FT_Stroker_Set(stroker, width * 64.0, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 }
 
-Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
+TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 {
 	if (border.Width == 0)
 		border.Width = MAXLONG;
@@ -51,9 +51,10 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 	Point offset = { 0, 0 };
 	Size advance = { 0, 0 };
 
-	Texture *texture = nullptr;
+	TextureRef texture(nullptr);
 	TextureBuilder builder(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte);
 
+#pragma region Process the text
 	for (unsigned long i = 0; i < strLength; i++)
 	{
 		if (*(text + i) == L'\n')
@@ -243,7 +244,7 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 		offset.X += advance.Width;
 
 		Size used = { bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height };
-		texture = new Texture();
+		texture = make_shared<Texture>();
 		texture->Set(length,
 			buffer,
 			used,
@@ -261,10 +262,12 @@ Texture *Font::RenderString(const wchar_t *text, Size border, Size *spare)
 
 		previousIndex = index;
 	}
-
-	texture = builder.Make();
+#pragma endregion
+	
+	builder.Make(texture);
 	if (texture && texture->IsAvailable())
-	texture->Generate(Texture::Filter::Nearest);
+		texture->Generate(Texture::Filter::Nearest);
+	
 	return texture;
 }
 

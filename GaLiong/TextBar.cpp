@@ -15,25 +15,15 @@ TextBar::TextBar()
 	implemented = ControlInterface::IRenderable;
 	for (auto &texture_flag : textures_Border)
 	{
-		texture_flag = { nullptr, Renderer::ReverseMethod::None, { 0.0, 0.0, 0.0, 0.0 }, { 0.0, 0.0 } };
+		texture_flag = { nullptr, Renderer::ReverseMethod::None, { 0.0, 0.0, 0.0, 0.0 }, BorderComment::NoComment, { 0.0, 0.0 } };
 	}
+	available = true;
 }
 TextBar::~TextBar()
 {
-	set<TextureBase *> cleanUpTargets;
-	for (auto &texture_flag : textures_Border)
-	{
-		if (texture_flag.Texture && texture_flag.Texture->IsAvailable())
-			cleanUpTargets.insert(texture_flag.Texture);
-	}
-
-	for (auto &texture : cleanUpTargets)
-	{
-		delete texture;
-	}
 }
 
-void TextBar::BindBorderTexture(TextureBase *texture, const Flag comment)
+void TextBar::BindBorderTexture(TextureRef texture, const Flag comment)
 {
 	if (!texture || !texture->IsAvailable() || !comment)
 		return;
@@ -41,24 +31,26 @@ void TextBar::BindBorderTexture(TextureBase *texture, const Flag comment)
 	SizeD size_Texture = { ((double)_s.Width / (double)windowSize->Height) * 100.0, ((double)_s.Height / (double)windowSize->Height) * 100.0 };
 	Size size_Control = { (long)((this->size.Width / 100.0) * windowSize->Height), (long)((this->size.Height / 100.0) * windowSize->Height) };
 
+	texture->Get().ChangeFilter(Texture::Filter::Nearest);
+
 	if (comment & BorderComment::EveryBorder)
 	{
 		if (comment & BorderComment::EveryBorder == BorderComment::EveryBorder)
 		{
-			textures_Border[LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y, pos.X, pos.Y - size.Height }, { 1.0, texture->CalculateDuplication(size_Control).Height } };
-			textures_Border[TOP] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
-			textures_Border[RIGHT] = { texture, Renderer::ReverseMethod::Horizontal, { pos.X + size.Width, pos.Y, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height }, { 1.0, texture->CalculateDuplication(size_Control).Height } };
-			textures_Border[BOTTOM] = { texture, Renderer::ReverseMethod::Vertical, { pos.X, pos.Y - size.Height, pos.X + size.Width, pos.Y - size.Height - size_Texture.Height }, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
+			textures_Border[LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y, pos.X, pos.Y - size.Height }, comment, { 1.0, texture->CalculateDuplication(size_Control).Height } };
+			textures_Border[TOP] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, comment, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
+			textures_Border[RIGHT] = { texture, Renderer::ReverseMethod::Horizontal, { pos.X + size.Width, pos.Y, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height }, comment, { 1.0, texture->CalculateDuplication(size_Control).Height } };
+			textures_Border[BOTTOM] = { texture, Renderer::ReverseMethod::Vertical, { pos.X, pos.Y - size.Height, pos.X + size.Width, pos.Y - size.Height - size_Texture.Height }, comment, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
 			goto _;
 		}
 		if (comment & BorderComment::Left)
-			textures_Border[LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y, pos.X, pos.Y - size.Height }, { 1.0, texture->CalculateDuplication(size_Control).Height } };
+			textures_Border[LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y, pos.X, pos.Y - size.Height }, comment, { 1.0, texture->CalculateDuplication(size_Control).Height } };
 		if (comment & BorderComment::Top)
-			textures_Border[TOP] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
+			textures_Border[TOP] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, comment, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
 		if (comment & BorderComment::Right)
-			textures_Border[RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height }, { 1.0, texture->CalculateDuplication(size_Control).Height } };
+			textures_Border[RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height }, comment, { 1.0, texture->CalculateDuplication(size_Control).Height } };
 		if (comment & BorderComment::Bottom)
-			textures_Border[BOTTOM] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y - size.Height, pos.X + size.Width, pos.Y - size.Height - size_Texture.Height }, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
+			textures_Border[BOTTOM] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y - size.Height, pos.X + size.Width, pos.Y - size.Height - size_Texture.Height }, comment, { texture->CalculateDuplication(size_Control).Width, 1.0 } };
 	}
 
 	_:
@@ -66,24 +58,24 @@ void TextBar::BindBorderTexture(TextureBase *texture, const Flag comment)
 	{
 		if (comment & BorderComment::EveryCorner == BorderComment::EveryCorner)
 		{
-			textures_Border[UPPER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y + size_Texture.Height, pos.X, pos.Y } };
-			textures_Border[UPPER_RIGHT] = { texture, Renderer::ReverseMethod::Horizontal, { pos.X + size.Width, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y } };
-			textures_Border[LOWER_LEFT] = { texture, Renderer::ReverseMethod::Vertical, { pos.X - size_Texture.Width, pos.Y - size.Height, pos.X, pos.Y - size.Height - size_Texture.Height } };
-			textures_Border[LOWER_RIGHT] = { texture, Renderer::ReverseMethod::BothDirection, { pos.X + size.Width, pos.Y - size.Height, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height - size_Texture.Height } };
+			textures_Border[UPPER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y + size_Texture.Height, pos.X, pos.Y }, comment, {1.0,1.0} };
+			textures_Border[UPPER_RIGHT] = { texture, Renderer::ReverseMethod::Horizontal, { pos.X + size.Width, pos.Y + size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, comment, { 1.0, 1.0 } };
+			textures_Border[LOWER_LEFT] = { texture, Renderer::ReverseMethod::Vertical, { pos.X - size_Texture.Width, pos.Y - size.Height, pos.X, pos.Y - size.Height - size_Texture.Height }, comment, { 1.0, 1.0 } };
+			textures_Border[LOWER_RIGHT] = { texture, Renderer::ReverseMethod::BothDirection, { pos.X + size.Width, pos.Y - size.Height, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height - size_Texture.Height }, comment, { 1.0, 1.0 } };
 			return;
 		}
 		if (comment & BorderComment::UpperLeft)
-			textures_Border[UPPER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y - size_Texture.Height, pos.X, pos.Y } };
+			textures_Border[UPPER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y - size_Texture.Height, pos.X, pos.Y }, comment, { 1.0, 1.0 } };
 		if (comment & BorderComment::UpperRight)
-			textures_Border[UPPER_RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y - size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y } };
+			textures_Border[UPPER_RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y - size_Texture.Height, pos.X + size.Width + size_Texture.Width, pos.Y }, comment, { 1.0, 1.0 } };
 		if (comment & BorderComment::LowerLeft)
-			textures_Border[LOWER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y - size.Height, pos.X, pos.Y - size.Height - size_Texture.Height } };
+			textures_Border[LOWER_LEFT] = { texture, Renderer::ReverseMethod::None, { pos.X - size_Texture.Width, pos.Y - size.Height, pos.X, pos.Y - size.Height - size_Texture.Height }, comment, { 1.0, 1.0 } };
 		if (comment & BorderComment::LowerRight)
-			textures_Border[LOWER_RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y - size.Height, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height - size_Texture.Height } };
+			textures_Border[LOWER_RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y - size.Height, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height - size_Texture.Height }, comment, { 1.0, 1.0 } };
 	}
 }
 
-void TextBar::BindTexture(TextureBase *texture)
+void TextBar::BindTexture(TextureRef texture)
 {
 	Entity::BindTexture(texture);
 }
@@ -103,7 +95,7 @@ void TextBar::Render()
 
 void TextBar::Resize()
 {
-	if (!size.Width || !size.Height)
+	if (!available || !size.Width || !size.Height)
 		return;
 	TextEntity::Resize();
 	Size size_Control = { (long)((this->size.Width / 100.0) * windowSize->Height), (long)((this->size.Height / 100.0) * windowSize->Height) };
@@ -111,9 +103,7 @@ void TextBar::Resize()
 	{
 		if (texture.Texture)
 		{
-			// ...
-			// 将一大串的comment匹配封装成函数，并在此处添加函数引用
-			texture.TextureDuplication = texture.Texture->CalculateDuplication(size_Control);
+			BindBorderTexture(texture.Texture, texture.Comment);
 		}
 	}
 }

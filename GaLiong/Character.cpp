@@ -15,17 +15,17 @@ void Character::Render()
 	if (!visible)
 		return;
 
-	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
+	for (const auto &texture : textures) // Go to Entity::Render for details.
 	{
-		if (!(*it) || !(*it)->IsAvailable())
+		if (!texture || !texture->IsAvailable())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 			return;
 		}
 		if (this->displayMode == DisplayMode::Normal)
-			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
-			Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
+			Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
 		if (fx != FX::Normal)
 			ProcessFX();
 	}

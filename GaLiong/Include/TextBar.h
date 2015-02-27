@@ -26,8 +26,8 @@ public:
 
 	TextBar();
 	virtual ~TextBar() override;
-	virtual void BindTexture(TextureBase *texture) override;
-	void BindBorderTexture(TextureBase *texture, const Flag comment);
+	virtual void BindTexture(TextureRef texture) override;
+	void BindBorderTexture(TextureRef texture, const Flag comment);
 	void Move(unsigned long duration, RectD destination);
 	virtual void Render() override;
 	virtual void Resize() override;
@@ -35,9 +35,10 @@ private:
 	bool available = false;
 	struct BorderComponent
 	{
-		TextureBase *Texture;
+		TextureRef Texture;
 		Renderer::ReverseMethod ReverseMethod;
 		RectD Rect;
+		Flag Comment;
 		SizeD TextureDuplication;
 	};
 	array<BorderComponent, 8> textures_Border;

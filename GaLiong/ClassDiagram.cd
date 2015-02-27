@@ -250,7 +250,7 @@
       <FileName>include\preprocess.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="TextureConponent" Collapsed="true">
+  <Struct Name="TextureComponent" Collapsed="true">
     <Position X="17.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAA=</HashCode>

@@ -5,6 +5,13 @@ Texture::Texture() : size({ 0, 0 })
 {
 }
 
+void Texture::ChangeFilter(Filter filter)
+{
+	glBindTexture(GL_TEXTURE_2D, index);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
+}
+
 unsigned char Texture::GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize)
 {
 	if (byteSize == ByteSize::UByte)

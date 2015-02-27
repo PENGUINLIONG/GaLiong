@@ -29,7 +29,7 @@ public:
 		visible = available = true;
 		ClearTextures();
 	}
-	virtual void BindTexture(TextureBase *texture){}
+	virtual void BindTexture(TextureRef texture){}
 	bool ChangeText(const wchar_t *text)
 	{
 		if (!available)
@@ -43,8 +43,8 @@ public:
 	{
 		empty = true;
 		text.clear();
-		fontSize = { 0, 0 };
 		ClearTextures();
+		fontSize = { 0, 0 };
 	}
 	bool GenerateFont();
 	virtual void Render() override;

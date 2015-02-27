@@ -10,14 +10,14 @@ void Entity::Render()
 	if (!visible)
 		return;
 
-	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // The order to render the textures is to
+	for (const auto &texture : textures) // The order to render the textures is to
 	{
-		if (!(*it) || !(*it)->IsAvailable())
+		if (!texture || !texture->IsAvailable())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 			return;
 		}
-		Renderer::DrawRectangle((*it)->Get().GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}
 }
 

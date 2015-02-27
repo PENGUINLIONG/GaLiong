@@ -15,11 +15,11 @@ bool Label::GenerateFont()
 		size.Height * (double)windowSize->Height * 0.01
 	};
 	Size spare = { 0, 0 };
-	TextureBase *t = font->RenderString(this->text.c_str(), maximum, &spare);
+	TextureRef t = font->RenderString(this->text.c_str(), maximum, &spare);
 
 	if (!t)
 		return false;
-
+	
 	const Size &&s = t->GetSize();
 	fontSize = {
 		s.Width * 100.0 / (double)windowSize->Height,
@@ -27,7 +27,7 @@ bool Label::GenerateFont()
 	};
 	fontPos = { pos.X + ((size.Width - fontSize.Width) / 2), pos.Y - ((size.Height - fontSize.Height) / 2) };
 
-	textures.push_back(t);
+	textures.push_back(TextureRef(t));
 	empty = false;
 
 	return true;
@@ -38,16 +38,16 @@ void Label::Render()
 	if (!visible && !available && empty)
 		return;
 
-	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it) // Go to Entity::Render for details.
+	for (const auto &texture : textures) // Go to Entity::Render for details.
 	{
-		if (!(*it) || !(*it)->IsAvailable())
+		if (!texture || !texture->IsAvailable())
 		{
 			Renderer::DrawWithoutTexture({ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height });
 			return;
 		}
 		// Rendering image upside-down will be much faster processing data in the memory.
 		// * NOTE: rendered fonts' image are upside-down in general.
-		Renderer::DrawRectangle((*it)->Get().GetIndex(),
+		Renderer::DrawRectangle(texture->GetIndex(),
 			{ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height },
 			Renderer::ReverseMethod::Vertical);
 	}

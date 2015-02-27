@@ -19,7 +19,7 @@ class _L_ ImageFormat
 public:
 	static ImageFileFormat Detect(ifstream &stream, wchar_t *path);
 	static bool Assert(ifstream &stream, wchar_t * path, ImageFileFormat format);
-	static void DetectAndRead(ifstream &stream, wchar_t *path, TextureBase *target);
+	static void DetectAndRead(ifstream &stream, wchar_t *path, TextureRef target);
 private:
 	static ImageFileFormat DoDetect(ifstream &stream, wchar_t *path);
 };

@@ -18,24 +18,24 @@ bool Button::CheckClick(Size window, Point point)
 	if (x0 > point.X || point.X > x1 || y0 > point.Y || point.Y > y1)
 		return false;
 
-	for (vector<TextureBase *>::iterator it = textures.begin(); it != textures.end(); ++it)
+	for (const auto &texture : textures)
 	{
-		if (!(*it)->IsInformative())
+		if (!texture->IsInformative())
 			continue;
-		if ((*it)->SameType(TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte) ||
-			(*it)->SameType(TextureBase::PixelFormat::RGB, TextureBase::ByteSize::UByte))
+		if (texture->SameType(TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte) ||
+			texture->SameType(TextureBase::PixelFormat::RGB, TextureBase::ByteSize::UByte))
 			return true;
-		else if ((*it)->SameType(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte))
+		else if (texture->SameType(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte))
 		{
-			int pixelLength = (*it)->GetPixelLength();
+			int pixelLength = texture->GetPixelLength();
 			if (pixelLength < 5)
 			{
-				if (*(Buffer )((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
+				if (*(Buffer)(texture->GetData() + ((point.X - x0) + (point.Y - y0) * texture->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
 					return true;
 			}
 			else
 			{
-				if (*(unsigned short *)((*it)->GetData() + ((point.X - x0) + (point.Y - y0) * (*it)->GetSize().Width) * pixelLength + 6))
+				if (*(unsigned short *)(texture->GetData() + ((point.X - x0) + (point.Y - y0) * texture->GetSize().Width) * pixelLength + 6))
 					return true;
 			}
 		}

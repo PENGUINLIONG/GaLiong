@@ -34,7 +34,7 @@ public:
 	~BMP();
 	bool InitHeader(Size &size, BufferLength &length);
 	Buffer ReadData(BufferLength length);
-	void ToTexture(wchar_t *path, TextureBase *texture, Flag option = FileReadOption::None);
+	void ToTexture(wchar_t *path, TextureRef texture, Flag option = FileReadOption::None);
 private:
 	ifstream stream;
 };

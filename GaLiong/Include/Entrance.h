@@ -18,7 +18,7 @@
 #include "TextBar.h"
 #include "Texture.h"
 #include "TextureBase.h"
-#include "TextureBuffer.h"
+////#include "TextureBuffer.h"
 #include "TextureBuilder.h"
 #include "Timer.h"
 #include "WAV.h"

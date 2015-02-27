@@ -7,29 +7,29 @@ TextureBuilder::TextureBuilder(TextureBase::PixelFormat pixelFormat, TextureBase
 		throw exception("Unsupported pixel format.");
 }
 
-bool TextureBuilder::AppendConponent(TextureConponent conponent)
+bool TextureBuilder::AppendConponent(TextureComponent component)
 {
-	if (!conponent.Texture->IsInformative() || !conponent.Texture->SameType(pixelFormat, byteSize) ||
-		conponent.Rect.Right <= conponent.Rect.Left || conponent.Rect.Top <= conponent.Rect.Bottom)
+	if (!component.Texture->IsInformative() || !component.Texture->SameType(pixelFormat, byteSize) ||
+		component.Rect.Right <= component.Rect.Left || component.Rect.Top <= component.Rect.Bottom)
 		return false;
 	
-	if (conponent.Rect.Left < boundary.Left)
-		boundary.Left = conponent.Rect.Left;
-	if (conponent.Rect.Top > boundary.Top)
-		boundary.Top = conponent.Rect.Top;
-	if (conponent.Rect.Right > boundary.Right)
-		boundary.Right = conponent.Rect.Right;
-	if (conponent.Rect.Bottom < boundary.Bottom)
-		boundary.Bottom = conponent.Rect.Bottom;
+	if (component.Rect.Left < boundary.Left)
+		boundary.Left = component.Rect.Left;
+	if (component.Rect.Top > boundary.Top)
+		boundary.Top = component.Rect.Top;
+	if (component.Rect.Right > boundary.Right)
+		boundary.Right = component.Rect.Right;
+	if (component.Rect.Bottom < boundary.Bottom)
+		boundary.Bottom = component.Rect.Bottom;
 
-	textures.push_back(conponent);
+	textures.push_back({ component.Rect, component.Texture });
 	return true;
 }
 
-Texture *TextureBuilder::Make()
+void TextureBuilder::Make(TextureRef &target)
 {
 	if (textures.empty())
-		return nullptr;
+		return;
 
 	Size size = { boundary.Right - boundary.Left, boundary.Top - boundary.Bottom };
 	long length = size.Width * size.Height * pxLength;
@@ -40,9 +40,9 @@ Texture *TextureBuilder::Make()
 	int x, y;
 
 	// Copy the value of each pixel.
-	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
+	for (vector<TextureComponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
 	{
-		TextureConponent &ref = *it;
+		TextureComponent &ref = *it;
 		const Buffer textureData = ref.Texture->GetData();
 		const Size textureSize = ref.Texture->GetSize();
 		
@@ -85,21 +85,12 @@ Texture *TextureBuilder::Make()
 #endif
 	
 	// Ending.
-	Texture *texture = new Texture();
-	texture->Set(length, buffer, size, pixelFormat, byteSize);
-
-	return texture;
+	target = TextureRef(new Texture());
+	target->Set(length, buffer, size, pixelFormat, byteSize);
 }
 
 TextureBuilder::~TextureBuilder()
 {
-	for (vector<TextureConponent>::iterator it = textures.begin(); it != textures.end(); ++it) // it == Texture **
-	{
-		if (it->Texture)
-		{
-			delete it->Texture;
-			it->Texture = nullptr;
-		}
-	}
+	Log << L"TextureBuilder destructed." << EndLog;
 }
 _L_END
