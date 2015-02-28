@@ -7,19 +7,26 @@ Texture::Texture() : size({ 0, 0 })
 
 Texture::~Texture()
 {
-	if (data && available)
+	if (data && informative)
 	{
 		delete[] data;
 		data = nullptr;
-		available = false;
 	}
 }
+
 
 void Texture::ChangeFilter(Flag filter)
 {
 	glBindTexture(GL_TEXTURE_2D, index);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+}
+
+SizeD Texture::CalculateDuplication(Size &container)
+{
+	Size _size = GetSize();
+	return{ (double)container.Width / (double)(_size.Width),
+		(double)container.Height / (double)(_size.Height) };
 }
 
 unsigned char Texture::GetPixelLength(Flag pixelFormat, Flag byteSize)
@@ -67,29 +74,5 @@ void Texture::Generate(Flag filter)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
-}
-
-TextureRef TextureManager::NewTexture()
-{
-	TextureStrongRef ref(new Texture);
-	refs.push_back(ref);
-	return TextureRef(ref);
-}
-
-template<unsigned long TSize>
-array<TextureRef, TSize> TextureManager::NewTextureArray()
-{
-	if (!TSize)
-		return;
-	array<TextureStrongRef, TSize> arr;
-	array<TextureRef, TSize> rtn;
-	long size = 0;
-	for (TextureStrongRef ref : arr)
-	{
-		refs.push_back(ref);
-		rtn[size] = TextureRef(ref);
-		size++;
-	}
-	return rtn;
 }
 _L_END

@@ -61,6 +61,8 @@ using namespace std;
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
+#define _WHITE_BOX_TESTING
+
 #ifdef _WHITE_BOX_TESTING // White-box testing
 #define private public
 #define protected public

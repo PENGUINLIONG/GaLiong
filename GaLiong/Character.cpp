@@ -17,15 +17,18 @@ void Character::Render()
 
 	for (const auto &texture : textures) // Go to Entity::Render for details.
 	{
-		if (!texture || !texture->IsAvailable())
+		if (texture.expired())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-			return;
+
+			Texture *targetPtr = texture.lock().get();
+			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
+			continue;
 		}
 		if (this->displayMode == DisplayMode::Normal)
-			Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+			Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
-			Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
+			Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
 		if (fx != FX::Normal)
 			ProcessFX();
 	}

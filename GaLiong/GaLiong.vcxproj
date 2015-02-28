@@ -160,6 +160,8 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="TextEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureBuilder.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LibFreeType.cpp" />
@@ -196,6 +198,8 @@
     <ClInclude Include="Include\SoundCommon.h" />
     <ClInclude Include="Include\Storage.h" />
     <ClInclude Include="Include\Texture.h" />
+    <ClInclude Include="Include\TextureBuilder.h" />
+    <ClInclude Include="Include\TextureManager.h" />
     <ClInclude Include="Include\Timer.h" />
     <ClInclude Include="Include\WAV.h" />
     <ClInclude Include="Include\WaveOut.h" />

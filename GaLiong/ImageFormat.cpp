@@ -13,7 +13,7 @@ ImageFileFormat ImageFormat::Detect(ifstream &stream, wchar_t * path)
 	return format;
 }
 
-void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureRef target)
+TextureRef ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path)
 {
 	if (stream.is_open())
 		stream.close();
@@ -25,16 +25,15 @@ void ImageFormat::DetectAndRead(ifstream &stream, wchar_t *path, TextureRef targ
 		case ImageFileFormat::BMP:
 		{
 			BMP bmp;
-			bmp.ToTexture(path, target);
-			break;
+			return bmp.ToTexture(path);
 		}
 		case ImageFileFormat::PNG:
 		{
 			PNG png;
-			png.ToTexture(path, target);
-			break;
+			return png.ToTexture(path);
 		}
-		default: break;
+		default:
+			return TextureRef();
 	}
 }
 

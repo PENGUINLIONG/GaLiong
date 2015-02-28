@@ -51,7 +51,6 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 	Point offset = { 0, 0 };
 	Size advance = { 0, 0 };
 
-	TextureRef texture(nullptr);
 	TextureBuilder builder(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte);
 
 #pragma region Process the text
@@ -244,8 +243,9 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 		offset.X += advance.Width;
 
 		Size used = { bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height };
-		texture = make_shared<Texture>();
-		texture->Set(length,
+		
+		TextureRef texture = TextureManager.NewTexture(
+			length,
 			buffer,
 			used,
 			Texture::PixelFormat::RGBA,
@@ -264,9 +264,9 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 	}
 #pragma endregion
 	
-	builder.Make(texture);
-	if (texture && texture->IsAvailable())
-		texture->Generate(Texture::Filter::Nearest);
+	TextureRef texture = builder.Make();
+	if (!texture.expired())
+		texture.lock()->Generate(Texture::Filter::Nearest);
 	
 	return texture;
 }

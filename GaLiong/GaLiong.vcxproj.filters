@@ -120,6 +120,12 @@
     <ClCompile Include="Texture.cpp">
       <Filter>源文件\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="TextureBuilder.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>源文件\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Entrance.h">
@@ -202,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="Include\MemoryManager.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureBuilder.h">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureManager.h">
+      <Filter>头文件\Texture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

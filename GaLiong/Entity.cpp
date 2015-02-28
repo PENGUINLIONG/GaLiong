@@ -12,12 +12,15 @@ void Entity::Render()
 
 	for (const auto &texture : textures) // The order to render the textures is to
 	{
-		if (!texture || !texture->IsAvailable())
+		if (texture.expired())
 		{
 			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-			return;
+			
+			Texture *targetPtr = texture.lock().get();
+			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
+			continue;
 		}
-		Renderer::DrawRectangle(texture->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}
 }
 

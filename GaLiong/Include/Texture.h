@@ -26,6 +26,7 @@ public:
 	};
 	Texture();
 	void ChangeFilter(Flag filter);
+	SizeD CalculateDuplication(Size &container);
 	static unsigned char GetPixelLength(Flag pixelFormat, Flag byteSize);
 	void Generate(Flag filter = Filter::Linear);
 	const Buffer GetData()
@@ -44,15 +45,20 @@ public:
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
+	const bool IsInformative()
+	{
+		return informative;
+	}
 	const bool SameType(Flag pixelFormat, Flag byteSize)
 	{
 		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
 	void Set(BufferLength dataLength, Buffer data, Size size, Flag pixelFormat, Flag byteSize)
 	{
+		if (!data)
+			return;
 		if (this->data)
 			delete this->data;
-		else return;
 		this->dataLength = dataLength;
 		this->data = data;
 		this->size = size;
@@ -72,17 +78,10 @@ private:
 
 typedef shared_ptr<Texture> TextureStrongRef;
 typedef weak_ptr<Texture> TextureRef;
+
 struct TextureComponent
 {
 	Rect Rect;
 	TextureRef Texture;
-};
-
-class _L_ TextureManager
-{
-	static TextureRef NewTexture();
-	template<unsigned long TSize>
-	static array<TextureRef, TSize> NewTextureArray();
-	static list<TextureStrongRef> refs;
 };
 _L_END

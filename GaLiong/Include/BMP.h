@@ -2,6 +2,7 @@
 #include "Preprocess.h"
 #include "Logger.h"
 #include "Texture.h"
+#include "TextureManager.h"
 
 _L_BEGIN
 class _L_ BMP
@@ -34,7 +35,7 @@ public:
 	~BMP();
 	bool InitHeader(Size &size, BufferLength &length);
 	Buffer ReadData(BufferLength length);
-	void ToTexture(wchar_t *path, TextureRef texture, Flag option = FileReadOption::None);
+	TextureRef ToTexture(wchar_t *path, Flag option = FileReadOption::None);
 private:
 	ifstream stream;
 };

@@ -88,35 +88,38 @@ Buffer PNG::ReadData(const Size size, BufferLength &dataLength, const Byte pixel
 	return data;
 }
 
-void PNG::ToTexture(wchar_t *path, TextureRef texture, Flag option)
+TextureRef PNG::ToTexture(wchar_t *path, Flag option)
 {
 	Log << L"PNG: Try loading " << path << L"..." << EndLog;
 	if (stream.is_open())
 		stream.close();
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 	
+	TextureRef ref;
+	
 	Size size;
-	Texture::PixelFormat pixelFormat;
-	Texture::ByteSize byteSize;
-
+	Flag pixelFormat, byteSize;
 	if (InitHeader(size, pixelFormat, byteSize))
 	{
 		BufferLength dataLength;
 		Buffer data = ReadData(size, dataLength, Texture::GetPixelLength(pixelFormat, byteSize));
+		if (!data)
+			return TextureRef();
 
-		texture->Set(dataLength, data, size, pixelFormat, byteSize);
+		ref = TextureManager.NewTexture(dataLength, data, size, pixelFormat, byteSize);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
-			texture->Generate();
+			ref.lock()->Generate();
 	}
 	else
 	{
 		Log.Log((L"PNG: Failed in loading " + wstring(path) + L"!").c_str(), Logger::WarningLevel::Warn);
-		return;
+		return TextureRef();
 	}
 	
 	if ((option & FileReadOption::NoClose) == FileReadOption::None)
 		stream.close();
 	Log << L"PNG: Succeeded." << EndLog;
+	return ref;
 }
 
 void PNG::ReadDataUsingFileStream(png_structp pngPtr, png_bytep data, png_size_t length)

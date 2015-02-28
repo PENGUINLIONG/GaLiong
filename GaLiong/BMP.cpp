@@ -29,25 +29,36 @@ Buffer BMP::ReadData(BufferLength length)
 	return data;
 }
 
-void BMP::ToTexture(wchar_t *path, TextureRef texture, Flag option)
+TextureRef BMP::ToTexture(wchar_t *path, Flag option)
 {
 	Log << L"BMP: Try loading " << path << L"...";
 	if (stream.is_open())
 		stream.close();
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 
+	TextureRef ref;
+
 	Size size;
 	BufferLength dataLength;
 	if (InitHeader(size, dataLength))
 	{
 		Buffer data = ReadData(dataLength);
+		if (!data)
+			return TextureRef();
 
-		texture->Set(dataLength, data, size, Texture::PixelFormat::BGR, Texture::ByteSize::UByte);
+		ref = TextureManager.NewTexture(dataLength, data, size, Texture::PixelFormat::BGR, Texture::ByteSize::UByte);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
-			texture->Generate();
+			ref.lock()->Generate();
 	}
+	else
+	{
+		Log.Log((L"BMP: Failed in loading " + wstring(path) + L"!").c_str(), Logger::WarningLevel::Warn);
+		return TextureRef();
+	}
+
 	if ((option & FileReadOption::NoClose) == FileReadOption::None)
 		stream.close();
 	Log << L"BMP: Succeeded!";
+	return ref;
 }
 _L_END

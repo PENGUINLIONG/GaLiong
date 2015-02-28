@@ -2,6 +2,7 @@
 #include "Preprocess.h"
 #include "Logger.h"
 #include "Texture.h"
+#include "TextureManager.h"
 
 _L_BEGIN
 class _L_ PNG
@@ -22,7 +23,7 @@ public:
 	~PNG();
 	bool InitHeader(Size &size, Flag &pixelFormat, Flag &byteSize);
 	Buffer ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength);
-	void ToTexture(wchar_t *path, TextureRef texture, Flag option = FileReadOption::None);
+	TextureRef ToTexture(wchar_t *path, Flag option = FileReadOption::None);
 #ifdef _INSIDER_COMPILATION
 private:
 	ifstream stream;

@@ -42,10 +42,12 @@ void Renderer::DrawRectangle(TextureIndex textureID, RectD rect, ReverseMethod r
 	glEnd();
 }
 
-void Renderer::DrawBackGroundImage(Texture &texture)
+void Renderer::DrawBackGroundImage(TextureRef texture)
 {
-	double &&ratio = (double)texture.GetSize().Width / (double)texture.GetSize().Height;
-	DrawRectangle(texture.GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
+	TextureStrongRef ref = texture.lock();
+	Size size = ref->GetSize();
+	double &&ratio = (double)size.Width / (double)size.Height;
+	DrawRectangle(ref->GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });
 }
 
 void Renderer::DrawWithoutTexture(RectD rect)

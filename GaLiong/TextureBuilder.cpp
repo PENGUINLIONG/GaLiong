@@ -1,7 +1,7 @@
 #include "TextureBuilder.h"
 
 _L_BEGIN
-TextureBuilder::TextureBuilder(TextureBase::PixelFormat pixelFormat, TextureBase::ByteSize byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }), pixelFormat(pixelFormat), byteSize(byteSize)
+TextureBuilder::TextureBuilder(Flag pixelFormat, Flag byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }), pixelFormat(pixelFormat), byteSize(byteSize)
 {
 	if (!(pxLength = Texture::GetPixelLength(pixelFormat, byteSize)))
 		throw exception("Unsupported pixel format.");
@@ -9,7 +9,7 @@ TextureBuilder::TextureBuilder(TextureBase::PixelFormat pixelFormat, TextureBase
 
 bool TextureBuilder::AppendConponent(TextureComponent component)
 {
-	if (!component.Texture->IsInformative() || !component.Texture->SameType(pixelFormat, byteSize) ||
+	if (!component.Texture.lock()->IsInformative() || !component.Texture.lock()->SameType(pixelFormat, byteSize) ||
 		component.Rect.Right <= component.Rect.Left || component.Rect.Top <= component.Rect.Bottom)
 		return false;
 	
@@ -26,10 +26,10 @@ bool TextureBuilder::AppendConponent(TextureComponent component)
 	return true;
 }
 
-void TextureBuilder::Make(TextureRef &target)
+TextureRef TextureBuilder::Make()
 {
 	if (textures.empty())
-		return;
+		return TextureRef();
 
 	Size size = { boundary.Right - boundary.Left, boundary.Top - boundary.Bottom };
 	long length = size.Width * size.Height * pxLength;
@@ -43,8 +43,9 @@ void TextureBuilder::Make(TextureRef &target)
 	for (vector<TextureComponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
 	{
 		TextureComponent &ref = *it;
-		const Buffer textureData = ref.Texture->GetData();
-		const Size textureSize = ref.Texture->GetSize();
+		TextureStrongRef sref = ref.Texture.lock();
+		const Buffer textureData = sref->GetData();
+		const Size textureSize = sref->GetSize();
 		
 		long dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
 		long srcOffset = 0;
@@ -85,12 +86,13 @@ void TextureBuilder::Make(TextureRef &target)
 #endif
 	
 	// Ending.
-	target = TextureRef(new Texture());
-	target->Set(length, buffer, size, pixelFormat, byteSize);
+	return TextureManager.NewTexture(length, buffer, size, pixelFormat, byteSize);
 }
 
 TextureBuilder::~TextureBuilder()
 {
+	for (auto &texture : textures)
+		TextureManager.DeleteTexture(texture.Texture);
 	Log << L"TextureBuilder destructed." << EndLog;
 }
 _L_END
