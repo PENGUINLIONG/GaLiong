@@ -5,14 +5,24 @@ Texture::Texture() : size({ 0, 0 })
 {
 }
 
-void Texture::ChangeFilter(Filter filter)
+Texture::~Texture()
 {
-	glBindTexture(GL_TEXTURE_2D, index);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
+	if (data && available)
+	{
+		delete[] data;
+		data = nullptr;
+		available = false;
+	}
 }
 
-unsigned char Texture::GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize)
+void Texture::ChangeFilter(Flag filter)
+{
+	glBindTexture(GL_TEXTURE_2D, index);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+}
+
+unsigned char Texture::GetPixelLength(Flag pixelFormat, Flag byteSize)
 {
 	if (byteSize == ByteSize::UByte)
 	{
@@ -45,31 +55,41 @@ unsigned char Texture::GetPixelLength(PixelFormat pixelFormat, ByteSize byteSize
 	return 0;
 }
 
-void Texture::Generate(Filter filter)
+void Texture::Generate(Flag filter)
 {
 	if (!size.Width || !size.Height || !data)
 		return;
-	TextureID textureIndex;
 
-	glGenTextures(1, &textureIndex);
-	glBindTexture(GL_TEXTURE_2D, textureIndex);
+	glGenTextures(1, &index);
+	glBindTexture(GL_TEXTURE_2D, index);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
 	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, static_cast<GLenum>(pixelFormat), static_cast<GLenum>(byteSize), data); // After
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
-
-	index = textureIndex;
-	available = true;
 }
 
-Texture::~Texture()
+TextureRef TextureManager::NewTexture()
 {
-	if (data && available)
+	TextureStrongRef ref(new Texture);
+	refs.push_back(ref);
+	return TextureRef(ref);
+}
+
+template<unsigned long TSize>
+array<TextureRef, TSize> TextureManager::NewTextureArray()
+{
+	if (!TSize)
+		return;
+	array<TextureStrongRef, TSize> arr;
+	array<TextureRef, TSize> rtn;
+	long size = 0;
+	for (TextureStrongRef ref : arr)
 	{
-		delete[] data;
-		data = nullptr;
-		available = false;
+		refs.push_back(ref);
+		rtn[size] = TextureRef(ref);
+		size++;
 	}
+	return rtn;
 }
 _L_END

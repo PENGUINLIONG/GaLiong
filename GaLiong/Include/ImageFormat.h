@@ -1,6 +1,6 @@
 #pragma once
 #include "Preprocess.h"
-#include "TextureBase.h"
+#include "Texture.h"
 #include "BMP.h"
 #include "PNG.h"
 

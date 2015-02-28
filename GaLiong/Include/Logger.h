@@ -1,9 +1,5 @@
 #pragma once
 #include "Preprocess.h"
-#include "ControlBase.h"
-#include "Font.h"
-#include "TextureBase.h"
-#include "Window.h"
 
 _L_BEGIN
 class _L_ Logger
@@ -45,8 +41,6 @@ public:
 	inline Logger &operator<<(const wstring            &source);
 	// Inner data type.
 		   Logger &operator<<(const InformativeBuffer  &source);
-		   Logger &operator<<(      ControlBase		   &source);
-		   Logger &operator<<(      Window			   &source);
 #pragma endregion
 	Logger &operator<<(Logger &(func)(Logger &));
 

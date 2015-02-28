@@ -128,37 +128,6 @@ Logger &Logger::operator<<(const InformativeBuffer &source)
 
 	return Log(tempSStream.str().c_str(), WarningLevel::Info, false);
 }
-Logger &Logger::operator<<(ControlBase &source)
-{
-	wstring s;
-	s += L"Control :\n    ";
-	if (source.Implemented(ControlInterface::IClickable))
-		s += L"IClickable ";
-	if (source.Implemented(ControlInterface::IRenderable))
-		s += L"IRenderable ";
-	
-	return Log(s.c_str(), WarningLevel::Info, false);
-}
-Logger &Logger::operator<<(Window &source)
-{
-	wstringstream tempSStream;
-	tempSStream << L"Window (HWND = 0x" << setfill(L'0') << hex << setw(sizeof(void *) << 1) << source.hWindow << L") :" << endl;
-	tempSStream << (source.isFullScreen ? L"    Fullscreen mode;" : L"    Window mode;") << endl;
-	unsigned long long i = 0;
-	tempSStream << L"    With " << source.controls.size() << L" controls :";
-	for_each(source.controls.begin(), source.controls.end(), [&i, &tempSStream](ControlBase *&control)
-	{
-		tempSStream << endl;
-		tempSStream << L"        [" << i << L']';
-		if (control->Implemented(ControlInterface::IClickable))
-			tempSStream << L" IClickable";
-		if (control->Implemented(ControlInterface::IRenderable))
-			tempSStream << L" IRenderable";
-		i++;
-	});
-	
-	return Log(tempSStream.str().c_str(), WarningLevel::Info, false);
-}
 
 Logger &Logger::operator<<(Logger &(func)(Logger &))
 {

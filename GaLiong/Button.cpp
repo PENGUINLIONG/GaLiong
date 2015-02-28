@@ -22,10 +22,10 @@ bool Button::CheckClick(Size window, Point point)
 	{
 		if (!texture->IsInformative())
 			continue;
-		if (texture->SameType(TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte) ||
-			texture->SameType(TextureBase::PixelFormat::RGB, TextureBase::ByteSize::UByte))
+		if (texture->SameType(Texture::PixelFormat::BGR, Texture::ByteSize::UByte) ||
+			texture->SameType(Texture::PixelFormat::RGB, Texture::ByteSize::UByte))
 			return true;
-		else if (texture->SameType(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte))
+		else if (texture->SameType(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte))
 		{
 			int pixelLength = texture->GetPixelLength();
 			if (pixelLength < 5)

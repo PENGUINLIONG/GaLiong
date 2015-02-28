@@ -77,7 +77,7 @@ typedef unsigned char *Buffer;
 typedef unsigned long long BufferLength;
 typedef std::tuple<const Buffer &, const BufferLength> InformativeBuffer;
 typedef unsigned __int16 Flag;
-typedef unsigned int TextureID;
+typedef unsigned int TextureIndex;
 typedef unsigned long LongFlag;
 
 struct SizeL

@@ -42,7 +42,7 @@ void BMP::ToTexture(wchar_t *path, TextureRef texture, Flag option)
 	{
 		Buffer data = ReadData(dataLength);
 
-		texture->Set(dataLength, data, size, TextureBase::PixelFormat::BGR, TextureBase::ByteSize::UByte);
+		texture->Set(dataLength, data, size, Texture::PixelFormat::BGR, Texture::ByteSize::UByte);
 		if ((option & FileReadOption::NoGenerate) == FileReadOption::None)
 			texture->Generate();
 	}

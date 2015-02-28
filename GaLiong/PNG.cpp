@@ -12,7 +12,7 @@ PNG::~PNG()
 	png_destroy_read_struct(&pngPtr, &pngInfoPtr, nullptr);
 }
 
-bool PNG::InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureBase::ByteSize &byteSize)
+bool PNG::InitHeader(Size &size, Flag &pixelFormat, Flag &byteSize)
 {
 	// Check the signature.
 	Byte signature[8];
@@ -34,17 +34,17 @@ bool PNG::InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureB
 	if (ihdr.ColorType & 0x01)
 	{
 		png_set_palette_to_rgb(pngPtr);
-		pixelFormat = TextureBase::PixelFormat::RGB;
+		pixelFormat = Texture::PixelFormat::RGB;
 	}
 	else
 	{
 		switch (ihdr.ColorType)
 		{
 			case 2:
-				pixelFormat = TextureBase::PixelFormat::RGB;
+				pixelFormat = Texture::PixelFormat::RGB;
 				break;
 			case 6:
-				pixelFormat = TextureBase::PixelFormat::RGBA;
+				pixelFormat = Texture::PixelFormat::RGBA;
 				break;
 			default:
 				goto failed;
@@ -55,10 +55,10 @@ bool PNG::InitHeader(Size &size, TextureBase::PixelFormat &pixelFormat, TextureB
 	switch (ihdr.BitDepth)
 	{
 		case 8:
-			byteSize = TextureBase::ByteSize::UByte;
+			byteSize = Texture::ByteSize::UByte;
 			break;
 		case 16:
-			byteSize = TextureBase::ByteSize::UShort;
+			byteSize = Texture::ByteSize::UShort;
 			break;
 		default:
 			goto failed;
@@ -96,8 +96,8 @@ void PNG::ToTexture(wchar_t *path, TextureRef texture, Flag option)
 	stream.open(path, stream.in | stream.binary | stream._Nocreate);
 	
 	Size size;
-	TextureBase::PixelFormat pixelFormat;
-	TextureBase::ByteSize byteSize;
+	Texture::PixelFormat pixelFormat;
+	Texture::ByteSize byteSize;
 
 	if (InitHeader(size, pixelFormat, byteSize))
 	{

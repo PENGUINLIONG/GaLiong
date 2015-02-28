@@ -13,7 +13,7 @@ public:
 	virtual ~Entity() override;
 	void BindTexture(TextureRef texture)
 	{
-		if (!texture || !texture->IsAvailable())
+		if (!texture.expired() || texture.lock()->GetIndex())
 			return;
 		textures.push_back(texture);
 	}
@@ -35,7 +35,7 @@ public:
 	}
 protected:
 	bool visible = true;
-	vector<TextureRef> textures;
+	list<TextureRef> textures;
 	PointD pos;
 	SizeD size;
 };

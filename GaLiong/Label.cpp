@@ -40,11 +40,13 @@ void Label::Render()
 
 	for (const auto &texture : textures) // Go to Entity::Render for details.
 	{
-		if (!texture || !texture->IsAvailable())
+		if (texture.expired())
 		{
 			Renderer::DrawWithoutTexture({ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height });
 			return;
 		}
+		else
+			textures.remove(texture);
 		// Rendering image upside-down will be much faster processing data in the memory.
 		// * NOTE: rendered fonts' image are upside-down in general.
 		Renderer::DrawRectangle(texture->GetIndex(),

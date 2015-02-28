@@ -6,7 +6,7 @@ _L_BEGIN
 #define UPPER_RIGHT textureCoord.Width, textureCoord.Height
 #define LOWER_RIGHT textureCoord.Width, 0.0f
 
-void Renderer::DrawRectangle(TextureID textureID, RectD rect, ReverseMethod reverseMethod, SizeD textureCoord)
+void Renderer::DrawRectangle(TextureIndex textureID, RectD rect, ReverseMethod reverseMethod, SizeD textureCoord)
 {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_QUADS);
@@ -42,7 +42,7 @@ void Renderer::DrawRectangle(TextureID textureID, RectD rect, ReverseMethod reve
 	glEnd();
 }
 
-void Renderer::DrawBackGroundImage(TextureBase &texture)
+void Renderer::DrawBackGroundImage(Texture &texture)
 {
 	double &&ratio = (double)texture.GetSize().Width / (double)texture.GetSize().Height;
 	DrawRectangle(texture.GetIndex(), { ratio * -50.0f, 50, ratio * 50.0f, -50.0f });

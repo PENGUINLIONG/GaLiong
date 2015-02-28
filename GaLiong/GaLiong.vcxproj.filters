@@ -72,9 +72,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>源文件\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="ImageFormat.cpp">
       <Filter>源文件\FileSys</Filter>
     </ClCompile>
@@ -99,16 +96,10 @@
     <ClCompile Include="Font.cpp">
       <Filter>源文件\Font</Filter>
     </ClCompile>
-    <ClCompile Include="TextureBuilder.cpp">
-      <Filter>源文件\Texture</Filter>
-    </ClCompile>
     <ClCompile Include="LibFreeType.cpp">
       <Filter>源文件\Font</Filter>
     </ClCompile>
     <ClCompile Include="Label.cpp">
-      <Filter>源文件\Control</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\TextEntity.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
     <ClCompile Include="TextBar.cpp">
@@ -123,7 +114,10 @@
     <ClCompile Include="Logger.cpp">
       <Filter>源文件\Log</Filter>
     </ClCompile>
-    <ClCompile Include="TextureBase.cpp">
+    <ClCompile Include="TextEntity.cpp">
+      <Filter>源文件\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
       <Filter>源文件\Texture</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,9 +164,6 @@
     <ClInclude Include="Include\Texture.h">
       <Filter>头文件\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Include\TextureBuilder.h">
-      <Filter>头文件\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="Include\WindowsAudioSession.h">
       <Filter>头文件\Sound</Filter>
     </ClInclude>
@@ -187,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="Include\LibFreeType.h">
       <Filter>头文件\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\TextureBase.h">
-      <Filter>头文件\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Include\Label.h">
       <Filter>头文件\Control</Filter>
@@ -215,8 +203,5 @@
     <ClInclude Include="Include\MemoryManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

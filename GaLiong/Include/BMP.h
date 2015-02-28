@@ -1,7 +1,7 @@
 #pragma once
 #include "Preprocess.h"
 #include "Logger.h"
-#include "TextureBase.h"
+#include "Texture.h"
 
 _L_BEGIN
 class _L_ BMP

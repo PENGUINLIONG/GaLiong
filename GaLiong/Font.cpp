@@ -52,7 +52,7 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 	Size advance = { 0, 0 };
 
 	TextureRef texture(nullptr);
-	TextureBuilder builder(TextureBase::PixelFormat::RGBA, TextureBase::ByteSize::UByte);
+	TextureBuilder builder(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte);
 
 #pragma region Process the text
 	for (unsigned long i = 0; i < strLength; i++)

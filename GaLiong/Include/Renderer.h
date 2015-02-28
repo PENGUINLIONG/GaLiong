@@ -14,8 +14,8 @@ public:
 		Vertical,
 		BothDirection
 	};
-	static void DrawRectangle(TextureID textureID, RectD rect, ReverseMethod reverseMethod = ReverseMethod::None, SizeD textureCoord = { 1.0, 1.0 });
-	static void DrawBackGroundImage(TextureBase &texture);
+	static void DrawRectangle(TextureIndex textureID, RectD rect, ReverseMethod reverseMethod = ReverseMethod::None, SizeD textureCoord = { 1.0, 1.0 });
+	static void DrawBackGroundImage(Texture &texture);
 	static void DrawWithoutTexture(RectD rect);
 	static void DrawTestImage();
 };

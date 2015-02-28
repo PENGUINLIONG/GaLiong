@@ -3,10 +3,10 @@
 #include "Font.h"
 #include "Renderer.h"
 #include "Entity.h"
-#include "TextureBase.h"
+#include "Texture.h"
 
 _L_BEGIN
-class TextureBase;
+class Texture;
 
 class _L_ Label : public Entity
 {
