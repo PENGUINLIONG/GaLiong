@@ -82,6 +82,6 @@ typedef weak_ptr<Texture> TextureRef;
 struct TextureComponent
 {
 	Rect Rect;
-	TextureRef Texture;
+	Texture *Texture;
 };
 _L_END

@@ -9,7 +9,7 @@ TextureBuilder::TextureBuilder(Flag pixelFormat, Flag byteSize) : boundary({ MAX
 
 bool TextureBuilder::AppendConponent(TextureComponent component)
 {
-	if (!component.Texture.lock()->IsInformative() || !component.Texture.lock()->SameType(pixelFormat, byteSize) ||
+	if (!component.Texture->IsInformative() || !component.Texture->SameType(pixelFormat, byteSize) ||
 		component.Rect.Right <= component.Rect.Left || component.Rect.Top <= component.Rect.Bottom)
 		return false;
 	
@@ -43,9 +43,8 @@ TextureRef TextureBuilder::Make()
 	for (vector<TextureComponent>::iterator it = textures.begin(); it != textures.end(); ++it) // Copy pixels here.
 	{
 		TextureComponent &ref = *it;
-		TextureStrongRef sref = ref.Texture.lock();
-		const Buffer textureData = sref->GetData();
-		const Size textureSize = sref->GetSize();
+		const Buffer textureData = ref.Texture->GetData();
+		const Size textureSize = ref.Texture->GetSize();
 		
 		long dstOffset = ((boundary.Top - ref.Rect.Top) * size.Width + (ref.Rect.Left - boundary.Left)) * pxLength;
 		long srcOffset = 0;
@@ -92,7 +91,7 @@ TextureRef TextureBuilder::Make()
 TextureBuilder::~TextureBuilder()
 {
 	for (auto &texture : textures)
-		TextureManager.DeleteTexture(texture.Texture);
+		delete texture.Texture;
 	Log << L"TextureBuilder destructed." << EndLog;
 }
 _L_END

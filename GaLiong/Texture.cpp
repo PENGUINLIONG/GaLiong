@@ -10,10 +10,8 @@ Texture::~Texture()
 	if (data && informative)
 	{
 		delete[] data;
-		data = nullptr;
 	}
 }
-
 
 void Texture::ChangeFilter(Flag filter)
 {

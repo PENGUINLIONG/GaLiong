@@ -244,7 +244,8 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 
 		Size used = { bitmap.width + outlineOffset_doubled.Width, bitmap.rows + outlineOffset_doubled.Height };
 		
-		TextureRef texture = TextureManager.NewTexture(
+		Texture *texture = new Texture;
+		texture->Set(
 			length,
 			buffer,
 			used,

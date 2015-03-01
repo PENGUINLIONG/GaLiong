@@ -13,7 +13,7 @@ public:
 	virtual ~Entity() override;
 	void BindTexture(TextureRef texture)
 	{
-		if (!texture.expired() || texture.lock()->GetIndex())
+		if (texture.expired() || !texture.lock()->GetIndex())
 			return;
 		textures.push_back(texture);
 	}
