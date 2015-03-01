@@ -15,9 +15,9 @@ public:
 	Label();
 	virtual ~Label() override;
 
-	bool AppendText(const wchar_t *text)
+	bool AppendText(wstring text)
 	{
-		if (!font || !available || !wcslen(text))
+		if (!font || !available || text.empty())
 			return false;
 
 		this->text.append(text);
@@ -30,7 +30,7 @@ public:
 		ClearTextures();
 	}
 	virtual void BindTexture(TextureRef texture){}
-	bool ChangeText(const wchar_t *text)
+	bool ChangeText(wstring text)
 	{
 		if (!available)
 			return false;

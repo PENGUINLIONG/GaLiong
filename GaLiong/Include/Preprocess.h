@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include <fstream>
+#include <functional>
 #include <future>
 #include <iomanip>
 #include <iostream>
@@ -61,7 +62,7 @@ using namespace std;
 #define _L_BEGIN namespace LiongStudio { namespace GaLiong {
 #define _L_END } }
 
-#define _WHITE_BOX_TESTING
+//#define _WHITE_BOX_TESTING
 
 #ifdef _WHITE_BOX_TESTING // White-box testing
 #define private public
@@ -81,6 +82,8 @@ typedef std::tuple<const Buffer &, const BufferLength> InformativeBuffer;
 typedef unsigned __int16 Flag;
 typedef unsigned int TextureIndex;
 typedef unsigned long LongFlag;
+
+typedef void event;
 
 struct SizeL
 {

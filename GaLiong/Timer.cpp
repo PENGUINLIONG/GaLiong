@@ -15,23 +15,6 @@ Timer::Timer(void *userData, unsigned long interval, TimerExecuteMode mode) : us
 		available = true;
 }
 
-void Timer::DoElapsed()
-{
-	while (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startTime) < interval && enabled)
-		this_thread::yield();
-
-	if (!enabled || !available)
-		return;
-	
-	if (!callbacks.empty() && available)
-	{
-		for (const auto &callback : callbacks)
-		{
-			callback(*this, userData);
-		}
-	}
-}
-
 void Timer::Elapsed()
 {
 	if (!available)
@@ -41,7 +24,23 @@ void Timer::Elapsed()
 		if (!enabled)
 			break;
 		startTime = chrono::steady_clock::now();
-		DoElapsed();
+		
+		[&](){
+			while (chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startTime) < interval && enabled)
+				this_thread::yield();
+
+			if (!enabled || !available)
+				return;
+
+			if (!callbacks.empty() && available)
+			{
+				for (const auto &callback : callbacks)
+				{
+					callback(*this, userData);
+				}
+			}
+		}();
+
 	} while (mode == TimerExecuteMode::Loop);
 	enabled = false;
 }
@@ -55,30 +54,18 @@ bool Timer::IsEnabled()
 
 Timer &Timer::operator+=(const TimerCallbackFunction &callback)
 {
-	AppendCallback(callback);
+	if (available && callback)
+		callbacks.push_back(callback);
 	return *this;
 }
 
 Timer &Timer::operator-=(const TimerCallbackFunction &callback)
 {
-	RemoveCallback(callback);
+	if (!available || !callback)
+		return *this;
+	auto funcPtr = callback.target<void(*)(Timer, void *)>();
+	callbacks.remove_if([funcPtr](TimerCallbackFunction &inList){ return funcPtr == inList.target<void(*)(Timer, void *)>(); });
 	return *this;
-}
-
-void Timer::AppendCallback(const TimerCallbackFunction &callback)
-{
-	if (!available)
-		return;
-	if (callback)
-		callbacks.push_back(callback);
-};
-
-void Timer::RemoveCallback(const TimerCallbackFunction &callback)
-{
-	if (!available)
-		return;
-	if (callback)
-		callbacks.remove(callback);
 }
 
 void Timer::Start()
@@ -94,6 +81,13 @@ void Timer::Start()
 void Timer::Stop()
 {
 	enabled = false;
+}
+
+void Timer::SetInterval(unsigned long interval)
+{
+	bool shouldStart = enabled;
+	Stop();
+	this->interval = chrono::milliseconds(interval);
 }
 
 Timer::~Timer()

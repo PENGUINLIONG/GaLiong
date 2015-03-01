@@ -10,7 +10,7 @@ class _L_ TextEntity : public Entity
 public:
 	TextEntity();
 	virtual ~TextEntity() override;
-	bool AppendText(const wchar_t *text)
+	virtual bool AppendText(wstring text)
 	{
 		return label.AppendText(text);
 	}
@@ -19,11 +19,11 @@ public:
 		label.BindFont(font);
 	}
 	virtual void BindTexture(TextureRef texture) = 0;
-	bool ChangeText(const wchar_t *text)
+	virtual bool ChangeText(wstring text)
 	{
 		return label.ChangeText(text);
 	}
-	void ClearText()
+	virtual void ClearText()
 	{
 		label.ClearText();
 	}

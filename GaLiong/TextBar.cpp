@@ -17,10 +17,23 @@ TextBar::TextBar()
 	{
 		texture_flag = { TextureRef(), Renderer::ReverseMethod::None, { 0.0, 0.0, 0.0, 0.0 }, BorderComment::NoComment, { 0.0, 0.0 } };
 	}
+
+	textTimer += textTimer_Elapsed;
+
 	available = true;
 }
 TextBar::~TextBar()
 {
+}
+
+bool TextBar::AppendText(wstring text)
+{
+	this->text += text;
+	if (immediately)
+	{
+		immediately = false;
+	}
+	return true;
 }
 
 void TextBar::BindBorderTexture(TextureRef texture, const Flag comment)
@@ -83,6 +96,14 @@ void TextBar::BindTexture(TextureRef texture)
 	Entity::BindTexture(texture);
 }
 
+bool TextBar::ChangeText(wstring text)
+{
+	this->text.clear();
+	this->text = text;
+	label.ClearText();
+	return true;
+}
+
 void TextBar::Render()
 {
 	unsigned long long i = 0;
@@ -111,6 +132,25 @@ void TextBar::Resize()
 		{
 			BindBorderTexture(texture.Texture, texture.Comment);
 		}
+	}
+}
+
+void TextBar::SetTextSpeed(unsigned short msPerChar)
+{
+	if (msPerChar == 0)
+	{
+		textTimer.Stop();
+		immediately = true;
+	}
+	textTimer.SetInterval(msPerChar);
+}
+
+void TextBar::textTimer_Elapsed(Timer &sender, void *userData)
+{
+	TextBar *textBar = reinterpret_cast<TextBar *>(userData);
+	if (textBar)
+	{
+		// ...
 	}
 }
 

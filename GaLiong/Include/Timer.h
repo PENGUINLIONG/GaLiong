@@ -3,7 +3,8 @@
 
 _L_BEGIN
 class Timer;
-typedef void(*TimerCallbackFunction)(Timer &sender, void *userData);
+//typedef void(*TimerCallbackFunction)(Timer &sender, void *userData);
+typedef function<void(Timer, void *)> TimerCallbackFunction;
 
 class _L_ Timer
 {
@@ -19,24 +20,20 @@ public:
 	bool IsEnabled();
 	Timer &operator+=(const TimerCallbackFunction &callback);
 	Timer &operator-=(const TimerCallbackFunction &callback);
-	void AppendCallback(const TimerCallbackFunction &callback);
-	void RemoveCallback(const TimerCallbackFunction &callback);
 	void Start();
 	void Stop();
+	void SetInterval(unsigned long interval);
 	~Timer();
 private:
 	void *userData = nullptr;
 	bool available = false;
 	bool enabled = false;
 	bool done = false;
-	//atomic<bool> ;
 	chrono::steady_clock::time_point startTime;
 	chrono::milliseconds interval;
 	list<TimerCallbackFunction> callbacks;
-	future<void> asyncAccess;
 	TimerExecuteMode mode = TimerExecuteMode::Loop;
 
-	void Elapsed();
-	void DoElapsed();
+	event Elapsed();
 };
 _L_END

@@ -26,13 +26,15 @@ public:
 
 	TextBar();
 	virtual ~TextBar() override;
+	virtual bool AppendText(wstring text) override;
 	virtual void BindTexture(TextureRef texture) override;
 	void BindBorderTexture(TextureRef texture, const Flag comment);
+	virtual bool ChangeText(wstring text) override;
 	void Move(unsigned long duration, RectD destination);
 	virtual void Render() override;
 	virtual void Resize() override;
+	void SetTextSpeed(unsigned short msPerChar);
 private:
-	bool available = false;
 	struct BorderComponent
 	{
 		TextureRef Texture;
@@ -41,7 +43,14 @@ private:
 		Flag Comment;
 		SizeD TextureDuplication;
 	};
+	friend class array<BorderComponent, 8>;
+
+	bool available = false, immediately = true;
 	array<BorderComponent, 8> textures_Border;
+	wstring text;
+	wstring::iterator posInText;
 	Timer moveTimer, textTimer;
+
+	static void textTimer_Elapsed(Timer &sender, void *userData);
 };
 _L_END
