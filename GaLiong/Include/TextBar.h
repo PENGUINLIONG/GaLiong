@@ -47,8 +47,10 @@ private:
 
 	bool available = false, immediately = true;
 	array<BorderComponent, 8> textures_Border;
+
 	wstring text;
-	wstring::iterator posInText;
+	size_t textLength, textOffset;
+	
 	Timer moveTimer, textTimer;
 
 	static void textTimer_Elapsed(Timer &sender, void *userData);

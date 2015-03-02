@@ -21,6 +21,7 @@ public:
 			return false;
 
 		this->text.append(text);
+
 		return GenerateFont();
 	}
 	void BindFont(Font &font)

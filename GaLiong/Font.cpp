@@ -36,7 +36,7 @@ void Font::SetOutlineWidth(double width)
 	FT_Stroker_Set(stroker, width * 64.0, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 }
 
-TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
+TextureRef Font::RenderString(const wstring text, Size border, Size *spare)
 {
 	if (border.Width == 0)
 		border.Width = MAXLONG;
@@ -44,7 +44,6 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 		border.Height = MAXLONG;
 
 	FT_Glyph glyph, _glyph;
-	unsigned long strLength = wcslen(text);
 	
 	long ceiling = 0;
 	FT_UInt previousIndex = 0;
@@ -54,9 +53,10 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 	TextureBuilder builder(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte);
 
 #pragma region Process the text
-	for (unsigned long i = 0; i < strLength; i++)
+	for (const wchar_t &c : text)
 	{
-		if (*(text + i) == L'\n')
+
+		if (c == L'\n')
 		{
 			offset.X = 0;
 			offset.Y -= advance.Height;
@@ -70,7 +70,7 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 			outlineOffset_doubled = { 0, 0 };
 
 		FT_Vector delta = { 0, 0 };
-		FT_UInt index = FT_Get_Char_Index(face, *(text + i));
+		FT_UInt index = FT_Get_Char_Index(face, c);
 		Rect rect;
 		FT_BitmapGlyph bitmapGlyph, _bitmapGlyph;
 		FT_Bitmap bitmap, _bitmap;
@@ -266,8 +266,6 @@ TextureRef Font::RenderString(const wchar_t *text, Size border, Size *spare)
 #pragma endregion
 	
 	TextureRef texture = builder.Make();
-	if (!texture.expired())
-		texture.lock()->Generate(Texture::Filter::Nearest);
 	
 	return texture;
 }

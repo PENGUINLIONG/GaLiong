@@ -60,17 +60,20 @@ unsigned char Texture::GetPixelLength(Flag pixelFormat, Flag byteSize)
 	return 0;
 }
 
-void Texture::Generate(Flag filter)
+void Texture::Generate(Flag filter, TextureIndex index)
 {
 	if (!size.Width || !size.Height || !data)
 		return;
 
-	glGenTextures(1, &index);
-	glBindTexture(GL_TEXTURE_2D, index);
+	if (index)
+		this->index = index;
+	else
+		glGenTextures(1, &this->index);
+	glBindTexture(GL_TEXTURE_2D, this->index);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
-	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
+	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
 }
 _L_END

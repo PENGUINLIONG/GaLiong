@@ -4,12 +4,11 @@ _L_BEGIN
 Timer::Timer()
 {
 }
-Timer::Timer(void *userData, unsigned long interval) : userData(userData), interval(interval)
+Timer::Timer(void *userData) : userData(userData), interval(1000), mode(TimerExecuteMode::Loop)
 {
-	if (interval)
-		available = true;
+	available = true;
 }
-Timer::Timer(void *userData, unsigned long interval, TimerExecuteMode mode) : userData(userData), interval(interval), mode(mode)
+Timer::Timer(void *userData, unsigned long interval, TimerExecuteMode mode = TimerExecuteMode::Loop) : userData(userData), interval(interval), mode(mode)
 {
 	if (interval)
 		available = true;

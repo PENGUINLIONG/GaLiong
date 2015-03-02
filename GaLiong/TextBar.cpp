@@ -18,21 +18,35 @@ TextBar::TextBar()
 		texture_flag = { TextureRef(), Renderer::ReverseMethod::None, { 0.0, 0.0, 0.0, 0.0 }, BorderComment::NoComment, { 0.0, 0.0 } };
 	}
 
+	textTimer = Timer(this);
 	textTimer += textTimer_Elapsed;
+
+	text = L"";
+	textOffset = 0;
+	textLength = 0;
 
 	available = true;
 }
 TextBar::~TextBar()
 {
+	textTimer.Stop();
 }
 
 bool TextBar::AppendText(wstring text)
 {
 	this->text += text;
+	textLength = this->text.size();
 	if (immediately)
 	{
-		immediately = false;
+		label.AppendText(text);
+		label.GenerateFont();
 	}
+	else
+	{
+		immediately = false;
+		textTimer.Start();
+	}
+
 	return true;
 }
 
@@ -100,7 +114,10 @@ bool TextBar::ChangeText(wstring text)
 {
 	this->text.clear();
 	this->text = text;
+	textOffset = 0;
+	textLength = text.size();
 	label.ClearText();
+	AppendText(text);
 	return true;
 }
 
@@ -142,15 +159,23 @@ void TextBar::SetTextSpeed(unsigned short msPerChar)
 		textTimer.Stop();
 		immediately = true;
 	}
+	else
+		immediately = false;
 	textTimer.SetInterval(msPerChar);
 }
 
 void TextBar::textTimer_Elapsed(Timer &sender, void *userData)
 {
-	TextBar *textBar = reinterpret_cast<TextBar *>(userData);
-	if (textBar)
+	TextBar *instance = reinterpret_cast<TextBar *>(userData);
+	if (instance)
 	{
-		// ...
+		if (instance->textOffset < instance->textLength)
+		{
+			instance->label.AppendText(instance->text.substr(instance->textOffset, 1));
+			instance->textOffset++;
+		}
+		else
+			instance->textTimer.Stop();
 	}
 }
 

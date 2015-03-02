@@ -16,10 +16,13 @@ bool Label::GenerateFont()
 	};
 	Size spare = { 0, 0 };
 	TextureBuilder builder(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte);
-	TextureRef texture = font->RenderString(this->text.c_str(), maximum, &spare);
-	
+	TextureRef texture = font->RenderString(this->text, maximum, &spare);
+
 	if (texture.expired())
 		return false;
+	//else
+		//texture.lock()->Generate(Texture::Filter::Nearest);
+	// We can't do the generate staff here since OpenGL does not support multithreading.
 
 	TextureStrongRef ref = texture.lock();
 	
@@ -51,6 +54,11 @@ void Label::Render()
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
 		}
+
+		TextureStrongRef sref = texture.lock();
+		if (!sref->GetIndex())
+			sref->Generate(Texture::Filter::Nearest); // But we can generate here!
+
 		// Rendering image upside-down will be much faster processing data in the memory.
 		// * NOTE: rendered fonts' image are upside-down in general.
 		Renderer::DrawRectangle(texture.lock()->GetIndex(),

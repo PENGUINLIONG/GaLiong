@@ -25,10 +25,11 @@ public:
 		const static Flag UShort = 0x1403;
 	};
 	Texture();
+	~Texture();
 	void ChangeFilter(Flag filter);
 	SizeD CalculateDuplication(Size &container);
 	static unsigned char GetPixelLength(Flag pixelFormat, Flag byteSize);
-	void Generate(Flag filter = Filter::Linear);
+	void Generate(Flag filter = Filter::Linear, TextureIndex index = 0);
 	const Buffer GetData()
 	{
 		return data;
@@ -66,7 +67,6 @@ public:
 		this->byteSize = byteSize;
 		informative = true;
 	}
-	~Texture();
 private:
 	bool informative = false;
 	BufferLength dataLength = 0;

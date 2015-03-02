@@ -15,7 +15,7 @@ public:
 		Loop
 	};
 	Timer();
-	Timer(void *userData, unsigned long interval);
+	Timer(void *userData);
 	Timer(void *userData, unsigned long interval, TimerExecuteMode mode);
 	bool IsEnabled();
 	Timer &operator+=(const TimerCallbackFunction &callback);
