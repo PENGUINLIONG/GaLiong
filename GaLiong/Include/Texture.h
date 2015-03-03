@@ -6,7 +6,7 @@ _L_BEGIN
 class _L_ Texture
 {
 public:
-	mutex occupy;
+	recursive_mutex occupy;
 	
 	const static struct Filter
 	{

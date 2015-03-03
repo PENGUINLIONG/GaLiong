@@ -145,7 +145,7 @@ void TextBar::Resize()
 	{
 		if (!texture.Texture.expired())
 		{
-			lock_guard<mutex> lock(texture.Texture.lock()->occupy);
+			lock_guard<recursive_mutex> lock(texture.Texture.lock()->occupy);
 
 			BindBorderTexture(texture.Texture, texture.Comment);
 		}

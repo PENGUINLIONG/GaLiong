@@ -54,7 +54,7 @@ void Label::Render()
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
 		}
-		lock_guard<mutex> lock(texture.lock()->occupy);
+		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
 
 		TextureStrongRef sref = texture.lock();
 		if (!sref->GetIndex())

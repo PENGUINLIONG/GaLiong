@@ -39,7 +39,7 @@ void Entity::Render()
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
 		}
-		lock_guard<mutex> lock(texture.lock()->occupy);
+		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
 		
 		Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}

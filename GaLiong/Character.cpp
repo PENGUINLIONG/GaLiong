@@ -26,7 +26,7 @@ void Character::Render()
 			continue;
 		}
 
-		lock_guard<mutex> lock(texture.lock()->occupy);
+		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
 		if (this->displayMode == DisplayMode::Normal)
 			Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else

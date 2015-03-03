@@ -27,7 +27,7 @@ bool Button::CheckClick(Size window, Point point)
 			continue;
 		}
 
-		lock_guard<mutex> lock(texture.lock()->occupy);
+		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
 
 		TextureStrongRef ref = texture.lock();
 		if (!ref->IsInformative())
