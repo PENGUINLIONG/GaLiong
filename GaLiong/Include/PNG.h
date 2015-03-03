@@ -22,7 +22,7 @@ public:
 	PNG();
 	~PNG();
 	bool InitHeader(Size &size, Flag &pixelFormat, Flag &byteSize);
-	Buffer ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength);
+	Buffer ReadData(const Size &size, BufferLength &dataLength, const Byte pixelLength);
 	TextureRef ToTexture(wchar_t *path, Flag option = FileReadOption::None);
 #ifdef _INSIDER_COMPILATION
 private:

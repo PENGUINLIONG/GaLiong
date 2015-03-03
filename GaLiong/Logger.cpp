@@ -136,7 +136,7 @@ Logger &Logger::operator<<(Logger &(func)(Logger &))
 
 void Logger::SpecifyOutputFile(wchar_t *path, bool fileOutputOnly)
 {
-	if (path == L"Console")
+	if (wcscmp(path, L"Console"))
 	{
 		console = true;
 		if (!fileOutputOnly)

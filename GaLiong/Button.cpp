@@ -26,6 +26,9 @@ bool Button::CheckClick(Size window, Point point)
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
 		}
+
+		lock_guard<mutex> lock(texture.lock()->occupy);
+
 		TextureStrongRef ref = texture.lock();
 		if (!ref->IsInformative())
 			continue;

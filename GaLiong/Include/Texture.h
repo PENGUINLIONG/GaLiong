@@ -6,6 +6,8 @@ _L_BEGIN
 class _L_ Texture
 {
 public:
+	mutex occupy;
+	
 	const static struct Filter
 	{
 		const static Flag Nearest = 0x2600;
@@ -24,6 +26,7 @@ public:
 		const static Flag UByte = 0x1401;
 		const static Flag UShort = 0x1403;
 	};
+
 	Texture();
 	~Texture();
 	void ChangeFilter(Flag filter);

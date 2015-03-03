@@ -123,7 +123,6 @@ bool TextBar::ChangeText(wstring text)
 
 void TextBar::Render()
 {
-	unsigned long long i = 0;
 	for (auto &texture : textures_Border)
 	{
 		if (!texture.Texture.expired())
@@ -142,11 +141,12 @@ void TextBar::Resize()
 	if (!available || !size.Width || !size.Height)
 		return;
 	TextEntity::Resize();
-	Size size_Control = { (long)((this->size.Width / 100.0) * windowSize->Height), (long)((this->size.Height / 100.0) * windowSize->Height) };
 	for (auto &texture : textures_Border)
 	{
-		if (texture.Texture.expired())
+		if (!texture.Texture.expired())
 		{
+			lock_guard<mutex> lock(texture.Texture.lock()->occupy);
+
 			BindBorderTexture(texture.Texture, texture.Comment);
 		}
 	}

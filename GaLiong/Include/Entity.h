@@ -11,24 +11,11 @@ class _L_ Entity : public ControlBase, public IRenderable
 public:
 	Entity();
 	virtual ~Entity() override;
-	void BindTexture(TextureRef texture)
-	{
-		if (texture.expired() || !texture.lock()->GetIndex())
-			return;
-		textures.push_back(texture);
-	}
-	void ClearTextures()
-	{
-		if (textures.empty())
-			return;
-		textures.clear();
-	}
+	void BindTexture(TextureRef texture);
+	void ClearTextures();
 	virtual void Render() override;
 	virtual void Resize() override {}
-	virtual void SetPosition(PointD position)
-	{
-		this->pos = position;
-	}
+	virtual void SetPosition(PointD position);
 	virtual void SetSize(SizeD size)
 	{
 		this->size = size;

@@ -25,10 +25,13 @@ void Character::Render()
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
 		}
+
+		lock_guard<mutex> lock(texture.lock()->occupy);
 		if (this->displayMode == DisplayMode::Normal)
 			Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 		else
 			Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height }, Renderer::ReverseMethod::Vertical);
+
 		if (fx != FX::Normal)
 			ProcessFX();
 	}

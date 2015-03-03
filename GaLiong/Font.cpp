@@ -1,7 +1,7 @@
 ﻿#include "Font.h"
 
 _L_BEGIN
-Font::Font()
+Font::Font() : size({ 0, 0 }), fontColor({ 0, 0, 0, 0 }), outlineColor({ 0, 0, 0, 0 })
 {
 }
 
@@ -36,7 +36,7 @@ void Font::SetOutlineWidth(double width)
 	FT_Stroker_Set(stroker, width * 64.0, FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 }
 
-TextureRef Font::RenderString(const wstring text, Size border, Size *spare)
+TextureRef Font::RenderString(const wstring &text, Size border, Size *spare)
 {
 	if (border.Width == 0)
 		border.Width = MAXLONG;
@@ -55,7 +55,6 @@ TextureRef Font::RenderString(const wstring text, Size border, Size *spare)
 #pragma region Process the text
 	for (const wchar_t &c : text)
 	{
-
 		if (c == L'\n')
 		{
 			offset.X = 0;

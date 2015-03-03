@@ -70,7 +70,7 @@ failed:
 	return false;
 }
 
-Buffer PNG::ReadData(const Size size, BufferLength &dataLength, const Byte pixelLength)
+Buffer PNG::ReadData(const Size &size, BufferLength &dataLength, const Byte pixelLength)
 {
 	BufferLength advance = size.Width * pixelLength;
 	dataLength = advance * size.Height;

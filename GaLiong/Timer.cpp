@@ -87,6 +87,8 @@ void Timer::SetInterval(unsigned long interval)
 	bool shouldStart = enabled;
 	Stop();
 	this->interval = chrono::milliseconds(interval);
+	if (shouldStart)
+		Start();
 }
 
 Timer::~Timer()

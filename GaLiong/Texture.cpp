@@ -62,6 +62,8 @@ unsigned char Texture::GetPixelLength(Flag pixelFormat, Flag byteSize)
 
 void Texture::Generate(Flag filter, TextureIndex index)
 {
+	lock_guard<mutex> lock(occupy);
+
 	if (!size.Width || !size.Height || !data)
 		return;
 

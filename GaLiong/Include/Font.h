@@ -14,10 +14,10 @@ public:
 	void SetSizeAbsolute(Size size);
 	void SetColor(Color fontColor, Color outlineColor);
 	void SetOutlineWidth(double width);
-	TextureRef RenderString(const wstring text, Size border, Size *spare = nullptr);
+	TextureRef RenderString(const wstring &text, Size border, Size *spare = nullptr);
 	~Font();
 private:
-	Buffer file;
+	Buffer file = nullptr;
 	double outlineWidth = 0;
 	Size size;
 	Color fontColor, outlineColor;

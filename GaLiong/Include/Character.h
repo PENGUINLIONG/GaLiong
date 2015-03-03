@@ -7,13 +7,13 @@ _L_BEGIN
 class _L_ Character : public Entity
 {
 public:
-enum class DisplayMode {
-	Inherit = 0,
-	Hidden = 1,
-	Normal = 2,
-	UpsideDown = 3
-};
-enum class FX {
+	enum class DisplayMode {
+		Inherit = 0,
+		Hidden = 1,
+		Normal = 2,
+		UpsideDown = 3
+	};
+	enum class FX {
 		Inherit = 0,
 		Normal = 1,
 		Shaky = 2,
@@ -23,8 +23,8 @@ enum class FX {
 		ExExAbnormal = 6 //////////////////////Need Implementation/////////////////////
 		// Accessory
 		/*Intimate,
-		Joyful,
-		Jetting,*/
+	Joyful,
+	Jetting,*/
 	};
 
 	Character();

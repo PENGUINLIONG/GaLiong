@@ -258,12 +258,12 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				window->pos = { LOWORD(lParam) - (window->border.Width >> 1), HIWORD(lParam) - (window->border.Height - (window->border.Width >> 1)) };
 			return 0;
 		case WM_KEYDOWN:
-			window->isFullScreen = !window->isFullScreen;
 			if (wParam != VK_ESCAPE)
 			{
 				switch (wParam)
 				{
 					case VK_F11:
+						window->isFullScreen = !window->isFullScreen;
 						if (window->isFullScreen)
 						{
 							Log << L"Try to switch to fullscreen mode..." << EndLog;
@@ -274,6 +274,8 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 							Log << L"Try to switch to window mode..." << EndLog;
 							window->Resize(window->previous);
 						}
+						break;
+					case VK_F12:
 						break;
 					default:
 						break;

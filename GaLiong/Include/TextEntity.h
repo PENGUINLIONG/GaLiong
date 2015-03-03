@@ -34,6 +34,8 @@ public:
 	}
 	virtual void Resize() override
 	{
+		if (!size.Width || !size.Height)
+			return;
 		label.Resize();
 	}
 	virtual void SetPosition(PointD position) override
