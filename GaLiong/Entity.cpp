@@ -56,6 +56,12 @@ void Entity::Resize()
 	Border.Resize();
 }
 
+void Entity::SetWindowSize(Size *windowSize)
+{
+	ControlBase::SetWindowSize(windowSize);
+	Border.SetWindowSize(windowSize);
+}
+
 Entity::BorderImpl::BorderImpl(PointD &pos, SizeD &size) : pos(pos), size(size)
 {
 	for (auto &texture : textures)

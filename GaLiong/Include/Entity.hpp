@@ -29,7 +29,12 @@ public:
 	class BorderImpl : public ControlBase, public IRenderable
 	{
 	public:
-		void BindTexture(TextureRef texture, const Flag comment);
+		// LNK2019 occured when I did not use to add the virtual keyword.
+		// That's interesting.
+		// If there is someone can tell me what caused that, 
+		//     please create an issue on this repo via Github or send an email to admin@penguinliong.moe.
+		// Much appriciated!
+		virtual void BindTexture(TextureRef texture, const Flag comment);
 		virtual void Render() override final;
 		virtual void Resize() override final;
 	private:
@@ -65,6 +70,7 @@ public:
 	{
 		this->size = size;
 	}
+	virtual void SetWindowSize(Size *windowSize);
 protected:
 	bool visible = true;
 	list<TextureRef> textures;

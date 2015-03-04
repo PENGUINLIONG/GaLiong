@@ -92,6 +92,5 @@ TextureBuilder::~TextureBuilder()
 {
 	for (auto &texture : textures)
 		delete texture.Texture;
-	Log << L"TextureBuilder destructed." << EndLog;
 }
 _L_END
