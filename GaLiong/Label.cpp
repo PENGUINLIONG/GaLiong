@@ -62,9 +62,19 @@ void Label::Render()
 
 		// Rendering image upside-down will be much faster processing data in the memory.
 		// * NOTE: rendered fonts' image are upside-down in general.
-		Renderer::DrawRectangle(texture.lock()->GetIndex(),
-			{ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height },
-			Renderer::ReverseMethod::Vertical);
+		switch (alignment)
+		{
+			case Alignment::Center:
+				Renderer::DrawRectangle(texture.lock()->GetIndex(),
+				{ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height },
+				Renderer::ReverseMethod::Vertical);
+				break;
+			case Alignment::Left:
+				Renderer::DrawRectangle(texture.lock()->GetIndex(),
+				{ pos.X, pos.Y, pos.X + fontSize.Width, pos.Y - fontSize.Height },
+				Renderer::ReverseMethod::Vertical);
+				break;
+		}
 	}
 }
 

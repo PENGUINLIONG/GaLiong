@@ -147,4 +147,10 @@ struct FileReadOption
 	const static Flag NoClose    = 0x0001;
 	const static Flag NoGenerate = 0x0002;
 };
+
+enum class Alignment
+{
+	Center,
+	Left,
+};
 _L_END

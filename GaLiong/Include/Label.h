@@ -12,6 +12,8 @@ class _L_ Label : public Entity
 {
 	friend class TextEntity;
 public:
+	Alignment alignment;
+
 	Label();
 	virtual ~Label() override;
 
@@ -30,7 +32,7 @@ public:
 		visible = available = true;
 		ClearTextures();
 	}
-	virtual void BindTexture(TextureRef texture){}
+	virtual void BindTexture(TextureRef texture) { }
 	bool ChangeText(wstring text)
 	{
 		if (!available)

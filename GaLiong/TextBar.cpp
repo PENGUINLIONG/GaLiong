@@ -25,6 +25,8 @@ TextBar::TextBar()
 	textOffset = 0;
 	textLength = 0;
 
+	label.alignment = Alignment::Left;
+
 	available = true;
 }
 TextBar::~TextBar()
