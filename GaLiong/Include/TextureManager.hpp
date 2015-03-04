@@ -1,6 +1,6 @@
 #pragma once
-#include "Preprocess.h"
-#include "Texture.h"
+#include "Preprocess.hpp"
+#include "Texture.hpp"
 
 _L_BEGIN
 class _L_ TextureManagerImpl

@@ -1,4 +1,4 @@
-#include "Character.h"
+#include "Character.hpp"
 
 _L_BEGIN
 Character::Character() : pos_Original({ 0, 0 })

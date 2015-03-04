@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "Label.hpp"
 
 _L_BEGIN
 Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })

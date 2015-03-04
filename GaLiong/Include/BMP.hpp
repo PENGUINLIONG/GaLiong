@@ -1,8 +1,8 @@
 #pragma once
-#include "Preprocess.h"
-#include "Logger.h"
-#include "Texture.h"
-#include "TextureManager.h"
+#include "Preprocess.hpp"
+#include "Logger.hpp"
+#include "Texture.hpp"
+#include "TextureManager.hpp"
 
 _L_BEGIN
 class _L_ BMP

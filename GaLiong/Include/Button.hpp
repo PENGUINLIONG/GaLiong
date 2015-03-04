@@ -1,8 +1,8 @@
 #pragma once
-#include "Preprocess.h"
-#include "TextEntity.h"
-#include "IClickable.h"
-#include "Logger.h"
+#include "Preprocess.hpp"
+#include "TextEntity.hpp"
+#include "IClickable.hpp"
+#include "Logger.hpp"
 
 _L_BEGIN
 class _L_ Button : public TextEntity, public IClickable

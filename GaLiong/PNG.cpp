@@ -1,4 +1,4 @@
-#include "PNG.h"
+#include "PNG.hpp"
 
 _L_BEGIN
 PNG::PNG()

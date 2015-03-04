@@ -1,4 +1,4 @@
-#include "TextureBuilder.h"
+#include "TextureBuilder.hpp"
 
 _L_BEGIN
 TextureBuilder::TextureBuilder(Flag pixelFormat, Flag byteSize) : boundary({ MAXLONG, MINLONG, MINLONG, MAXLONG }), pixelFormat(pixelFormat), byteSize(byteSize)

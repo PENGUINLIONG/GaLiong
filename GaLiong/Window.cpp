@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "Window.hpp"
 
 _L_BEGIN
 Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })

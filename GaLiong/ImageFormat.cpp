@@ -1,4 +1,4 @@
-#include "ImageFormat.h"
+#include "ImageFormat.hpp"
 
 _L_BEGIN
 bool ImageFormat::Assert(ifstream &stream, wchar_t * path, ImageFileFormat format)

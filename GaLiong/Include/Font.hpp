@@ -1,7 +1,7 @@
 #pragma once
-#include "Preprocess.h"
-#include "Texture.h"
-#include "TextureBuilder.h"
+#include "Preprocess.hpp"
+#include "Texture.hpp"
+#include "TextureBuilder.hpp"
 
 _L_BEGIN
 class _L_ Font

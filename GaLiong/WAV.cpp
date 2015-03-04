@@ -1,4 +1,4 @@
-#include "WAV.h"
+#include "WAV.hpp"
 
 _L_BEGIN
 WAV::WAV(ifstream *stream) : stream(stream)

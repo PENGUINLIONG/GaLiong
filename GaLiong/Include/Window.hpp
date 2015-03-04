@@ -1,12 +1,11 @@
 #pragma once
-#include "Preprocess.h"
-#include <WinUser.h>
-#include "ControlBase.h"
-#include "Button.h"
-#include "Character.h"
-#include "IClickable.h"
-#include "IRenderable.h"
-#include "Logger.h"
+#include "Preprocess.hpp"
+#include "ControlBase.hpp"
+#include "Button.hpp"
+#include "Character.hpp"
+#include "IClickable.hpp"
+#include "IRenderable.hpp"
+#include "Logger.hpp"
 
 _L_BEGIN
 class _L_ Window

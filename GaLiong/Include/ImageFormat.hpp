@@ -1,8 +1,8 @@
 #pragma once
-#include "Preprocess.h"
-#include "Texture.h"
-#include "BMP.h"
-#include "PNG.h"
+#include "Preprocess.hpp"
+#include "Texture.hpp"
+#include "BMP.hpp"
+#include "PNG.hpp"
 
 _L_BEGIN
 enum class ImageFileFormat

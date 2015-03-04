@@ -128,92 +128,92 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Entrance.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Preprocess.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\BMP.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Button.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Character.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Font.h">
-      <Filter>头文件\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Entity.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\IClickable.h">
-      <Filter>头文件\Control\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ImageFormat.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\IRenderable.h">
-      <Filter>头文件\Control\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Renderer.h">
-      <Filter>头文件\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\SoundCommon.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Storage.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Texture.h">
-      <Filter>头文件\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\WindowsAudioSession.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\WaveOut.h">
-      <Filter>头文件\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\WAV.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Window.h">
-      <Filter>头文件\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\LibFreeType.h">
-      <Filter>头文件\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Label.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\TextEntity.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Timer.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\PNG.h">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ControlBase.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Logger.h">
-      <Filter>头文件\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\TextBar.h">
-      <Filter>头文件\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MemoryManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Include\TextureBuilder.h">
+    <ClInclude Include="Include\IClickable.hpp">
+      <Filter>头文件\Control\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\IRenderable.hpp">
+      <Filter>头文件\Control\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Button.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Character.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ControlBase.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Entity.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Label.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextBar.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextEntity.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Timer.hpp">
+      <Filter>头文件\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\BMP.hpp">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ImageFormat.hpp">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PNG.hpp">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Storage.hpp">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WAV.hpp">
+      <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Font.hpp">
+      <Filter>头文件\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\LibFreeType.hpp">
+      <Filter>头文件\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Renderer.hpp">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Window.hpp">
+      <Filter>头文件\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Logger.hpp">
+      <Filter>头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SoundCommon.hpp">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WaveOut.hpp">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WindowsAudioSession.hpp">
+      <Filter>头文件\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Texture.hpp">
       <Filter>头文件\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Include\TextureManager.h">
+    <ClInclude Include="Include\TextureBuilder.hpp">
       <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureManager.hpp">
+      <Filter>头文件\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Entrance.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Preprocess.hpp">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

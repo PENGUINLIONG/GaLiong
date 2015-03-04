@@ -1,4 +1,4 @@
-#include "LibFreeType.h"
+#include "LibFreeType.hpp"
 
 _L_BEGIN
 LibFreeType::LibFreeType()

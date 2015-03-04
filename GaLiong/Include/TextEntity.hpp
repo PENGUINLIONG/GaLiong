@@ -1,8 +1,8 @@
 #pragma once
-#include "Preprocess.h"
-#include "Entity.h"
-#include "Font.h"
-#include "Label.h"
+#include "Preprocess.hpp"
+#include "Entity.hpp"
+#include "Font.hpp"
+#include "Label.hpp"
 
 _L_BEGIN
 class _L_ TextEntity : public Entity

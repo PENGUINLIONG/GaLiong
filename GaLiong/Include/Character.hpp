@@ -1,7 +1,7 @@
 #pragma once
 #include "cmath"
-#include "Preprocess.h"
-#include "Entity.h"
+#include "Preprocess.hpp"
+#include "Entity.hpp"
 
 _L_BEGIN
 class _L_ Character : public Entity

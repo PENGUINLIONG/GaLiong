@@ -1,4 +1,4 @@
-#include "TextureManager.h"
+#include "TextureManager.hpp"
 
 _L_BEGIN
 TextureManagerImpl::TextureManagerImpl()

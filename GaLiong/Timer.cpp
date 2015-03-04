@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "Timer.hpp"
 
 _L_BEGIN
 Timer::Timer()

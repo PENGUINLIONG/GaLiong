@@ -1,4 +1,4 @@
- #include "BMP.h"
+ #include "BMP.hpp"
 
 _L_BEGIN
 BMP::BMP() {}

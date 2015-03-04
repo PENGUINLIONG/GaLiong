@@ -13,11 +13,11 @@
 */
 /*
 #pragma once
-#include "Preprocess.h"
-#include <Audioclient.h>
-#include <audiopolicy.h>
-#include <Mmdeviceapi.h>
-#include "SoundCommon.h"
+#include "Preprocess.hpp"
+#include <Audioclient.hpp>
+#include <audiopolicy.hpp>
+#include <Mmdeviceapi.hpp>
+#include "SoundCommon.hpp"
 
 #pragma comment(lib, "winmm.lib")
 

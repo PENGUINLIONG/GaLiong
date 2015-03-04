@@ -21,6 +21,7 @@
 #include <vector>
 // Windows
 #include <Windows.h>
+#include <WinUser.h>
 #ifdef _INSIDER_COMPILATION
 // OpenGL
 #include <gl\GL.h>

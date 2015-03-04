@@ -1,6 +1,6 @@
 #pragma once
-#include "Preprocess.h"
-#include "SoundCommon.h"
+#include "Preprocess.hpp"
+#include "SoundCommon.hpp"
 
 _L_BEGIN
 class _L_ WaveOut

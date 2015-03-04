@@ -1,4 +1,4 @@
-﻿#include "Font.h"
+﻿#include "Font.hpp"
 
 _L_BEGIN
 Font::Font() : size({ 0, 0 }), fontColor({ 0, 0, 0, 0 }), outlineColor({ 0, 0, 0, 0 })

@@ -1,9 +1,9 @@
 #pragma once
-#include "Preprocess.h"
-#include "Font.h"
-#include "Renderer.h"
-#include "Entity.h"
-#include "Texture.h"
+#include "Preprocess.hpp"
+#include "Font.hpp"
+#include "Renderer.hpp"
+#include "Entity.hpp"
+#include "Texture.hpp"
 
 _L_BEGIN
 class Texture;

@@ -1,4 +1,4 @@
-#include "WaveOut.h"
+#include "WaveOut.hpp"
 
 _L_BEGIN
 WaveOut::WaveOut()

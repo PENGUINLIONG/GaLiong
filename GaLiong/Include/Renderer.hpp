@@ -1,7 +1,7 @@
 #pragma once
-#include "Preprocess.h"
-#include "Texture.h"
-////#include "TextureBuffer.h"
+#include "Preprocess.hpp"
+#include "Texture.hpp"
+////#include "TextureBuffer.hpp"
 
 _L_BEGIN
 class _L_ Renderer

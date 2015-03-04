@@ -1,4 +1,4 @@
-#include "Texture.h"
+#include "Texture.hpp"
 
 _L_BEGIN
 Texture::Texture() : size({ 0, 0 })

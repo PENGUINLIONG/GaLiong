@@ -1,6 +1,6 @@
 #pragma once
-#include "Preprocess.h"
-#include "Font.h"
+#include "Preprocess.hpp"
+#include "Font.hpp"
 
 _L_BEGIN
 class _L_ LibFreeType

@@ -1,4 +1,4 @@
-#include "TextEntity.h"
+#include "TextEntity.hpp"
 
 _L_BEGIN
 TextEntity::TextEntity()
