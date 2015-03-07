@@ -17,7 +17,7 @@ bool Button::CheckClick(PointD point)
 		point.X > pos.X + size.Width ||
 		point.Y < pos.Y - size.Height)
 		return false;
-
+	
 	for (const TextureRef &texture : textures)
 	{
 		if (texture.expired())
@@ -52,7 +52,7 @@ bool Button::CheckClick(PointD point)
 							static_cast<long>((point.X - pos.X) / size.Width * textureSize.Width), // X offset.
 							-static_cast<long>((point.Y - pos.Y) / size.Height * textureSize.Height) // Y offset
 						};
-						if (*(ref->GetData() + ((offset.Width + offset.Height * textureSize.Width) << 2) + 3))
+						if (*(ref->GetData() + ((offset.Width + (textureSize.Height - offset.Height) * textureSize.Width) << 2) + 3))
 							return true;
 						break;
 					}
