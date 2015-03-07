@@ -44,12 +44,16 @@ void Label::Render()
 	if (!visible && !available && empty)
 		return;
 
-	for (const auto &texture : textures) // Go to Entity::Render for details.
+	if (textures.empty())
+	{
+		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		return;
+	}
+
+	for (const TextureRef &texture : textures) // Go to Entity::Render for details.
 	{
 		if (texture.expired())
-		{
-			Renderer::DrawWithoutTexture({ fontPos.X, fontPos.Y, fontPos.X + fontSize.Width, fontPos.Y - fontSize.Height });
-			
+		{			
 			Texture *targetPtr = texture.lock().get();
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
@@ -57,6 +61,7 @@ void Label::Render()
 		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
 
 		TextureStrongRef sref = texture.lock();
+
 		if (!sref->GetIndex())
 			sref->Generate(Texture::Filter::Nearest); // But we can generate here!
 

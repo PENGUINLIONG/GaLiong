@@ -34,12 +34,16 @@ void Entity::Render()
 	if (!visible)
 		return;
 
-	for (const auto &texture : textures) // The order to render the textures is to
+	if (textures.empty())
+	{
+		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		return;
+	}
+
+	for (const TextureRef &texture : textures) // The order to render the textures is to
 	{
 		if (texture.expired())
 		{
-			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-			
 			Texture *targetPtr = texture.lock().get();
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;
@@ -146,6 +150,12 @@ _:
 
 void Entity::BorderImpl::Render()
 {
+	if (textures.empty())
+	{
+		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		return;
+	}
+
 	for (auto &texture : textures)
 	{
 		if (!texture.Texture.expired())

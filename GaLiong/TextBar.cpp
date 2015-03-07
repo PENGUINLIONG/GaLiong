@@ -3,7 +3,7 @@
 _L_BEGIN
 TextBar::TextBar()
 {
-	implemented = ControlInterface::IRenderable;
+	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
 
 	textTimer = Timer(this);
 	textTimer += textTimer_Elapsed;
@@ -53,18 +53,6 @@ bool TextBar::ChangeText(wstring text)
 	label.ClearText();
 	AppendText(text);
 	return true;
-}
-
-void TextBar::Render()
-{
-	TextEntity::Render();
-}
-
-void TextBar::Resize()
-{
-	if (!available || !size.Width || !size.Height)
-		return;
-	TextEntity::Resize();
 }
 
 void TextBar::SetTextSpeed(unsigned short msPerChar)

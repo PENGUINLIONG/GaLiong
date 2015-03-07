@@ -10,11 +10,11 @@ class _L_ Button : public TextEntity, public IClickable
 public:
 	Button();
 	virtual ~Button() override;
-	bool CheckClick(Size window, Point point) override final;
+	virtual bool CheckClick(PointD point) override;
 	virtual void BindTexture(TextureRef texture)
 	{
 		Entity::BindTexture(texture);
 	}
-	void ClickEventHandler(Point point) override final;
+	virtual void ClickEventHandler(Point point) override;
 };
 _L_END

@@ -20,7 +20,8 @@ Logger &Logger::Log(const wchar_t *content, WarningLevel level, bool terminate)
 	{
 		wchar_t timeBuffer[20];
 		time_t now = time(0);
-		struct tm ts = *localtime(&now);
+		struct tm ts;
+		localtime_s(&ts, &now);
 		wcsftime(timeBuffer, 20, L"%Y-%m-%d %X", &ts);
 		tempString = timeBuffer;
 

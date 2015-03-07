@@ -1,9 +1,8 @@
-#include "Entity.h"
+#include "Entity.hpp"
 
 _L_BEGIN
-Entity::Entity() : pos({ 0.0f, 0.0f }), size({ 0.0f, 0.0f })
+Entity::Entity() : pos({ 0.0f, 0.0f }), size({ 0.0f, 0.0f }), Border(pos, size)
 {
-	border = Border(pos, size);
 }
 
 Entity::~Entity()
@@ -49,9 +48,21 @@ void Entity::Render()
 		
 		Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}
+	Border.Render();
 }
 
-Entity::Border::Border(PointD &pos, SizeD &size) : pos(pos), size(size)
+void Entity::Resize()
+{
+	Border.Resize();
+}
+
+void Entity::SetWindowSize(Size *windowSize)
+{
+	ControlBase::SetWindowSize(windowSize);
+	Border.SetWindowSize(windowSize);
+}
+
+Entity::BorderImpl::BorderImpl(PointD &pos, SizeD &size) : pos(pos), size(size)
 {
 	for (auto &texture : textures)
 	{
@@ -59,16 +70,11 @@ Entity::Border::Border(PointD &pos, SizeD &size) : pos(pos), size(size)
 	}
 }
 
-#define LEFT 0
-#define TOP 1
-#define RIGHT 2
-#define BOTTOM 3
-#define UPPER_LEFT 4
-#define UPPER_RIGHT 5
-#define LOWER_LEFT 6
-#define LOWER_RIGHT 7
+Entity::BorderImpl::~BorderImpl()
+{
+}
 
-void Entity::Border::BindBorderTexture(TextureRef texture, const Flag comment)
+void Entity::BorderImpl::BindTexture(TextureRef texture, const Flag comment)
 {
 	if (texture.expired())
 		return;
@@ -81,6 +87,10 @@ void Entity::Border::BindBorderTexture(TextureRef texture, const Flag comment)
 
 	ref->ChangeFilter(Texture::Filter::Nearest);
 
+#define LEFT 0
+#define TOP 1
+#define RIGHT 2
+#define BOTTOM 3
 	if (comment & BorderComment::EveryBorder)
 	{
 		if (comment & BorderComment::EveryBorder == BorderComment::EveryBorder)
@@ -100,8 +110,15 @@ void Entity::Border::BindBorderTexture(TextureRef texture, const Flag comment)
 		if (comment & BorderComment::Bottom)
 			textures[BOTTOM] = { texture, Renderer::ReverseMethod::None, { pos.X, pos.Y - size.Height, pos.X + size.Width, pos.Y - size.Height - size_Texture.Height }, comment, { ref->CalculateDuplication(size_Control).Width, 1.0 } };
 	}
-
+#undef LEFT
+#undef TOP
+#undef RIGHT
+#undef BOTTOM
 _:
+#define UPPER_LEFT 4
+#define UPPER_RIGHT 5
+#define LOWER_LEFT 6
+#define LOWER_RIGHT 7
 	if (comment & BorderComment::EveryCorner)
 	{
 		if (comment & BorderComment::EveryCorner == BorderComment::EveryCorner)
@@ -121,19 +138,20 @@ _:
 		if (comment & BorderComment::LowerRight)
 			textures[LOWER_RIGHT] = { texture, Renderer::ReverseMethod::None, { pos.X + size.Width, pos.Y - size.Height, pos.X + size.Width + size_Texture.Width, pos.Y - size.Height - size_Texture.Height }, comment, { 1.0, 1.0 } };
 	}
-}
-
-#undef LEFT
-#undef TOP
-#undef RIGHT
-#undef BOTTOM
 #undef UPPER_LEFT
 #undef UPPER_RIGHT
 #undef LOWER_LEFT
 #undef LOWER_RIGHT
+}
 
-void Entity::Border::Render()
+void Entity::BorderImpl::Render()
 {
+	if (textures.empty)
+	{
+		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		return;
+	}
+
 	for (auto &texture : textures)
 	{
 		if (!texture.Texture.expired())
@@ -146,7 +164,7 @@ void Entity::Border::Render()
 	}
 }
 
-void Entity::Border::Resize()
+void Entity::BorderImpl::Resize()
 {
 	for (auto &texture : textures)
 	{
@@ -154,7 +172,7 @@ void Entity::Border::Resize()
 		{
 			lock_guard<recursive_mutex> lock(texture.Texture.lock()->occupy);
 
-			BindBorderTexture(texture.Texture, texture.Comment);
+			BindTexture(texture.Texture, texture.Comment);
 		}
 	}
 }

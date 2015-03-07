@@ -14,13 +14,17 @@ void Character::Render()
 {
 	if (!visible)
 		return;
+	
+	if (textures.empty())
+	{
+		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
+		return;
+	}
 
-	for (const auto &texture : textures) // Go to Entity::Render for details.
+	for (const TextureRef &texture : textures) // Go to Entity::Render for details.
 	{
 		if (texture.expired())
 		{
-			Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-
 			Texture *targetPtr = texture.lock().get();
 			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
 			continue;

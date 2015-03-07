@@ -1,10 +1,10 @@
 #pragma once
 #include "Preprocess.hpp"
-#include "TextEntity.hpp"
+#include "Button.hpp"
 #include "Timer.hpp"
 
 _L_BEGIN
-class _L_ TextBar : public TextEntity
+class _L_ TextBar : public Button
 {
 public:
 	TextBar();
@@ -13,8 +13,6 @@ public:
 	virtual void BindTexture(TextureRef texture) override;
 	virtual bool ChangeText(wstring text) override;
 	void Move(unsigned long duration, RectD destination);
-	virtual void Render() override;
-	virtual void Resize() override;
 	void SetTextSpeed(unsigned short msPerChar);
 private:
 	bool available = false, immediately = true;

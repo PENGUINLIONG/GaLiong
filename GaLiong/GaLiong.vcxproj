@@ -87,6 +87,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)GaLiong\Include;$(SolutionDir)Lib\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <EnablePREfast>false</EnablePREfast>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(SolutionDir)\Lib\zlib_x86.lib;$(SolutionDir)\Lib\libpng_x86.lib;$(SolutionDir)\Lib\freetype_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -104,6 +105,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GALIONG_EXPORTS;_INSIDER_COMPILATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)GaLiong\Include;$(SolutionDir)Lib\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -123,6 +125,7 @@
       <StructMemberAlignment>1Byte</StructMemberAlignment>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>
@@ -143,6 +146,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GALIONG_EXPORTS;_INSIDER_COMPILATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)GaLiong\Include;$(SolutionDir)Lib\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>

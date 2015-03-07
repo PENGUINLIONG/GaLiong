@@ -35,14 +35,16 @@ void Window::Click(Point point)
 {
 	Log << L"Check click... At (" << point.X << L", " << point.Y << L")." << EndLog;
 
-	for (vector<ControlBase *>::iterator ControlBase = controls.begin(); ControlBase != controls.end(); ++ControlBase)
+	PointD size_relative = { -50.0 + ((double)((point.X - ((size.Width - size.Height) >> 1)) * 100) / (double)size.Height), 50.0 - ((double)point.Y / (double)size.Height * 100) };
+
+	for (auto &controlBase = controls.rbegin(); controlBase != controls.rend(); controlBase++)
 	{
-		if (!*ControlBase)
+		if (!*controlBase)
 			continue;
-		if ((*ControlBase)->Implemented(ControlInterface::IClickable))
+		if ((*controlBase)->Implemented(ControlInterface::IClickable))
 		{
-			IClickable *iClickable = dynamic_cast<IClickable *>(*ControlBase);
-			if (iClickable->CheckClick(size, point))
+			IClickable *iClickable = dynamic_cast<IClickable *>(*controlBase);
+			if (iClickable->CheckClick(size_relative))
 			{
 				iClickable->ClickEventHandler(point);
 				return;

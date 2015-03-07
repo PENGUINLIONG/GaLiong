@@ -10,20 +10,20 @@ Button::~Button()
 {
 }
 
-bool Button::CheckClick(Size window, Point point)
+bool Button::CheckClick(PointD point)
 {
-	int x0 = window.Width * (pos.X + 50.0f) / 100.0, y0 = window.Height * (50.0f - pos.Y) / 100.0,
-		x1 = window.Width * (pos.X + size.Width + 50.0f) / 100.0, y1 = window.Height * (50.0f - pos.Y + size.Height) / 100.0;
-
-	if (x0 > point.X || point.X > x1 || y0 > point.Y || point.Y > y1)
+	if (point.X < pos.X ||
+		point.Y > pos.Y ||
+		point.X > pos.X + size.Width ||
+		point.Y < pos.Y - size.Height)
 		return false;
 
-	for (const auto &texture : textures)
+	for (const TextureRef &texture : textures)
 	{
 		if (texture.expired())
 		{
 			Texture *targetPtr = texture.lock().get();
-			textures.remove_if([targetPtr](TextureRef &texture){return texture.lock().get() == targetPtr; });
+			textures.remove_if([targetPtr](TextureRef &texture){ return texture.lock().get() == targetPtr; });
 			continue;
 		}
 
@@ -32,21 +32,38 @@ bool Button::CheckClick(Size window, Point point)
 		TextureStrongRef ref = texture.lock();
 		if (!ref->IsInformative())
 			continue;
-		if (ref->SameType(Texture::PixelFormat::BGR, Texture::ByteSize::UByte) ||
-			ref->SameType(Texture::PixelFormat::RGB, Texture::ByteSize::UByte))
-			return true;
-		else if (ref->SameType(Texture::PixelFormat::RGBA, Texture::ByteSize::UByte))
+		if (ref->SameType(Texture::PixelFormat::Ignore))
 		{
-			int pixelLength = ref->GetPixelLength();
-			if (pixelLength < 5)
+			if (ref->SameType(Texture::PixelFormat::BGR) ||
+				ref->SameType(Texture::PixelFormat::RGB))
+				return true;
+			else if (ref->SameType(Texture::PixelFormat::RGBA))
 			{
-				if (*reinterpret_cast<Buffer>(ref->GetData() + ((point.X - x0) + (point.Y - y0) * ref->GetSize().Width) * pixelLength + 3)) // Calculate the offset to the pixel.
-					return true;
-			}
-			else
-			{
-				if (*reinterpret_cast<Byte2 *>(ref->GetData() + ((point.X - x0) + (point.Y - y0) * ref->GetSize().Width) * pixelLength + 6))
-					return true;
+				// Calculate the offset to the pixel and check the alpha.
+				const Byte pixelLength = ref->GetPixelLength();
+				const Size &textureSize = ref->GetSize();
+
+				switch (pixelLength)
+				{
+					case 4: // Maybe I should optimize this progress?
+					{
+						Size offset =
+						{
+							static_cast<long>((point.X - pos.X) / size.Width * textureSize.Width), // X offset.
+							-static_cast<long>((point.Y - pos.Y) / size.Height * textureSize.Height) // Y offset
+						};
+						if (*(ref->GetData() + ((offset.Width + offset.Height * textureSize.Width) << 2) + 3))
+							return true;
+						break;
+					}
+					// Be compatible with 16-bit depth pixel later.
+
+					//case 8:
+					//	if (*reinterpret_cast<Byte2 *>(ref->GetData() + ((point.X - x0) + (point.Y - y0) * ref->GetSize().Width) * pixelLength + 6))
+					//		return true;
+					default:
+						break;
+				}
 			}
 		}
 	}

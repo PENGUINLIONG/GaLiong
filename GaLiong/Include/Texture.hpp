@@ -15,6 +15,7 @@ public:
 	};
 	const static struct PixelFormat
 	{
+		const static Flag Ignore = 0x0000;
 		const static Flag Alpha = 0x1906;
 		const static Flag RGB = 0x1907;
 		const static Flag RGBA = 0x1908;
@@ -23,6 +24,7 @@ public:
 	};
 	const static struct ByteSize
 	{
+		const static Flag Ignore = 0x0000;
 		const static Flag UByte = 0x1401;
 		const static Flag UShort = 0x1403;
 	};
@@ -37,6 +39,10 @@ public:
 	{
 		return data;
 	}
+	const BufferLength GetDataLength()
+	{
+		return dataLength;
+	}
 	const TextureIndex GetIndex()
 	{
 		return index;
@@ -45,7 +51,7 @@ public:
 	{
 		return size;
 	}
-	const unsigned char GetPixelLength()
+	const Byte GetPixelLength()
 	{
 		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
 	}
@@ -53,9 +59,11 @@ public:
 	{
 		return informative;
 	}
-	const bool SameType(Flag pixelFormat, Flag byteSize)
+	const bool SameType(Flag pixelFormat, Flag byteSize = ByteSize::UByte)
 	{
-		return (this->pixelFormat == pixelFormat && this->byteSize == byteSize);
+		return (!pixelFormat || !byteSize) ?
+			(this->pixelFormat == pixelFormat || this->byteSize == byteSize) :
+			(this->pixelFormat == pixelFormat && this->byteSize == byteSize);
 	}
 	void Set(BufferLength dataLength, Buffer data, Size size, Flag pixelFormat, Flag byteSize)
 	{
@@ -63,7 +71,8 @@ public:
 			return;
 		if (this->data)
 			delete this->data;
-		this->dataLength = dataLength;
+		if (dataLength >= size.Width * size.Height * GetPixelLength(pixelFormat, byteSize))
+			this->dataLength = dataLength;
 		this->data = data;
 		this->size = size;
 		this->pixelFormat = pixelFormat;
