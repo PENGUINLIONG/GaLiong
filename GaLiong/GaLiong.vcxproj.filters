@@ -72,9 +72,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>源文件\Control</Filter>
     </ClCompile>
-    <ClCompile Include="ImageFormat.cpp">
-      <Filter>源文件\FileSys</Filter>
-    </ClCompile>
     <ClCompile Include="WAV.cpp">
       <Filter>源文件\FileSys</Filter>
     </ClCompile>
@@ -126,6 +123,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>源文件\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>源文件\FileSys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MemoryManager.h">
@@ -162,9 +162,6 @@
       <Filter>头文件\Control</Filter>
     </ClInclude>
     <ClInclude Include="Include\BMP.hpp">
-      <Filter>头文件\FileSys</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ImageFormat.hpp">
       <Filter>头文件\FileSys</Filter>
     </ClInclude>
     <ClInclude Include="Include\PNG.hpp">
@@ -214,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Include\Preprocess.hpp">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\File.hpp">
+      <Filter>头文件\FileSys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

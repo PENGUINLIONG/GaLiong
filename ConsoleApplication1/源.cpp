@@ -27,12 +27,12 @@ int main()
 	//WaveOut waveOut;
 	//waveOut.Write(wav.GetSelected(), wav.GetSelectedLength(), wav.GetPCMFormat());
 
-	TextureRef texture1 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\yosemite.bmp");
-	TextureRef texture2 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\fuckphp.bmp");
-	TextureRef texture3 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\button.bmp");
-	TextureRef texture4 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\test5.png");
-	TextureRef texture5 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\border.png");
-	auto texture6 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\mavericks.bmp");
+	auto texture1 = File.Read(L"F:\\assets\\yosemite.bmp");
+	auto texture2 = File.Read(L"F:\\assets\\fuckphp.bmp");
+	auto texture3 = File.Read(L"F:\\assets\\button.bmp");
+	auto texture4 = File.Read(L"F:\\assets\\test5.png");
+	auto texture5 = File.Read(L"F:\\assets\\border.png");
+	auto texture6 = File.Read(L"F:\\assets\\ctest.png");
 
 	Log << 1 << EndLog;
 	Log << L"あいうえお" << EndLog;

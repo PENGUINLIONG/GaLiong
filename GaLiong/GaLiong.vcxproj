@@ -173,7 +173,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LibFreeType.cpp" />
-    <ClCompile Include="ImageFormat.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="PNG.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Storage.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="Include\Label.hpp" />
     <ClInclude Include="Include\LibFreeType.hpp" />
     <ClInclude Include="Include\IClickable.hpp" />
-    <ClInclude Include="Include\ImageFormat.hpp" />
+    <ClInclude Include="Include\File.hpp" />
     <ClInclude Include="Include\IRenderable.hpp" />
     <ClInclude Include="Include\Preprocess.hpp" />
     <ClInclude Include="Include\Renderer.hpp" />

@@ -6,7 +6,7 @@ _L_BEGIN
 class _L_ WAV
 {
 public:
-	WAV(ifstream *stream);
+	WAV();
 	void ReadData(wchar_t *path);
 	void SelectFromTo(unsigned int offset, unsigned int duration);
 	void Dispose();
@@ -18,7 +18,7 @@ private:
 	bool available = false;
 	unsigned int offset = 0;
 	unsigned int endpoint = 0;
-	ifstream *stream = nullptr;
+	ifstream stream;
 
 	struct RIFFWaveHeaderChunk
 	{

@@ -5,7 +5,7 @@
 #include "Entity.hpp"
 #include "Font.hpp"
 #include "IClickable.hpp"
-#include "ImageFormat.hpp"
+#include "File.hpp"
 #include "IRenderable.hpp"
 #include "Label.hpp"
 #include "LibFreeType.hpp"
