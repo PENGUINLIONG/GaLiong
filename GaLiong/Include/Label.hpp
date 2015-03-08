@@ -62,5 +62,6 @@ private:
 	SizeD fontSize;
 	wstring text = L"";
 	Font *font = nullptr;
+	mutex occupy;
 };
 _L_END

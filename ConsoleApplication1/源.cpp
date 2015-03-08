@@ -28,11 +28,11 @@ int main()
 	//waveOut.Write(wav.GetSelected(), wav.GetSelectedLength(), wav.GetPCMFormat());
 
 	TextureRef texture1 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\yosemite.bmp");
-	TextureRef texture2 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\c.png");
+	TextureRef texture2 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\fuckphp.bmp");
 	TextureRef texture3 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\button.bmp");
 	TextureRef texture4 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\test5.png");
 	TextureRef texture5 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\border.png");
-	auto texture6 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\csimplebks.png");
+	auto texture6 = ImageFormat::DetectAndRead(stream, L"F:\\assets\\mavericks.bmp");
 
 	Log << 1 << EndLog;
 	Log << L"あいうえお" << EndLog;
@@ -77,7 +77,7 @@ int main()
 	window.Resize({ 1366, 768 });
 
 
-	tb.AppendText(L"Fatal error. C1004.");
+	tb.AppendText(L"123456789123456789123456789");
 
 	MSG message;
 	while (true)

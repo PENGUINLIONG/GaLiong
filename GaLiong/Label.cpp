@@ -8,6 +8,8 @@ Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 
 bool Label::GenerateFont()
 {
+	lock_guard<mutex> lock(occupy);
+
 	ClearTextures();
 	empty = true;
 	Size maximum = {
@@ -41,14 +43,10 @@ bool Label::GenerateFont()
 
 void Label::Render()
 {
+	lock_guard<mutex> lock(occupy);
+
 	if (!visible && !available && empty)
 		return;
-
-	if (textures.empty())
-	{
-		Renderer::DrawWithoutTexture({ pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
-		return;
-	}
 
 	for (const TextureRef &texture : textures) // Go to Entity::Render for details.
 	{

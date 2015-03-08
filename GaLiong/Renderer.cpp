@@ -52,6 +52,7 @@ void Renderer::DrawBackGroundImage(TextureRef texture)
 
 void Renderer::DrawWithoutTexture(RectD rect)
 {
+	glDisable(GL_TEXTURE_2D);
 	glColor3ub(229, 229, 229);
 	glBegin(GL_QUADS);
 	{
@@ -82,6 +83,7 @@ void Renderer::DrawWithoutTexture(RectD rect)
 	}
 	glEnd();
 	glColor4ub(255, 255, 255, 255);
+	glEnable(GL_TEXTURE_2D);
 }
 
 void Renderer::DrawTestImage()
