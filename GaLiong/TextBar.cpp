@@ -3,10 +3,8 @@
 _L_BEGIN
 TextBar::TextBar()
 {
-	implemented = ControlInterface::IRenderable | ControlInterface::IClickable;
-
 	textTimer = Timer(this);
-	textTimer += textTimer_Elapsed;
+	textTimer.Elapsed += textTimer_Elapsed;
 
 	text = L"";
 	textOffset = 0;
@@ -67,9 +65,9 @@ void TextBar::SetTextSpeed(unsigned short msPerChar)
 	textTimer.SetInterval(msPerChar);
 }
 
-void TextBar::textTimer_Elapsed(Timer &sender, void *userData)
+void TextBar::textTimer_Elapsed(void *sender, ElapsedEventArgs e)
 {
-	TextBar *instance = reinterpret_cast<TextBar *>(userData);
+	TextBar *instance = reinterpret_cast<TextBar *>(e.UserData);
 	if (instance)
 	{
 		if (instance->textOffset < instance->textLength)

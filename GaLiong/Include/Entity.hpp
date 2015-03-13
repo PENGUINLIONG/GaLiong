@@ -4,9 +4,11 @@
 #include "Renderer.hpp"
 #include "Texture.hpp"
 #include "IRenderable.hpp"
+#include "IClickable.hpp"
+#include "Logger.hpp"
 
 _L_BEGIN
-class _L_ Entity : public ControlBase, public IRenderable
+class _L_ Entity : public ControlBase, public IRenderable, public IClickable
 {
 public:
 	struct BorderComment
@@ -35,8 +37,8 @@ public:
 		//     please create an issue on this repo via Github or send an email to admin@penguinliong.moe.
 		// Much appriciated!
 		virtual void BindTexture(TextureRef texture, const Flag comment);
-		virtual void Render() override final;
-		virtual void Resize() override final;
+		void BorderImpl_Render(void *sender, EventArgs e);
+		void BorderImpl_Resize(void *sender, ResizeEventArgs e);
 	private:
 		struct BorderComponent
 		{
@@ -60,11 +62,9 @@ public:
 
 	Entity();
 	virtual ~Entity() override;
-
 	void BindTexture(TextureRef texture);
 	void ClearTextures();
-	virtual void Render() override;
-	virtual void Resize() override;
+	bool IsHover(PointD point) override;
 	virtual void SetPosition(PointD position);
 	virtual void SetSize(SizeD size)
 	{
@@ -72,9 +72,14 @@ public:
 	}
 	virtual void SetWindowSize(Size *windowSize);
 protected:
-	bool visible = true;
+	bool _MouseDownMsgReceived = false, _Visible = true;
 	list<TextureRef> textures;
 	PointD pos;
 	SizeD size;
+
+	void Entity_Render(void *sender, EventArgs e);
+	void Entity_Resize(void *sender, ResizeEventArgs e);
+
+	friend class Window;
 };
 _L_END

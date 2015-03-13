@@ -27,17 +27,6 @@ public:
 	{
 		label.ClearText();
 	}
-	virtual void Render() override
-	{
-		Entity::Render();
-		label.Render();
-	}
-	virtual void Resize() override
-	{
-		if (!size.Width || !size.Height)
-			return;
-		label.Resize();
-	}
 	virtual void SetPosition(PointD position) override
 	{
 		Entity::SetPosition(position);
@@ -55,6 +44,16 @@ protected:
 	{
 		Entity::SetWindowSize(windowSize);
 		label.SetWindowSize(windowSize);
+	}
+	void TextEntity_Render(void *sender, EventArgs e)
+	{
+		label.Render(this, e);
+	}
+	void TextEntity_Resize(void *sender, ResizeEventArgs e)
+	{
+		if (!size.Width || !size.Height)
+			return;
+		label.Resize(this, e);
 	}
 };
 _L_END

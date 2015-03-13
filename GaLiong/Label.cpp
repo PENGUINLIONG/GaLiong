@@ -3,7 +3,6 @@
 _L_BEGIN
 Label::Label() : fontSize({ 0, 0 }), fontPos({ 0, 0 })
 {
-	implemented = ControlInterface::IRenderable;
 }
 
 bool Label::GenerateFont()
@@ -45,7 +44,7 @@ void Label::Render()
 {
 	lock_guard<mutex> lock(occupy);
 
-	if (!visible && !available && empty)
+	if (!_Visible && !available && empty)
 		return;
 
 	for (const TextureRef &texture : textures) // Go to Entity::Render for details.

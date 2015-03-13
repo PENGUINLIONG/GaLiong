@@ -164,7 +164,10 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="IClickable.cpp" />
+    <ClCompile Include="IRenderable.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="TextEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -190,9 +193,9 @@
     <ClInclude Include="Include\ControlBase.hpp" />
     <ClInclude Include="Include\Entity.hpp" />
     <ClInclude Include="Include\Entrance.hpp" />
+    <ClInclude Include="Include\Event.hpp" />
     <ClInclude Include="Include\Font.hpp" />
     <ClInclude Include="Include\Logger.hpp" />
-    <ClInclude Include="Include\MemoryManager.h" />
     <ClInclude Include="Include\PNG.hpp" />
     <ClInclude Include="Include\TextBar.hpp" />
     <ClInclude Include="Include\TextEntity.hpp" />

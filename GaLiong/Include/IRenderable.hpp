@@ -1,11 +1,20 @@
 #pragma once
 #include "Preprocess.hpp"
+#include "Event.hpp"
 
 _L_BEGIN
+class ResizeEventArgs : EventArgs
+{
+public:
+	Size WindowSize;
+
+	ResizeEventArgs(Size windowSize);
+};
+
 class _L_ IRenderable
 {
 public:
-	virtual void Render() = 0;
-	virtual void Resize() = 0;
+	Event<EventArgs> Render;
+	Event<ResizeEventArgs> Resize;
 };
 _L_END

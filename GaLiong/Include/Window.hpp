@@ -1,14 +1,16 @@
 #pragma once
 #include "Preprocess.hpp"
-#include "ControlBase.hpp"
 #include "Button.hpp"
 #include "Character.hpp"
+#include "ControlBase.hpp"
+#include "Event.hpp"
+#include "Timer.hpp"
 #include "IClickable.hpp"
 #include "IRenderable.hpp"
 #include "Logger.hpp"
 
 _L_BEGIN
-class _L_ Window
+class _L_ Window : public IClickable, public IRenderable
 {
 	friend class Logger;
 public:
@@ -16,27 +18,30 @@ public:
 	~Window();
 	ControlBase *AppendEntity(ControlBase *ControlBase);
 	void Clear();
-	void Click(Point point);
 	bool Create();
 	void Flush();
 	HDC GetDeviceContext();
 	void Remove();
-	void Render();
-	void Resize(Size size);
+	void TrackMouse(long interval);
 private:
-	bool isFullScreen = false;
+	bool isFullScreen = false, _MouseDown = false;
 	HGLRC hRenderingContext = NULL;
 	HDC hDeviceContext = NULL;
 	HINSTANCE hInstance = NULL;
 	HWND hWindow = NULL;
 	Point pos;
 	Size size, border, previous;
+	Timer _MouseTracker;
 	vector<ControlBase *> controls;
 
 	DWORD style = WS_OVERLAPPEDWINDOW ^ WS_MAXIMIZEBOX ^ WS_THICKFRAME;
 	DWORD exStyle = WS_EX_OVERLAPPEDWINDOW;
 
-	void Resize(Size size, bool outer);
+	void DoResize(Size size, bool outer);
+	void Window_MouseButton(void *sender, MouseEventArgs e);
+	void Window_MouseHover(void *sender, MouseEventArgs e);
+	void Window_Render(void *sender, EventArgs e);
+	void Window_Resize(void *sender, ResizeEventArgs e);
 	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 _L_END

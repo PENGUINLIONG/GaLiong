@@ -43,20 +43,22 @@ int main()
 	font.SetColor({ 0xFF, 0xFF, 0xFF, 0xFF }, { 104, 33, 122, 0xFF });
 	font.SetOutlineWidth(1.25);
 
-	Character &c = *(Character *)(window.AppendEntity(new Character()));
-	c.SwitchDisplayMode(Character::DisplayMode::Normal);
-	c.SwitchFX(Character::FX::Normal);
-	c.BindTexture(texture2);
-	c.SetPosition({ -75, 50 });
-	c.SetSize({ 60.0, 50.0 });
+	Character *c = new Character();
+	window.AppendEntity(c);
+	c->SwitchDisplayMode(Character::DisplayMode::Normal);
+	c->SwitchFX(Character::FX::Normal);
+	c->BindTexture(texture2);
+	c->SetPosition({ -75, 50 });
+	c->SetSize({ 60.0, 50.0 });
 
-	Button &b = *(Button *)(window.AppendEntity(new Button()));
-	b.BindTexture(texture3);
-	b.SetPosition({ 0.0f, 40.0f });
-	b.SetSize({ 20.0, 10.0 });
+	Button *b = new Button();
+	window.AppendEntity(b);
+	b->BindTexture(texture3);
+	b->SetPosition({ 0.0f, 40.0f });
+	b->SetSize({ 20.0, 10.0 });
 
-	b.BindFont(font);
-	b.ChangeText(L"控件内文字");
+	b->BindFont(font);
+	b->ChangeText(L"控件内文字");
 
 	//Label &l = *(Label *)(window.AppendEntity(new Label()));
 	//l.BindFont(font);
@@ -64,20 +66,21 @@ int main()
 	//l.SetSize({ 80.0, 80.0 });
 	//l.AppendText(L"我有姿势我自豪");
 
-	TextBar &tb = *(TextBar *)(window.AppendEntity(new TextBar()));
-	tb.BindFont(font);
-	tb.SetPosition({ 0, 20 });
-	tb.SetSize({ 40.0, 20.0 });
-	tb.SetTextSpeed(40);
-	tb.BindTexture(texture6);
-	tb.Border.BindTexture(texture5, Entity::BorderComment::EveryWhere);
+	TextBar *tb = new TextBar();
+	window.AppendEntity(tb);
+	tb->BindFont(font);
+	tb->SetPosition({ 0, 20 });
+	tb->SetSize({ 40.0, 20.0 });
+	tb->SetTextSpeed(40);
+	tb->BindTexture(texture6);
+	tb->Border.BindTexture(texture5, Entity::BorderComment::EveryWhere);
 
 	Log << L"Init time cost: " << (timeGetTime() - t0) << EndLog;
 
 	window.Resize({ 1366, 768 });
 
 
-	tb.AppendText(L"123456789123456789123456789");
+	tb->AppendText(L"123456789123456789123456789");
 
 	MSG message;
 	while (true)

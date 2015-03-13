@@ -1,14 +1,22 @@
 #pragma once
 #include "Preprocess.hpp"
+#include "Event.hpp"
 
 _L_BEGIN
-class Timer;
-//typedef void(*TimerCallbackFunction)(Timer &sender, void *userData);
-typedef function<void(Timer, void *)> TimerCallbackFunction;
+class _L_ ElapsedEventArgs : public EventArgs
+{
+public:
+	chrono::steady_clock::time_point Trigger;
+	void *UserData = nullptr;
+	
+	ElapsedEventArgs(chrono::steady_clock::time_point Trigger, void *UserData);
+	~ElapsedEventArgs();
+};
 
 class _L_ Timer
 {
 public:
+	Event<ElapsedEventArgs> Elapsed;
 	enum class TimerExecuteMode
 	{
 		Once,
@@ -18,8 +26,6 @@ public:
 	Timer(void *userData);
 	Timer(void *userData, unsigned long interval, TimerExecuteMode mode);
 	bool IsEnabled();
-	Timer &operator+=(const TimerCallbackFunction &callback);
-	Timer &operator-=(const TimerCallbackFunction &callback);
 	void Start();
 	void Stop();
 	void SetInterval(unsigned long interval);
@@ -31,9 +37,8 @@ private:
 	bool done = false;
 	chrono::steady_clock::time_point startTime;
 	chrono::milliseconds interval;
-	list<TimerCallbackFunction> callbacks;
 	TimerExecuteMode mode = TimerExecuteMode::Loop;
 
-	event Elapsed();
+	void Elapse();
 };
 _L_END

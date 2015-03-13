@@ -29,7 +29,7 @@ public:
 	void BindFont(Font &font)
 	{
 		this->font = &font;
-		visible = available = true;
+		_Visible = available = true;
 		ClearTextures();
 	}
 	virtual void BindTexture(TextureRef texture) { }
@@ -50,8 +50,8 @@ public:
 		fontSize = { 0, 0 };
 	}
 	bool GenerateFont();
-	virtual void Render() override;
-	virtual void Resize() override
+	void Label_Render();
+	void Label_Resize()
 	{
 		GenerateFont();
 	}

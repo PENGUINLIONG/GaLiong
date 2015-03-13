@@ -3,7 +3,6 @@
 _L_BEGIN
 Character::Character() : pos_Original({ 0, 0 })
 {
-	this->implemented = ControlInterface::IRenderable;
 }
 
 Character::~Character()
@@ -12,7 +11,7 @@ Character::~Character()
 
 void Character::Render()
 {
-	if (!visible)
+	if (!_Visible)
 		return;
 	
 	if (textures.empty())

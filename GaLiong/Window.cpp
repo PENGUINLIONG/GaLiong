@@ -6,6 +6,18 @@ Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })
 	Rect w = { 0, 0, size.Width, size.Height };
 	AdjustWindowRectEx((RECT *)&w, style, FALSE, exStyle);
 	border = { (w.Right - w.Left - size.Width), (w.Bottom - w.Top - size.Height) };
+	_MouseTracker = Timer(this);
+	
+	// Binding events.
+	_MouseTracker.Elapsed += [&](void *sender, ElapsedEventArgs e) {
+		Point point;
+		GetCursorPos((LPPOINT)&point);
+		MouseHover(this, new MouseEventArgs(point, MouseButtons::None, _MouseDown));
+	};
+	MouseButton += Window_MouseButton;
+	MouseHover += Window_MouseHover;
+	Render += Window_Render;
+	Resize += Window_Resize;
 }
 
 Window::~Window()
@@ -31,28 +43,6 @@ void Window::Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Window::Click(Point point)
-{
-	Log << L"Check click... At (" << point.X << L", " << point.Y << L")." << EndLog;
-
-	PointD size_relative = { -50.0 + ((double)((point.X - ((size.Width - size.Height) >> 1)) * 100) / (double)size.Height), 50.0 - ((double)point.Y / (double)size.Height * 100) };
-
-	for (auto &controlBase = controls.rbegin(); controlBase != controls.rend(); controlBase++)
-	{
-		if (!*controlBase)
-			continue;
-		if ((*controlBase)->Implemented(ControlInterface::IClickable))
-		{
-			IClickable *iClickable = dynamic_cast<IClickable *>(*controlBase);
-			if (iClickable->CheckClick(size_relative))
-			{
-				iClickable->ClickEventHandler(point);
-				return;
-			}
-		}
-	}
-}
-
 bool Window::Create()
 {
 	int pixelFormat;
@@ -60,7 +50,7 @@ bool Window::Create()
 	Rect windowRect = { 0, 0, size.Width, size.Height };
 
 	hInstance = GetModuleHandle(L"OpenGLiong");
-	windowClass.style = CS_HREDRAW | CS_OWNDC | CS_VREDRAW; // ########## It will be alright when this conponent is set to NULL. This should be looked up later maybe.
+	windowClass.style = CS_HREDRAW | CS_OWNDC | CS_VREDRAW | CS_DBLCLKS; // ########## It will be alright when this conponent is set to NULL. This should be looked up later maybe.
 	windowClass.lpfnWndProc = (WNDPROC)WindowProc;
 	windowClass.cbClsExtra = NULL; // No extra
 	windowClass.cbWndExtra = NULL; // window data.
@@ -121,7 +111,7 @@ bool Window::Create()
 	ShowWindow(hWindow, SW_SHOW);
 	SetForegroundWindow(hWindow);
 	SetFocus(hWindow);
-	Resize(size, false);
+	DoResize(size, false);
 
 	glShadeModel(GL_FLAT);
 	glEnable(GL_TEXTURE_2D);
@@ -134,57 +124,7 @@ bool Window::Create()
 	return true;
 }
 
-void Window::Flush()
-{
-	glFlush();
-	SwapBuffers(hDeviceContext);
-}
-
-HDC Window::GetDeviceContext()
-{
-	return hDeviceContext;
-}
-
-void Window::Remove()
-{
-	if (isFullScreen)
-		isFullScreen = false;
-
-	if (hRenderingContext)
-	{
-		wglMakeCurrent(NULL, NULL);
-		wglDeleteContext(hRenderingContext);
-		hRenderingContext = NULL;
-	}
-	if (hDeviceContext && !ReleaseDC(hWindow, hDeviceContext))
-		hDeviceContext = NULL;
-	if (hWindow && !DestroyWindow(hWindow))
-		hWindow = NULL;
-	if (!UnregisterClass(L"OpenGLiong", hInstance))
-		hInstance = 0;
-}
-
-void Window::Render()
-{
-	for (const auto &control : controls)
-	{
-		if (!control)
-			return;
-		if (control->Implemented(ControlInterface::IRenderable))
-		{
-			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
-			if (iRenderable)
-				iRenderable->Render();
-		}
-	}
-}
-
-void Window::Resize(Size size)
-{
-	Resize(size, true);
-}
-
-void Window::Resize(Size size, bool outer)
+void Window::DoResize(Size size, bool outer)
 {
 	if (outer)
 	{
@@ -234,6 +174,8 @@ void Window::Resize(Size size, bool outer)
 	previous = this->size;
 	this->size = size;
 	
+	ResizeEventArgs e(size);
+
 	for (const auto &control : controls)
 	{
 		if (!control)
@@ -241,9 +183,111 @@ void Window::Resize(Size size, bool outer)
 		if (control->Implemented(ControlInterface::IRenderable))
 		{
 			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
-			iRenderable->Resize();
+			iRenderable->Resize(iRenderable, e);
 		}
 	}
+}
+
+void Window::Flush()
+{
+	glFlush();
+	SwapBuffers(hDeviceContext);
+}
+
+HDC Window::GetDeviceContext()
+{
+	return hDeviceContext;
+}
+
+void Window::Remove()
+{
+	if (isFullScreen)
+		isFullScreen = false;
+
+	if (hRenderingContext)
+	{
+		wglMakeCurrent(NULL, NULL);
+		wglDeleteContext(hRenderingContext);
+		hRenderingContext = NULL;
+	}
+	if (hDeviceContext && !ReleaseDC(hWindow, hDeviceContext))
+		hDeviceContext = NULL;
+	if (hWindow && !DestroyWindow(hWindow))
+		hWindow = NULL;
+	if (!UnregisterClass(L"OpenGLiong", hInstance))
+		hInstance = 0;
+}
+
+void Window::TrackMouse(long interval)
+{
+	if (interval > 0)
+		_MouseTracker.SetInterval(interval);
+	else
+		_MouseTracker.Stop();
+	_MouseTracker.Start();
+}
+
+void Window::Window_MouseButton(void *sender, MouseEventArgs e)
+{
+	Log << L"Check click... At (" << e.Location.X << L", " << e.Location.Y << L")." << EndLog;
+
+	PointD size_relative = { -50.0 + ((double)(((double)e.Location.X - ((size.Width - size.Height) >> 1)) * 100) / (double)size.Height), 50.0 - ((double)e.Location.Y / (double)size.Height * 100) };
+
+	for (auto &controlBase = controls.rbegin(); controlBase != controls.rend(); controlBase++)
+	{
+		if (!*controlBase)
+			continue;
+		if ((*controlBase)->Implemented(ControlInterface::IClickable))
+		{
+			IClickable *iClickable = dynamic_cast<IClickable *>(*controlBase);
+			if (iClickable->IsHover(size_relative))
+			{
+				iClickable->MouseButton(iClickable, e);
+				return;
+			}
+		}
+	}
+}
+
+void Window::Window_MouseHover(void *sender, MouseEventArgs e)
+{
+	async(launch::async, [&]() {
+		PointD size_relative = { -50.0 + ((double)(((double)e.Location.X - ((size.Width - size.Height) >> 1)) * 100) / (double)size.Height), 50.0 - ((double)e.Location.Y / (double)size.Height * 100) };
+
+		for (auto &controlBase = controls.rbegin(); controlBase != controls.rend(); controlBase++)
+		{
+			if (!*controlBase)
+				continue;
+			if ((*controlBase)->Implemented(ControlInterface::IClickable))
+			{
+				IClickable *iClickable = dynamic_cast<IClickable *>(*controlBase);
+				if (iClickable->IsHover(size_relative))
+				{
+					iClickable->MouseHover(iClickable, e);
+					return;
+				}
+			}
+		}
+	});
+}
+
+void Window::Window_Render(void *sender, EventArgs e)
+{
+	for (const auto &control : controls)
+	{
+		if (!control)
+			return;
+		if (control->Implemented(ControlInterface::IRenderable))
+		{
+			IRenderable *iRenderable = dynamic_cast<IRenderable *>(control);
+			iRenderable->Render(iRenderable, e);
+		}
+	}
+}
+
+void Window::Window_Resize(void *sender, ResizeEventArgs e)
+{
+	DoResize(size, true);
 }
 
 LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -253,7 +297,7 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 		case WM_SIZE:
-			window->Resize({ LOWORD(lParam), HIWORD(lParam) }, false);
+			window->DoResize({ LOWORD(lParam), HIWORD(lParam) }, false);
 			return 0;
 		case WM_MOVE:
 			if (!window->isFullScreen)
@@ -269,12 +313,12 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						if (window->isFullScreen)
 						{
 							Log << L"Try to switch to fullscreen mode..." << EndLog;
-							window->Resize({ GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) });
+							window->Resize(window, new ResizeEventArgs({ GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) }));
 						}
 						else
 						{
 							Log << L"Try to switch to window mode..." << EndLog;
-							window->Resize(window->previous);
+							window->Resize(window, new ResizeEventArgs(window->previous));
 						}
 						break;
 					case VK_F12:
@@ -284,9 +328,24 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				}
 				return 0;
 			}
+		case WM_LBUTTONDOWN:
+			window->_MouseDown = true;
+			window->MouseButton(window, new MouseEventArgs({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) }, MouseButtons::Left, true));
+			return 0;
+		case WM_LBUTTONUP:
+			window->_MouseDown = false;
+			window->MouseButton(window, new MouseEventArgs({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) }, MouseButtons::Left, false));
+			return 0;
+		case WM_RBUTTONDOWN:
+			window->_MouseDown = true;
+			window->MouseButton(window, new MouseEventArgs({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) }, MouseButtons::Right, true));
+			return 0;
+		case WM_RBUTTONUP:
+			window->_MouseDown = false;
+			window->MouseButton(window, new MouseEventArgs({ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) }, MouseButtons::Right, false));
+			return 0;
 		case WM_DESTROY:
 		case WM_CLOSE:
-		{
 			if (window)
 			{
 				 window->Remove();
@@ -294,12 +353,7 @@ LRESULT Window::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				 return 0;
 			}
 			break;
-		}
-		case WM_LBUTTONDOWN:
-		{
-			window->Click({ LOWORD(lParam), HIWORD(lParam) });
-			return 0;
-		}
+		default: break;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }

@@ -49,14 +49,23 @@
     <Filter Include="源文件\Font">
       <UniqueIdentifier>{d8ca0166-9e5e-4833-90c5-832d27b5ce4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Control\Interface">
-      <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Log">
       <UniqueIdentifier>{d4704d55-ec8e-43e4-9846-b52198d4275d}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Log">
       <UniqueIdentifier>{191a9912-66ce-405f-97d0-d0f574e3f346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Utility">
+      <UniqueIdentifier>{7e8581de-4e5c-45f9-8b93-2a0bbf59d30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Utility">
+      <UniqueIdentifier>{edd3c3df-5e7f-4573-bb50-c71bd38de18b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Interface">
+      <UniqueIdentifier>{f79ee081-0107-470c-9eec-ef2fe60ed0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Interface">
+      <UniqueIdentifier>{28445e2a-4477-4cd0-83bc-e4d2367f6082}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,16 +135,22 @@
     <ClCompile Include="File.cpp">
       <Filter>源文件\FileSys</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>源文件\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="IClickable.cpp">
+      <Filter>源文件\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IRenderable.cpp">
+      <Filter>源文件\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\MemoryManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Include\IClickable.hpp">
-      <Filter>头文件\Control\Interface</Filter>
+      <Filter>头文件\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Include\IRenderable.hpp">
-      <Filter>头文件\Control\Interface</Filter>
+      <Filter>头文件\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Include\Button.hpp">
       <Filter>头文件\Control</Filter>
@@ -214,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="Include\File.hpp">
       <Filter>头文件\FileSys</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Event.hpp">
+      <Filter>头文件\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

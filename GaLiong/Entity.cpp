@@ -3,6 +3,14 @@
 _L_BEGIN
 Entity::Entity() : pos({ 0.0f, 0.0f }), size({ 0.0f, 0.0f }), Border(pos, size)
 {
+	Render += Entity_Render;
+	Resize += Entity_Resize;
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	MouseHover += [](void *sender, MouseEventArgs e) {
+		Log << L"Hovered! At (" << e.Location.X << L", " << e.Location.Y << L")" << EndLog;
+	};
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 Entity::~Entity()
@@ -24,14 +32,74 @@ void Entity::ClearTextures()
 	textures.clear();
 }
 
+bool Entity::IsHover(PointD point)
+{
+	if (point.X < pos.X ||
+		point.Y > pos.Y ||
+		point.X > pos.X + size.Width ||
+		point.Y < pos.Y - size.Height)
+		return false;
+
+	for (const TextureRef &texture : textures)
+	{
+		if (texture.expired())
+		{
+			Texture *targetPtr = texture.lock().get();
+			textures.remove_if([targetPtr](TextureRef &texture){ return texture.lock().get() == targetPtr; });
+			continue;
+		}
+
+		lock_guard<recursive_mutex> lock(texture.lock()->occupy);
+
+		TextureStrongRef ref = texture.lock();
+		if (!ref->IsInformative())
+			continue;
+		if (ref->SameType(Texture::PixelFormat::Ignore))
+		{
+			if (ref->SameType(Texture::PixelFormat::BGR) ||
+				ref->SameType(Texture::PixelFormat::RGB))
+				return true;
+			else if (ref->SameType(Texture::PixelFormat::RGBA))
+			{
+				// Calculate the offset to the pixel and check the alpha.
+				const Byte pixelLength = ref->GetPixelLength();
+				const Size &textureSize = ref->GetSize();
+
+				switch (pixelLength)
+				{
+					case 4: // Maybe I should optimize this progress?
+					{
+								Size offset =
+								{
+									static_cast<long>((point.X - pos.X) / size.Width * textureSize.Width), // X offset.
+									-static_cast<long>((point.Y - pos.Y) / size.Height * textureSize.Height) // Y offset
+								};
+								if (*(ref->GetData() + ((offset.Width + (textureSize.Height - offset.Height) * textureSize.Width) << 2) + 3))
+									return true;
+								break;
+					}
+						// Be compatible with 16-bit depth pixel later.
+
+						//case 8:
+						//	if (*reinterpret_cast<Byte2 *>(ref->GetData() + ((point.X - x0) + (point.Y - y0) * ref->GetSize().Width) * pixelLength + 6))
+						//		return true;
+					default:
+						break;
+				}
+			}
+		}
+	}
+	return false;
+}
+
 void Entity::SetPosition(PointD position)
 {
 	pos = position;
 }
 
-void Entity::Render()
+void Entity::Entity_Render(void *sender, EventArgs e)
 {
-	if (!visible)
+	if (!_Visible)
 		return;
 
 	if (textures.empty())
@@ -52,12 +120,12 @@ void Entity::Render()
 		
 		Renderer::DrawRectangle(texture.lock()->GetIndex(), { pos.X, pos.Y, pos.X + size.Width, pos.Y - size.Height });
 	}
-	Border.Render();
+	Border.Render(this, e);
 }
 
-void Entity::Resize()
+void Entity::Entity_Resize(void *sender, ResizeEventArgs e)
 {
-	Border.Resize();
+	Border.Resize(this, e);
 }
 
 void Entity::SetWindowSize(Size *windowSize)
@@ -148,7 +216,7 @@ _:
 #undef LOWER_RIGHT
 }
 
-void Entity::BorderImpl::Render()
+void Entity::BorderImpl::BorderImpl_Render(void *sender, EventArgs e)
 {
 	if (textures.empty())
 	{
@@ -168,7 +236,7 @@ void Entity::BorderImpl::Render()
 	}
 }
 
-void Entity::BorderImpl::Resize()
+void Entity::BorderImpl::BorderImpl_Resize(void *sender, ResizeEventArgs e)
 {
 	for (auto &texture : textures)
 	{

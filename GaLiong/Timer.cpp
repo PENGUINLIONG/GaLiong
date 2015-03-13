@@ -14,7 +14,7 @@ Timer::Timer(void *userData, unsigned long interval, TimerExecuteMode mode = Tim
 		available = true;
 }
 
-void Timer::Elapsed()
+void Timer::Elapse()
 {
 	if (!available)
 		return;
@@ -31,13 +31,7 @@ void Timer::Elapsed()
 			if (!enabled || !available)
 				return;
 
-			if (!callbacks.empty() && available)
-			{
-				for (const auto &callback : callbacks)
-				{
-					callback(*this, userData);
-				}
-			}
+			Elapsed(this, new ElapsedEventArgs(chrono::steady_clock::now(), userData));
 		}();
 
 	} while (mode == TimerExecuteMode::Loop);
@@ -51,29 +45,15 @@ bool Timer::IsEnabled()
 	return enabled;
 }
 
-Timer &Timer::operator+=(const TimerCallbackFunction &callback)
-{
-	if (available && callback)
-		callbacks.push_back(callback);
-	return *this;
-}
-
-Timer &Timer::operator-=(const TimerCallbackFunction &callback)
-{
-	if (!available || !callback)
-		return *this;
-	auto funcPtr = callback.target<void(*)(Timer, void *)>();
-	callbacks.remove_if([funcPtr](TimerCallbackFunction &inList){ return funcPtr == inList.target<void(*)(Timer, void *)>(); });
-	return *this;
-}
-
 void Timer::Start()
 {
 	if (!available)
 		return;
 	if (enabled)
 		Stop();
-	async(launch::async, [&](){ Elapsed(); });
+	async(launch::async, [&]() {
+		Elapse();
+	});
 	enabled = true;
 }
 

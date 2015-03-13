@@ -29,7 +29,7 @@ public:
 
 	Character();
 	virtual ~Character() override;
-	virtual void Render() override;
+	virtual void Character_Render();
 	virtual void SetPosition(PointD position) override
 	{
 		Entity::SetPosition(position);
@@ -47,9 +47,9 @@ public:
 		if (displayMode == DisplayMode::Inherit)
 			return;
 		if (displayMode == DisplayMode::Hidden)
-			visible = false;
+			_Visible = false;
 		else
-			visible = true;
+			_Visible = true;
 		this->displayMode = displayMode;
 	}
 	void SwitchFX(FX fx)

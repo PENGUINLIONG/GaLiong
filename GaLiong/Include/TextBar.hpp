@@ -22,6 +22,6 @@ private:
 	
 	Timer moveTimer, textTimer;
 
-	static void textTimer_Elapsed(Timer &sender, void *userData);
+	static void textTimer_Elapsed(void *sender, ElapsedEventArgs e);
 };
 _L_END

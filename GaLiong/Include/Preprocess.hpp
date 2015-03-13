@@ -23,6 +23,7 @@
 #include <vector>
 // Windows
 #include <Windows.h>
+#include <windowsx.h>
 #include <WinUser.h>
 #ifdef _INSIDER_COMPILATION
 // OpenGL
@@ -38,6 +39,7 @@
 // ZLib
 #include "zlib\zlib.h"
 #include "zlib\zconf.h"
+
 // Import libraries
 #pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "opengl32.lib")
