@@ -8,12 +8,12 @@ class _L_ Texture
 public:
 	recursive_mutex occupy;
 	
-	const static struct Filter
+	struct Filter
 	{
 		const static Flag Nearest = 0x2600;
 		const static Flag Linear = 0x2601;
 	};
-	const static struct PixelFormat
+	struct PixelFormat
 	{
 		const static Flag Ignore = 0x0000;
 		const static Flag Alpha = 0x1906;
@@ -22,7 +22,7 @@ public:
 		const static Flag BGR = 0x80E0;
 		const static Flag BGRA = 0x80E1;
 	};
-	const static struct ByteSize
+	struct ByteSize
 	{
 		const static Flag Ignore = 0x0000;
 		const static Flag UByte = 0x1401;

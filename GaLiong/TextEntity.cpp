@@ -3,8 +3,8 @@
 _L_BEGIN
 TextEntity::TextEntity()
 {
-	Render += TextEntity_Render;
-	Resize += TextEntity_Resize;
+	//Render += TextEntity_Render;
+	//Resize += TextEntity_Resize;
 }
 
 TextEntity::~TextEntity()

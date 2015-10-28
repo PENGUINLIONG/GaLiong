@@ -70,7 +70,7 @@ public:
 	{
 		this->size = size;
 	}
-	virtual void SetWindowSize(Size *windowSize);
+	virtual void SetWindowSize(Size *windowSize) override;
 protected:
 	bool _MouseDownMsgReceived = false, _Visible = true;
 	list<TextureRef> textures;

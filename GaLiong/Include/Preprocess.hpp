@@ -21,29 +21,25 @@
 #include <set>
 #include <tuple>
 #include <vector>
-// Windows
-#include <Windows.h>
-#include <windowsx.h>
-#include <WinUser.h>
-#ifdef _INSIDER_COMPILATION
-// OpenGL
-#include <gl\GL.h>
-#include <gl\GLU.h>
-// FreeType
-#include "freetype\ft2build.h"
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
-#include FT_STROKER_H
-// LibPNG
-#include "libpng\png.h"
-// ZLib
-#include "zlib\zlib.h"
-#include "zlib\zconf.h"
 
-// Import libraries
-#pragma comment (lib, "winmm.lib")
-#pragma comment (lib, "opengl32.lib")
-#pragma comment (lib, "glu32.lib")
+#ifdef _WIN32
+	// Windows
+	#include <Windows.h>
+	#include <windowsx.h>
+	#include <WinUser.h>
+	// OpenGL
+	#include <gl/GL.h>
+	#include <gl/GLU.h>
+
+	// Import libraries
+	#pragma comment (lib, "winmm.lib")
+	#pragma comment (lib, "opengl32.lib")
+	#pragma comment (lib, "glu32.lib")
+#endif
+
+#ifdef __APPLE__
+	// OpenGL
+	#include <GLUT/GLUT.h>
 #endif
 
 #pragma warning(disable: 4251)
@@ -54,18 +50,15 @@
 using namespace std;
 
 // Ignore annoying warnings.
-//#pragma warning( disable: 4251 )
-//#pragma warning( disable: 1083 )
+// #pragma warning( disable: 4251 )
+// #pragma warning( disable: 1083 )
 
-// Get ready for export the dll.
-#ifdef GALIONG_EXPORTS
-#define _L_ __declspec(dllexport)
-#else
-#define _L_ __declspec(dllimport)
-#endif
+// Ahh...?
+#define _L_
 
-#define _L_BEGIN namespace LiongStudio { namespace GaLiong {
-#define _L_END } }
+#define _L_BEGIN namespace LiongFramework {
+#define _L_END }
+#define interface class
 
 //#define _WHITE_BOX_TESTING
 
@@ -75,16 +68,16 @@ using namespace std;
 #endif
 
 _L_BEGIN
-typedef unsigned __int8  Byte1;
-typedef unsigned __int16 Byte2;
-typedef unsigned __int32 Byte4;
-typedef unsigned __int64 Byte8;
+typedef unsigned char  Byte1;
+typedef unsigned short Byte2;
+typedef unsigned int Byte4;
+typedef unsigned long long Byte8;
 
-typedef unsigned char Byte;
-typedef unsigned char *Buffer;
+typedef char Byte;
+typedef char* Buffer;
 typedef unsigned long long BufferLength;
 typedef std::tuple<const Buffer &, const BufferLength> InformativeBuffer;
-typedef unsigned __int16 Flag;
+typedef unsigned short Flag;
 typedef unsigned int TextureIndex;
 typedef unsigned long LongFlag;
 

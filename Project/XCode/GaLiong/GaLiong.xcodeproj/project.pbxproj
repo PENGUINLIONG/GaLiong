@@ -1,0 +1,516 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D493098A1BDBFF6F007382A9 /* Bmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309701BDBFF6F007382A9 /* Bmp.cpp */; };
+		D493098B1BDBFF6F007382A9 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309711BDBFF6F007382A9 /* Button.cpp */; };
+		D493098C1BDBFF6F007382A9 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309721BDBFF6F007382A9 /* Character.cpp */; };
+		D493098D1BDBFF6F007382A9 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309731BDBFF6F007382A9 /* Entity.cpp */; };
+		D493098E1BDBFF6F007382A9 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309741BDBFF6F007382A9 /* Event.cpp */; };
+		D493098F1BDBFF6F007382A9 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309751BDBFF6F007382A9 /* File.cpp */; };
+		D49309901BDBFF6F007382A9 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309761BDBFF6F007382A9 /* Font.cpp */; };
+		D49309911BDBFF6F007382A9 /* IClickable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309771BDBFF6F007382A9 /* IClickable.cpp */; };
+		D49309921BDBFF6F007382A9 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309781BDBFF6F007382A9 /* Image.cpp */; };
+		D49309931BDBFF6F007382A9 /* IRenderable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309791BDBFF6F007382A9 /* IRenderable.cpp */; };
+		D49309941BDBFF6F007382A9 /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097A1BDBFF6F007382A9 /* Label.cpp */; };
+		D49309951BDBFF6F007382A9 /* LibFreeType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097B1BDBFF6F007382A9 /* LibFreeType.cpp */; };
+		D49309961BDBFF6F007382A9 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097C1BDBFF6F007382A9 /* Logger.cpp */; };
+		D49309971BDBFF6F007382A9 /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097D1BDBFF6F007382A9 /* PNG.cpp */; };
+		D49309981BDBFF6F007382A9 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097E1BDBFF6F007382A9 /* Renderer.cpp */; };
+		D49309991BDBFF6F007382A9 /* Storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D493097F1BDBFF6F007382A9 /* Storage.cpp */; };
+		D493099A1BDBFF6F007382A9 /* TextBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309801BDBFF6F007382A9 /* TextBar.cpp */; };
+		D493099B1BDBFF6F007382A9 /* TextEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309811BDBFF6F007382A9 /* TextEntity.cpp */; };
+		D493099C1BDBFF6F007382A9 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309821BDBFF6F007382A9 /* Texture.cpp */; };
+		D493099D1BDBFF6F007382A9 /* TextureBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309831BDBFF6F007382A9 /* TextureBuilder.cpp */; };
+		D493099E1BDBFF6F007382A9 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309841BDBFF6F007382A9 /* TextureManager.cpp */; };
+		D493099F1BDBFF6F007382A9 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309851BDBFF6F007382A9 /* Timer.cpp */; };
+		D49309A01BDBFF6F007382A9 /* WAV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309861BDBFF6F007382A9 /* WAV.cpp */; };
+		D49309A11BDBFF6F007382A9 /* WaveOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309871BDBFF6F007382A9 /* WaveOut.cpp */; };
+		D49309A21BDBFF6F007382A9 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309881BDBFF6F007382A9 /* Window.cpp */; };
+		D49309A31BDBFF6F007382A9 /* WindowsAudioSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49309891BDBFF6F007382A9 /* WindowsAudioSession.cpp */; };
+		D49309C31BDBFFA5007382A9 /* Bmp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309A51BDBFFA5007382A9 /* Bmp.hpp */; };
+		D49309C41BDBFFA5007382A9 /* Button.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309A61BDBFFA5007382A9 /* Button.hpp */; };
+		D49309C51BDBFFA5007382A9 /* Character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309A71BDBFFA5007382A9 /* Character.hpp */; };
+		D49309C61BDBFFA5007382A9 /* ControlBase.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309A81BDBFFA5007382A9 /* ControlBase.hpp */; };
+		D49309C71BDBFFA5007382A9 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309A91BDBFFA5007382A9 /* Entity.hpp */; };
+		D49309C81BDBFFA5007382A9 /* Entrance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AA1BDBFFA5007382A9 /* Entrance.hpp */; };
+		D49309C91BDBFFA5007382A9 /* Event.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AB1BDBFFA5007382A9 /* Event.hpp */; };
+		D49309CA1BDBFFA5007382A9 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AC1BDBFFA5007382A9 /* File.hpp */; };
+		D49309CB1BDBFFA5007382A9 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AD1BDBFFA5007382A9 /* Font.hpp */; };
+		D49309CC1BDBFFA5007382A9 /* IClickable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AE1BDBFFA5007382A9 /* IClickable.hpp */; };
+		D49309CD1BDBFFA5007382A9 /* Image.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309AF1BDBFFA5007382A9 /* Image.hpp */; };
+		D49309CE1BDBFFA5007382A9 /* IRenderable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B01BDBFFA5007382A9 /* IRenderable.hpp */; };
+		D49309CF1BDBFFA5007382A9 /* Label.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B11BDBFFA5007382A9 /* Label.hpp */; };
+		D49309D01BDBFFA5007382A9 /* LibFreeType.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B21BDBFFA5007382A9 /* LibFreeType.hpp */; };
+		D49309D11BDBFFA5007382A9 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B31BDBFFA5007382A9 /* Logger.hpp */; };
+		D49309D21BDBFFA5007382A9 /* PNG.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B41BDBFFA5007382A9 /* PNG.hpp */; };
+		D49309D31BDBFFA5007382A9 /* Preprocess.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B51BDBFFA5007382A9 /* Preprocess.hpp */; };
+		D49309D41BDBFFA5007382A9 /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B61BDBFFA5007382A9 /* Renderer.hpp */; };
+		D49309D51BDBFFA5007382A9 /* SoundCommon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B71BDBFFA5007382A9 /* SoundCommon.hpp */; };
+		D49309D61BDBFFA5007382A9 /* Storage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B81BDBFFA5007382A9 /* Storage.hpp */; };
+		D49309D71BDBFFA5007382A9 /* TextBar.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309B91BDBFFA5007382A9 /* TextBar.hpp */; };
+		D49309D81BDBFFA5007382A9 /* TextEntity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BA1BDBFFA5007382A9 /* TextEntity.hpp */; };
+		D49309D91BDBFFA5007382A9 /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BB1BDBFFA5007382A9 /* Texture.hpp */; };
+		D49309DA1BDBFFA5007382A9 /* TextureBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BC1BDBFFA5007382A9 /* TextureBuilder.hpp */; };
+		D49309DB1BDBFFA5007382A9 /* TextureManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BD1BDBFFA5007382A9 /* TextureManager.hpp */; };
+		D49309DC1BDBFFA5007382A9 /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BE1BDBFFA5007382A9 /* Timer.hpp */; };
+		D49309DD1BDBFFA5007382A9 /* WAV.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309BF1BDBFFA5007382A9 /* WAV.hpp */; };
+		D49309DE1BDBFFA5007382A9 /* WaveOut.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309C01BDBFFA5007382A9 /* WaveOut.hpp */; };
+		D49309DF1BDBFFA5007382A9 /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309C11BDBFFA5007382A9 /* Window.hpp */; };
+		D49309E01BDBFFA5007382A9 /* WindowsAudioSession.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */; };
+		D49945881BDF8FD2009A6064 /* ISerializable.h in Headers */ = {isa = PBXBuildFile; fileRef = D49945871BDF8FD2009A6064 /* ISerializable.h */; };
+		D4E5E89F1BDD21E0002F7F8B /* IRenderable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E89E1BDD21E0002F7F8B /* IRenderable.hpp */; };
+		D4E5E8A11BDD2265002F7F8B /* MemoryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E8A01BDD2265002F7F8B /* MemoryStream.hpp */; };
+		D4E5E8A31BDD2A08002F7F8B /* MemoryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E5E8A21BDD2A08002F7F8B /* MemoryStream.cpp */; };
+		D4E5E8A61BDDECE6002F7F8B /* IOException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E5E8A41BDDECE6002F7F8B /* IOException.cpp */; };
+		D4E5E8A71BDDECE6002F7F8B /* IOException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E8A51BDDECE6002F7F8B /* IOException.hpp */; };
+		D4E5E8AA1BDE3C4E002F7F8B /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E5E8A81BDE3C4E002F7F8B /* Bitmap.cpp */; };
+		D4E5E8AB1BDE3C4E002F7F8B /* Bitmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E8A91BDE3C4E002F7F8B /* Bitmap.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D49309611BDBFD64007382A9 /* libGaLiong.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libGaLiong.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49309701BDBFF6F007382A9 /* Bmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bmp.cpp; path = ../../../../GaLiong/Bmp.cpp; sourceTree = "<group>"; };
+		D49309711BDBFF6F007382A9 /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Button.cpp; path = ../../../../GaLiong/Button.cpp; sourceTree = "<group>"; };
+		D49309721BDBFF6F007382A9 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Character.cpp; path = ../../../../GaLiong/Character.cpp; sourceTree = "<group>"; };
+		D49309731BDBFF6F007382A9 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cpp; path = ../../../../GaLiong/Entity.cpp; sourceTree = "<group>"; };
+		D49309741BDBFF6F007382A9 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Event.cpp; path = ../../../../GaLiong/Event.cpp; sourceTree = "<group>"; };
+		D49309751BDBFF6F007382A9 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../../../../GaLiong/File.cpp; sourceTree = "<group>"; };
+		D49309761BDBFF6F007382A9 /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font.cpp; path = ../../../../GaLiong/Font.cpp; sourceTree = "<group>"; };
+		D49309771BDBFF6F007382A9 /* IClickable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IClickable.cpp; path = ../../../../GaLiong/IClickable.cpp; sourceTree = "<group>"; };
+		D49309781BDBFF6F007382A9 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image.cpp; path = ../../../../GaLiong/Image.cpp; sourceTree = "<group>"; };
+		D49309791BDBFF6F007382A9 /* IRenderable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRenderable.cpp; path = ../../../../GaLiong/IRenderable.cpp; sourceTree = "<group>"; };
+		D493097A1BDBFF6F007382A9 /* Label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Label.cpp; path = ../../../../GaLiong/Label.cpp; sourceTree = "<group>"; };
+		D493097B1BDBFF6F007382A9 /* LibFreeType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LibFreeType.cpp; path = ../../../../GaLiong/LibFreeType.cpp; sourceTree = "<group>"; };
+		D493097C1BDBFF6F007382A9 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = ../../../../GaLiong/Logger.cpp; sourceTree = "<group>"; };
+		D493097D1BDBFF6F007382A9 /* PNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PNG.cpp; path = ../../../../GaLiong/PNG.cpp; sourceTree = "<group>"; };
+		D493097E1BDBFF6F007382A9 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Renderer.cpp; path = ../../../../GaLiong/Renderer.cpp; sourceTree = "<group>"; };
+		D493097F1BDBFF6F007382A9 /* Storage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Storage.cpp; path = ../../../../GaLiong/Storage.cpp; sourceTree = "<group>"; };
+		D49309801BDBFF6F007382A9 /* TextBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextBar.cpp; path = ../../../../GaLiong/TextBar.cpp; sourceTree = "<group>"; };
+		D49309811BDBFF6F007382A9 /* TextEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextEntity.cpp; path = ../../../../GaLiong/TextEntity.cpp; sourceTree = "<group>"; };
+		D49309821BDBFF6F007382A9 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../../../GaLiong/Texture.cpp; sourceTree = "<group>"; };
+		D49309831BDBFF6F007382A9 /* TextureBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureBuilder.cpp; path = ../../../../GaLiong/TextureBuilder.cpp; sourceTree = "<group>"; };
+		D49309841BDBFF6F007382A9 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = ../../../../GaLiong/TextureManager.cpp; sourceTree = "<group>"; };
+		D49309851BDBFF6F007382A9 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = ../../../../GaLiong/Timer.cpp; sourceTree = "<group>"; };
+		D49309861BDBFF6F007382A9 /* WAV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WAV.cpp; path = ../../../../GaLiong/WAV.cpp; sourceTree = "<group>"; };
+		D49309871BDBFF6F007382A9 /* WaveOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaveOut.cpp; path = ../../../../GaLiong/WaveOut.cpp; sourceTree = "<group>"; };
+		D49309881BDBFF6F007382A9 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window.cpp; path = ../../../../GaLiong/Window.cpp; sourceTree = "<group>"; };
+		D49309891BDBFF6F007382A9 /* WindowsAudioSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WindowsAudioSession.cpp; path = ../../../../GaLiong/WindowsAudioSession.cpp; sourceTree = "<group>"; };
+		D49309A51BDBFFA5007382A9 /* Bmp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Bmp.hpp; path = ../../../../GaLiong/Include/Bmp.hpp; sourceTree = "<group>"; };
+		D49309A61BDBFFA5007382A9 /* Button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Button.hpp; path = ../../../../GaLiong/Include/Button.hpp; sourceTree = "<group>"; };
+		D49309A71BDBFFA5007382A9 /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Character.hpp; path = ../../../../GaLiong/Include/Character.hpp; sourceTree = "<group>"; };
+		D49309A81BDBFFA5007382A9 /* ControlBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ControlBase.hpp; path = ../../../../GaLiong/Include/ControlBase.hpp; sourceTree = "<group>"; };
+		D49309A91BDBFFA5007382A9 /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Entity.hpp; path = ../../../../GaLiong/Include/Entity.hpp; sourceTree = "<group>"; };
+		D49309AA1BDBFFA5007382A9 /* Entrance.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Entrance.hpp; path = ../../../../GaLiong/Include/Entrance.hpp; sourceTree = "<group>"; };
+		D49309AB1BDBFFA5007382A9 /* Event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Event.hpp; path = ../../../../GaLiong/Include/Event.hpp; sourceTree = "<group>"; };
+		D49309AC1BDBFFA5007382A9 /* File.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = File.hpp; path = ../../../../GaLiong/Include/File.hpp; sourceTree = "<group>"; };
+		D49309AD1BDBFFA5007382A9 /* Font.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Font.hpp; path = ../../../../GaLiong/Include/Font.hpp; sourceTree = "<group>"; };
+		D49309AE1BDBFFA5007382A9 /* IClickable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IClickable.hpp; path = ../../../../GaLiong/Include/IClickable.hpp; sourceTree = "<group>"; };
+		D49309AF1BDBFFA5007382A9 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Image.hpp; path = ../../../../GaLiong/Include/Image.hpp; sourceTree = "<group>"; };
+		D49309B01BDBFFA5007382A9 /* IRenderable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IRenderable.hpp; path = ../../../../GaLiong/Include/IRenderable.hpp; sourceTree = "<group>"; };
+		D49309B11BDBFFA5007382A9 /* Label.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Label.hpp; path = ../../../../GaLiong/Include/Label.hpp; sourceTree = "<group>"; };
+		D49309B21BDBFFA5007382A9 /* LibFreeType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LibFreeType.hpp; path = ../../../../GaLiong/Include/LibFreeType.hpp; sourceTree = "<group>"; };
+		D49309B31BDBFFA5007382A9 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Logger.hpp; path = ../../../../GaLiong/Include/Logger.hpp; sourceTree = "<group>"; };
+		D49309B41BDBFFA5007382A9 /* PNG.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PNG.hpp; path = ../../../../GaLiong/Include/PNG.hpp; sourceTree = "<group>"; };
+		D49309B51BDBFFA5007382A9 /* Preprocess.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Preprocess.hpp; path = ../../../../GaLiong/Include/Preprocess.hpp; sourceTree = "<group>"; };
+		D49309B61BDBFFA5007382A9 /* Renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Renderer.hpp; path = ../../../../GaLiong/Include/Renderer.hpp; sourceTree = "<group>"; };
+		D49309B71BDBFFA5007382A9 /* SoundCommon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SoundCommon.hpp; path = ../../../../GaLiong/Include/SoundCommon.hpp; sourceTree = "<group>"; };
+		D49309B81BDBFFA5007382A9 /* Storage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Storage.hpp; path = ../../../../GaLiong/Include/Storage.hpp; sourceTree = "<group>"; };
+		D49309B91BDBFFA5007382A9 /* TextBar.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextBar.hpp; path = ../../../../GaLiong/Include/TextBar.hpp; sourceTree = "<group>"; };
+		D49309BA1BDBFFA5007382A9 /* TextEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextEntity.hpp; path = ../../../../GaLiong/Include/TextEntity.hpp; sourceTree = "<group>"; };
+		D49309BB1BDBFFA5007382A9 /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Texture.hpp; path = ../../../../GaLiong/Include/Texture.hpp; sourceTree = "<group>"; };
+		D49309BC1BDBFFA5007382A9 /* TextureBuilder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextureBuilder.hpp; path = ../../../../GaLiong/Include/TextureBuilder.hpp; sourceTree = "<group>"; };
+		D49309BD1BDBFFA5007382A9 /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextureManager.hpp; path = ../../../../GaLiong/Include/TextureManager.hpp; sourceTree = "<group>"; };
+		D49309BE1BDBFFA5007382A9 /* Timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Timer.hpp; path = ../../../../GaLiong/Include/Timer.hpp; sourceTree = "<group>"; };
+		D49309BF1BDBFFA5007382A9 /* WAV.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WAV.hpp; path = ../../../../GaLiong/Include/WAV.hpp; sourceTree = "<group>"; };
+		D49309C01BDBFFA5007382A9 /* WaveOut.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WaveOut.hpp; path = ../../../../GaLiong/Include/WaveOut.hpp; sourceTree = "<group>"; };
+		D49309C11BDBFFA5007382A9 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Window.hpp; path = ../../../../GaLiong/Include/Window.hpp; sourceTree = "<group>"; };
+		D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WindowsAudioSession.hpp; path = ../../../../GaLiong/Include/WindowsAudioSession.hpp; sourceTree = "<group>"; };
+		D49945871BDF8FD2009A6064 /* ISerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISerializable.h; path = ../../../../GaLiong/Include/ISerializable.h; sourceTree = "<group>"; };
+		D4E5E89E1BDD21E0002F7F8B /* IRenderable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IRenderable.hpp; path = ../../../../GaLiong/Include/IRenderable.hpp; sourceTree = "<group>"; };
+		D4E5E8A01BDD2265002F7F8B /* MemoryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MemoryStream.hpp; path = ../../../../GaLiong/Include/MemoryStream.hpp; sourceTree = "<group>"; };
+		D4E5E8A21BDD2A08002F7F8B /* MemoryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemoryStream.cpp; path = ../../../../GaLiong/MemoryStream.cpp; sourceTree = "<group>"; };
+		D4E5E8A41BDDECE6002F7F8B /* IOException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOException.cpp; path = ../../../../GaLiong/IOException.cpp; sourceTree = "<group>"; };
+		D4E5E8A51BDDECE6002F7F8B /* IOException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IOException.hpp; path = ../../../../GaLiong/Include/IOException.hpp; sourceTree = "<group>"; };
+		D4E5E8A81BDE3C4E002F7F8B /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bitmap.cpp; path = ../../../../GaLiong/Bitmap.cpp; sourceTree = "<group>"; };
+		D4E5E8A91BDE3C4E002F7F8B /* Bitmap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Bitmap.hpp; path = ../../../../GaLiong/Include/Bitmap.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D493095E1BDBFD64007382A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D49309581BDBFD64007382A9 = {
+			isa = PBXGroup;
+			children = (
+				D49309631BDBFD64007382A9 /* GaLiong */,
+				D49309621BDBFD64007382A9 /* Products */,
+			);
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
+		D49309621BDBFD64007382A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D49309611BDBFD64007382A9 /* libGaLiong.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D49309631BDBFD64007382A9 /* GaLiong */ = {
+			isa = PBXGroup;
+			children = (
+				D4E5E8A81BDE3C4E002F7F8B /* Bitmap.cpp */,
+				D49309701BDBFF6F007382A9 /* Bmp.cpp */,
+				D49309711BDBFF6F007382A9 /* Button.cpp */,
+				D49309721BDBFF6F007382A9 /* Character.cpp */,
+				D49309731BDBFF6F007382A9 /* Entity.cpp */,
+				D49309741BDBFF6F007382A9 /* Event.cpp */,
+				D49309751BDBFF6F007382A9 /* File.cpp */,
+				D49309761BDBFF6F007382A9 /* Font.cpp */,
+				D49309771BDBFF6F007382A9 /* IClickable.cpp */,
+				D49309781BDBFF6F007382A9 /* Image.cpp */,
+				D4E5E8A41BDDECE6002F7F8B /* IOException.cpp */,
+				D49309791BDBFF6F007382A9 /* IRenderable.cpp */,
+				D493097A1BDBFF6F007382A9 /* Label.cpp */,
+				D493097B1BDBFF6F007382A9 /* LibFreeType.cpp */,
+				D493097C1BDBFF6F007382A9 /* Logger.cpp */,
+				D4E5E8A21BDD2A08002F7F8B /* MemoryStream.cpp */,
+				D493097D1BDBFF6F007382A9 /* PNG.cpp */,
+				D493097E1BDBFF6F007382A9 /* Renderer.cpp */,
+				D493097F1BDBFF6F007382A9 /* Storage.cpp */,
+				D49309801BDBFF6F007382A9 /* TextBar.cpp */,
+				D49309811BDBFF6F007382A9 /* TextEntity.cpp */,
+				D49309821BDBFF6F007382A9 /* Texture.cpp */,
+				D49309831BDBFF6F007382A9 /* TextureBuilder.cpp */,
+				D49309841BDBFF6F007382A9 /* TextureManager.cpp */,
+				D49309851BDBFF6F007382A9 /* Timer.cpp */,
+				D49309861BDBFF6F007382A9 /* WAV.cpp */,
+				D49309871BDBFF6F007382A9 /* WaveOut.cpp */,
+				D49309881BDBFF6F007382A9 /* Window.cpp */,
+				D49309891BDBFF6F007382A9 /* WindowsAudioSession.cpp */,
+				D49309A41BDBFF81007382A9 /* Include */,
+			);
+			path = GaLiong;
+			sourceTree = "<group>";
+		};
+		D49309A41BDBFF81007382A9 /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				D4E5E8A91BDE3C4E002F7F8B /* Bitmap.hpp */,
+				D49309A51BDBFFA5007382A9 /* Bmp.hpp */,
+				D49309A61BDBFFA5007382A9 /* Button.hpp */,
+				D49309A71BDBFFA5007382A9 /* Character.hpp */,
+				D49309A81BDBFFA5007382A9 /* ControlBase.hpp */,
+				D49309A91BDBFFA5007382A9 /* Entity.hpp */,
+				D49309AA1BDBFFA5007382A9 /* Entrance.hpp */,
+				D49309AB1BDBFFA5007382A9 /* Event.hpp */,
+				D49309AC1BDBFFA5007382A9 /* File.hpp */,
+				D49309AD1BDBFFA5007382A9 /* Font.hpp */,
+				D49309AE1BDBFFA5007382A9 /* IClickable.hpp */,
+				D49309AF1BDBFFA5007382A9 /* Image.hpp */,
+				D4E5E8A51BDDECE6002F7F8B /* IOException.hpp */,
+				D4E5E89E1BDD21E0002F7F8B /* IRenderable.hpp */,
+				D49309B01BDBFFA5007382A9 /* IRenderable.hpp */,
+				D49309B11BDBFFA5007382A9 /* Label.hpp */,
+				D49309B21BDBFFA5007382A9 /* LibFreeType.hpp */,
+				D49309B31BDBFFA5007382A9 /* Logger.hpp */,
+				D4E5E8A01BDD2265002F7F8B /* MemoryStream.hpp */,
+				D49309B41BDBFFA5007382A9 /* PNG.hpp */,
+				D49309B51BDBFFA5007382A9 /* Preprocess.hpp */,
+				D49309B61BDBFFA5007382A9 /* Renderer.hpp */,
+				D49309B71BDBFFA5007382A9 /* SoundCommon.hpp */,
+				D49309B81BDBFFA5007382A9 /* Storage.hpp */,
+				D49309B91BDBFFA5007382A9 /* TextBar.hpp */,
+				D49309BA1BDBFFA5007382A9 /* TextEntity.hpp */,
+				D49309BB1BDBFFA5007382A9 /* Texture.hpp */,
+				D49309BC1BDBFFA5007382A9 /* TextureBuilder.hpp */,
+				D49309BD1BDBFFA5007382A9 /* TextureManager.hpp */,
+				D49309BE1BDBFFA5007382A9 /* Timer.hpp */,
+				D49309BF1BDBFFA5007382A9 /* WAV.hpp */,
+				D49309C01BDBFFA5007382A9 /* WaveOut.hpp */,
+				D49309C11BDBFFA5007382A9 /* Window.hpp */,
+				D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */,
+				D49945871BDF8FD2009A6064 /* ISerializable.h */,
+			);
+			name = Include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D493095F1BDBFD64007382A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49309C81BDBFFA5007382A9 /* Entrance.hpp in Headers */,
+				D49309CC1BDBFFA5007382A9 /* IClickable.hpp in Headers */,
+				D49309D21BDBFFA5007382A9 /* PNG.hpp in Headers */,
+				D49309C51BDBFFA5007382A9 /* Character.hpp in Headers */,
+				D49309DE1BDBFFA5007382A9 /* WaveOut.hpp in Headers */,
+				D49309C61BDBFFA5007382A9 /* ControlBase.hpp in Headers */,
+				D49309D01BDBFFA5007382A9 /* LibFreeType.hpp in Headers */,
+				D49309D91BDBFFA5007382A9 /* Texture.hpp in Headers */,
+				D49309DF1BDBFFA5007382A9 /* Window.hpp in Headers */,
+				D4E5E89F1BDD21E0002F7F8B /* IRenderable.hpp in Headers */,
+				D4E5E8A11BDD2265002F7F8B /* MemoryStream.hpp in Headers */,
+				D49309D31BDBFFA5007382A9 /* Preprocess.hpp in Headers */,
+				D49309DA1BDBFFA5007382A9 /* TextureBuilder.hpp in Headers */,
+				D49309D41BDBFFA5007382A9 /* Renderer.hpp in Headers */,
+				D49309CF1BDBFFA5007382A9 /* Label.hpp in Headers */,
+				D49309C41BDBFFA5007382A9 /* Button.hpp in Headers */,
+				D49309DD1BDBFFA5007382A9 /* WAV.hpp in Headers */,
+				D49309DC1BDBFFA5007382A9 /* Timer.hpp in Headers */,
+				D4E5E8A71BDDECE6002F7F8B /* IOException.hpp in Headers */,
+				D49309D71BDBFFA5007382A9 /* TextBar.hpp in Headers */,
+				D49309CB1BDBFFA5007382A9 /* Font.hpp in Headers */,
+				D49309DB1BDBFFA5007382A9 /* TextureManager.hpp in Headers */,
+				D49309D81BDBFFA5007382A9 /* TextEntity.hpp in Headers */,
+				D49309C71BDBFFA5007382A9 /* Entity.hpp in Headers */,
+				D49309CD1BDBFFA5007382A9 /* Image.hpp in Headers */,
+				D49309E01BDBFFA5007382A9 /* WindowsAudioSession.hpp in Headers */,
+				D49309C31BDBFFA5007382A9 /* Bmp.hpp in Headers */,
+				D4E5E8AB1BDE3C4E002F7F8B /* Bitmap.hpp in Headers */,
+				D49309D11BDBFFA5007382A9 /* Logger.hpp in Headers */,
+				D49309CA1BDBFFA5007382A9 /* File.hpp in Headers */,
+				D49945881BDF8FD2009A6064 /* ISerializable.h in Headers */,
+				D49309D51BDBFFA5007382A9 /* SoundCommon.hpp in Headers */,
+				D49309CE1BDBFFA5007382A9 /* IRenderable.hpp in Headers */,
+				D49309D61BDBFFA5007382A9 /* Storage.hpp in Headers */,
+				D49309C91BDBFFA5007382A9 /* Event.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D49309601BDBFD64007382A9 /* GaLiong */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D493096C1BDBFD64007382A9 /* Build configuration list for PBXNativeTarget "GaLiong" */;
+			buildPhases = (
+				D493095D1BDBFD64007382A9 /* Sources */,
+				D493095E1BDBFD64007382A9 /* Frameworks */,
+				D493095F1BDBFD64007382A9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GaLiong;
+			productName = GaLiong;
+			productReference = D49309611BDBFD64007382A9 /* libGaLiong.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D49309591BDBFD64007382A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = LiongStudio;
+				TargetAttributes = {
+					D49309601BDBFD64007382A9 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = D493095C1BDBFD64007382A9 /* Build configuration list for PBXProject "GaLiong" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D49309581BDBFD64007382A9;
+			productRefGroup = D49309621BDBFD64007382A9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D49309601BDBFD64007382A9 /* GaLiong */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D493095D1BDBFD64007382A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D493098D1BDBFF6F007382A9 /* Entity.cpp in Sources */,
+				D49309A21BDBFF6F007382A9 /* Window.cpp in Sources */,
+				D493099B1BDBFF6F007382A9 /* TextEntity.cpp in Sources */,
+				D49309991BDBFF6F007382A9 /* Storage.cpp in Sources */,
+				D49309941BDBFF6F007382A9 /* Label.cpp in Sources */,
+				D493098C1BDBFF6F007382A9 /* Character.cpp in Sources */,
+				D493099F1BDBFF6F007382A9 /* Timer.cpp in Sources */,
+				D49309971BDBFF6F007382A9 /* PNG.cpp in Sources */,
+				D49309951BDBFF6F007382A9 /* LibFreeType.cpp in Sources */,
+				D49309911BDBFF6F007382A9 /* IClickable.cpp in Sources */,
+				D49309981BDBFF6F007382A9 /* Renderer.cpp in Sources */,
+				D49309A31BDBFF6F007382A9 /* WindowsAudioSession.cpp in Sources */,
+				D493098E1BDBFF6F007382A9 /* Event.cpp in Sources */,
+				D493098F1BDBFF6F007382A9 /* File.cpp in Sources */,
+				D49309A01BDBFF6F007382A9 /* WAV.cpp in Sources */,
+				D4E5E8A61BDDECE6002F7F8B /* IOException.cpp in Sources */,
+				D493099A1BDBFF6F007382A9 /* TextBar.cpp in Sources */,
+				D49309961BDBFF6F007382A9 /* Logger.cpp in Sources */,
+				D493099C1BDBFF6F007382A9 /* Texture.cpp in Sources */,
+				D4E5E8AA1BDE3C4E002F7F8B /* Bitmap.cpp in Sources */,
+				D4E5E8A31BDD2A08002F7F8B /* MemoryStream.cpp in Sources */,
+				D493098A1BDBFF6F007382A9 /* Bmp.cpp in Sources */,
+				D493099D1BDBFF6F007382A9 /* TextureBuilder.cpp in Sources */,
+				D49309921BDBFF6F007382A9 /* Image.cpp in Sources */,
+				D49309931BDBFF6F007382A9 /* IRenderable.cpp in Sources */,
+				D493098B1BDBFF6F007382A9 /* Button.cpp in Sources */,
+				D49309901BDBFF6F007382A9 /* Font.cpp in Sources */,
+				D493099E1BDBFF6F007382A9 /* TextureManager.cpp in Sources */,
+				D49309A11BDBFF6F007382A9 /* WaveOut.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D493096A1BDBFD64007382A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D493096B1BDBFD64007382A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D493096D1BDBFD64007382A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D493096E1BDBFD64007382A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D493095C1BDBFD64007382A9 /* Build configuration list for PBXProject "GaLiong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D493096A1BDBFD64007382A9 /* Debug */,
+				D493096B1BDBFD64007382A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D493096C1BDBFD64007382A9 /* Build configuration list for PBXNativeTarget "GaLiong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D493096D1BDBFD64007382A9 /* Debug */,
+				D493096E1BDBFD64007382A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D49309591BDBFD64007382A9 /* Project object */;
+}

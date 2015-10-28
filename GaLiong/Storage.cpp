@@ -9,7 +9,7 @@ void Storage::Open(char *path)
 {
 	if (Exists())
 	{
-		stream.open(path, stream.binary | stream._Nocreate | stream._Noreplace);
+		stream.open(path, stream.binary);
 		if (stream.is_open())
 		{
 			this->path = path;
@@ -32,7 +32,7 @@ void Storage::Write(char *buffer, int length)
 
 bool Storage::Exists()
 {
-	stream.open(path, _IOS_Nocreate | _IOS_Noreplace);
+	stream.open(path);
 	if (stream) { stream.close(); return true; }
 	else return false;
 }
@@ -41,7 +41,7 @@ void Storage::Create(char *path)
 {
 	if (!Exists())
 	{
-		stream.open(path, _IOSbinary);
+		stream.open(path, stream.binary);
 		stream.close();
 	}
 	//if (stream.good()) return IO_Fine;
