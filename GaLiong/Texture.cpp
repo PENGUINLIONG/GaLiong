@@ -1,81 +1,68 @@
 #include "Texture.hpp"
 
 _L_BEGIN
-Texture::Texture() : size({ 0, 0 })
+namespace Graphic
 {
-}
-
-Texture::~Texture()
-{
-	if (data && informative)
+	Texture::Texture(unsigned int count)
+	: _Count(count)
+	, _Index(::new TextureIndex[count])
+	, _MagFilter(Filter::Linear)
+	, _MinFilter(Filter::Linear)
 	{
-		delete[] data;
-	}
-}
-
-void Texture::ChangeFilter(Flag filter)
-{
-	glBindTexture(GL_TEXTURE_2D, index);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-}
-
-SizeD Texture::CalculateDuplication(Size &container)
-{
-	Size _size = GetSize();
-	return{ (double)container.Width / (double)(_size.Width),
-		(double)container.Height / (double)(_size.Height) };
-}
-
-unsigned char Texture::GetPixelLength(Flag pixelFormat, Flag byteSize)
-{
-	if (byteSize == ByteSize::UByte)
-	{
-		switch (pixelFormat)
+		glGenTextures(count, _Index);
+		while (count > 0)
 		{
-			case PixelFormat::Alpha:
-				return 1;
-			case PixelFormat::RGBA:
-			case PixelFormat::BGRA:
-				return 4;
-			case PixelFormat::RGB:
-			case PixelFormat::BGR:
-				return 3;
-			default: break;
+			--count;
+			glBindTexture(GL_TEXTURE_2D, _Index[count]);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, Filter::Linear);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, Filter::Linear);
 		}
 	}
-	else if (byteSize == ByteSize::UShort)
+	Texture::Texture(Filter magFilter, Filter minFilter, unsigned int count)
+	: _Count(count)
+	, _Index(::new unsigned int[count])
+	, _MagFilter(magFilter)
+	, _MinFilter(minFilter)
 	{
-		switch (pixelFormat)
+		glGenTextures(count, _Index);
+		while (count > 0)
 		{
-			case PixelFormat::RGB:
-				return 6;
-			case PixelFormat::RGBA:
-				return 8;
-			case PixelFormat::Alpha:
-				return 2;
-			default: break;
+			--count;
+			glBindTexture(GL_TEXTURE_2D, _Index[count]);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
 		}
 	}
-	return 0;
-}
+	Texture::~Texture()
+	{
+		glDeleteTextures(_Count, _Index);
+		delete [] _Index;
+	}
+	
+	TextureIndex Texture::GetIndex(unsigned int position)
+	{
+		return _Index[position];
+	}
 
-void Texture::Generate(Flag filter, TextureIndex index)
-{
-	lock_guard<recursive_mutex> lock(occupy);
+	void Texture::SetMagFilter(Filter filter, unsigned int position)
+	{
+		glBindTexture(GL_TEXTURE_2D, _Index[position]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+	}
+	
+	void Texture::SetMinFilter(Filter filter, unsigned int position)
+	{
+		glBindTexture(GL_TEXTURE_2D, _Index[position]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+	}
 
-	if (!size.Width || !size.Height || !data)
-		return;
-
-	if (index)
-		this->index = index;
-	else
-		glGenTextures(1, &this->index);
-	glBindTexture(GL_TEXTURE_2D, this->index);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, GetPixelLength());
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(filter));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(filter));
-	//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Before
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.Width, size.Height, 0, pixelFormat, byteSize, data); // After
+	void Texture::Update(Image& image, unsigned int position)
+	{
+		Buffer buffer = image.Interpret(PixelType::Rgba);
+		glBindTexture(GL_TEXTURE_2D, _Index[position]);
+		//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Cannot work properly.
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)image.GetSize().Width, (GLsizei)image.GetSize().Height, 0, GL_RGBA, GL_BYTE, buffer); // Alternative.
+		::delete [] buffer;
+	}
 }
 _L_END

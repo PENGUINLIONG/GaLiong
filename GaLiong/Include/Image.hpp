@@ -24,7 +24,7 @@ namespace Media
 		Blue = 3,
 		Rgb = 4,
 		Bgr = 5,
-		Argb = 6
+		Rgba = 6
 	};
 	
 	class _L_ Image
@@ -32,7 +32,7 @@ namespace Media
 	public:
 		/*
 		 * Retrieve a chunk of pixels in the image.
-		 * [return] A pointer to a newly allocated buffer which stores sequense of pixels.
+		 * [return] A pointer to a newly allocated buffer which stores sequence of pixels.
 		 * [warning] You should delete the pointer when you will not use it anymore.
 		 * [note] You should not use this method to retrieve a chunk of pixels. Alternatively, use [LiongFramework::IO::Image::GetChunk] instead.
 		 */
@@ -50,10 +50,17 @@ namespace Media
 		virtual bool IsEmpty() = 0;
 		/*
 		 * Interpret data to Bitmap of a specific pixel type and save the result into a newly allocated buffer.
-		 * [return] A pointer to a newly allocated which stores sequense of pixels of the same specified type.
+		 * [return] A pointer to a newly allocated which stores sequence of pixels of the same specified type.
 		 * [warning] You should delete the pointer when you will not use it anymore.
 		 */
 		virtual Buffer Interpret(PixelType pixelType) = 0;
+        
+        // Static
+        
+        static Image* FromMemory(MemoryStream stream)
+        {
+            if (stream.ReadByte() == 'B')
+        }
 	};
 }
 _L_END

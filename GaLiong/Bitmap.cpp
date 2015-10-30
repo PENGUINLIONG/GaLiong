@@ -18,16 +18,17 @@ namespace Media
 	, _Size(instance.GetSize())
 	{
 	}
-	
-	Bitmap::Bitmap(Buffer buffer, Size size, PixelType pixelType)
-	: _Data(::new Byte[CalculateDataLength(size, pixelType)])
+	Bitmap::Bitmap(Buffer buffer, Size size, PixelType pixelType, bool shouldCopy, bool shouldDelete)
+	: _Data(shouldCopy ? ::new Byte[CalculateDataLength(size, pixelType)] : buffer)
 	, _Length(CalculateDataLength(size, pixelType))
 	, _PixelType(pixelType)
 	, _Size(size)
 	{
-		memcpy(_Data, buffer, _Length);
+		if (shouldCopy)
+			memcpy(_Data, buffer, _Length);
+		if(shouldDelete)
+			::delete [] buffer;
 	}
-	
 	Bitmap::~Bitmap()
 	{
 		::delete [] _Data;
@@ -143,7 +144,7 @@ namespace Media
 	Buffer Bitmap::InterpretMonoTo(PixelType pixelType)
 	{
 		if (pixelType < 4) return nullptr; // Mono
-		else if (pixelType == PixelType::Argb) // Quad
+		else if (pixelType == PixelType::Rgba) // Quad
 			return InterpretMonoToQuad((int)pixelType);
 		else // Tri
 			return InterpretMonoToTri(pixelType == PixelType::Rgb
@@ -153,7 +154,7 @@ namespace Media
 	
 	Buffer Bitmap::InterpretTriTo(PixelType pixelType)
 	{
-		if (pixelType == PixelType::Argb) // Quad
+		if (pixelType == PixelType::Rgba) // Quad
 			return InterpretTriToQuad((bool)(pixelType - 4));
 		else if ((int)pixelType < 4 && pixelType != PixelType::Alpha) // Mono
 			return InterpretTriToMono(_PixelType == PixelType::Rgb);
@@ -183,7 +184,10 @@ namespace Media
 	{
 		Buffer buffer = ::new Byte[_Size.Width * _Size.Height * 4];
 		for (int i = 0; i < _Length; ++i)
+		{
 			buffer[i * 4 + factorOffset] = _Data[i];
+			buffer[i * 4 + 3] = 0xFF;
+		}
 		return buffer;
 	}
 	
@@ -217,18 +221,20 @@ namespace Media
         {
             for (int i = 0; i < pixelCount; ++i)
             {
-                buffer[i * 4 + 1] = _Data[i * 3];
-                buffer[i * 4 + 2] = _Data[i * 3 + 1];
-                buffer[i * 4 + 3] = _Data[i * 3 + 2];
+                buffer[i * 4] = _Data[i * 3];
+                buffer[i * 4 + 1] = _Data[i * 3 + 1];
+                buffer[i * 4 + 2] = _Data[i * 3 + 2];
+				buffer[i * 4 + 3] = 0xFF;
             }
         }
         else
         {
             for (int i = 0; i < pixelCount; ++i)
             {
-                buffer[i * 4 + 1] = _Data[i * 3 + 2];
-                buffer[i * 4 + 2] = _Data[i * 3 + 1];
-                buffer[i * 4 + 3] = _Data[i * 3];
+                buffer[i * 4] = _Data[i * 3 + 2];
+                buffer[i * 4 + 1] = _Data[i * 3 + 1];
+                buffer[i * 4 + 2] = _Data[i * 3];
+				buffer[i * 4 + 3] = 0xFF;
             }
         }
         return buffer;
@@ -251,18 +257,18 @@ namespace Media
         {
             for (int i = 0; i < pixelCount; ++i)
             {
-                buffer[i * 3] = _Data[i * 4 + 1];
-                buffer[i * 3 + 1] = _Data[i * 4 + 2];
-                buffer[i * 3 + 2] = _Data[i * 4 + 3];
+                buffer[i * 3] = _Data[i * 4];
+                buffer[i * 3 + 1] = _Data[i * 4 + 1];
+                buffer[i * 3 + 2] = _Data[i * 4 + 2];
             }
         }
         else
         {
             for (int i = 0; i < pixelCount; ++i)
             {
-                buffer[i * 3] = _Data[i * 4 + 3];
-                buffer[i * 3 + 1] = _Data[i * 4 + 2];
-                buffer[i * 3 + 2] = _Data[i * 4 + 1];
+                buffer[i * 3] = _Data[i * 4 + 2];
+                buffer[i * 3 + 1] = _Data[i * 4 + 1];
+                buffer[i * 3 + 2] = _Data[i * 4];
             }
         }
         return buffer;
@@ -274,7 +280,7 @@ namespace Media
 	{
 		switch (pixelType)
 		{
-			case PixelType::Argb:
+			case PixelType::Rgba:
 				return 4;
 			case PixelType::Bgr:
 			case PixelType::Rgb:

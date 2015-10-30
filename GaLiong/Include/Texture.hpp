@@ -1,99 +1,71 @@
-#pragma once
+//
+//  Texture.hpp
+//  GaLiong
+//
+//  Created by Liong on ??/??/??.
+//
+
+#ifndef Texture_hpp
+#define Texture_hpp
+
 #include "Preprocess.hpp"
-#include "Texture.hpp"
+#include "Image.hpp"
+
+using namespace LiongFramework::Media;
 
 _L_BEGIN
-class _L_ Texture
+namespace Graphic
 {
-public:
-	recursive_mutex occupy;
+	typedef unsigned int TextureIndex;
 	
-	struct Filter
-	{
-		const static Flag Nearest = 0x2600;
-		const static Flag Linear = 0x2601;
-	};
-	struct PixelFormat
-	{
-		const static Flag Ignore = 0x0000;
-		const static Flag Alpha = 0x1906;
-		const static Flag RGB = 0x1907;
-		const static Flag RGBA = 0x1908;
-		const static Flag BGR = 0x80E0;
-		const static Flag BGRA = 0x80E1;
-	};
-	struct ByteSize
-	{
-		const static Flag Ignore = 0x0000;
-		const static Flag UByte = 0x1401;
-		const static Flag UShort = 0x1403;
-	};
+    class _L_ Texture
+    {
+    public:
+		/*
+		 * [for who is new to OpenGL]
+		 * There are two types of filter usage of this enum:
+		 * One is for the 'min filter' which is used when the rendered texture is smaller than the original one, represented by GL_TEXTURE_MIN_FILTER.
+		 * Another is for the 'mag filter' which is used when the rendered texture is larger than the original one, represented by GL_TEXTURE_MAG_FILTER.
+		 * The mip map is a optimization for rendering far objects. GL will make several copies of a image which is smaller in size. These copies are of priority, which means they will be used instead of the original one when the target position is farther than a specific distant.
+		 * In some ways, the mip maps and the original image are  by a texture.
+		 * [for who is new to OpenGL]
+		 */
+        enum Filter
+        {
+            Nearest = GL_NEAREST,
+            Linear = GL_LINEAR,
+			// The following items are for min filter only.
+			NearestWithNearestMipmap = GL_NEAREST_MIPMAP_NEAREST,
+			NearestWithLinearMipmap = GL_NEAREST_MIPMAP_LINEAR,
+			LinearWithNearestMipmap = GL_LINEAR_MIPMAP_NEAREST,
+			LinearWithLinearMipmap = GL_NEAREST_MIPMAP_LINEAR
+        };
 
-	Texture();
-	~Texture();
-	void ChangeFilter(Flag filter);
-	SizeD CalculateDuplication(Size &container);
-	static unsigned char GetPixelLength(Flag pixelFormat, Flag byteSize);
-	void Generate(Flag filter = Filter::Linear, TextureIndex index = 0);
-	const Buffer GetData()
-	{
-		return data;
-	}
-	const BufferLength GetDataLength()
-	{
-		return dataLength;
-	}
-	const TextureIndex GetIndex()
-	{
-		return index;
-	}
-	const Size GetSize()
-	{
-		return size;
-	}
-	const Byte GetPixelLength()
-	{
-		return informative ? GetPixelLength(pixelFormat, byteSize) : 0;
-	}
-	const bool IsInformative()
-	{
-		return informative;
-	}
-	const bool SameType(Flag pixelFormat, Flag byteSize = ByteSize::UByte)
-	{
-		return (!pixelFormat || !byteSize) ?
-			(this->pixelFormat == pixelFormat || this->byteSize == byteSize) :
-			(this->pixelFormat == pixelFormat && this->byteSize == byteSize);
-	}
-	void Set(BufferLength dataLength, Buffer data, Size size, Flag pixelFormat, Flag byteSize)
-	{
-		if (!data)
-			return;
-		if (this->data)
-			delete this->data;
-		if (dataLength >= size.Width * size.Height * GetPixelLength(pixelFormat, byteSize))
-			this->dataLength = dataLength;
-		this->data = data;
-		this->size = size;
-		this->pixelFormat = pixelFormat;
-		this->byteSize = byteSize;
-		informative = true;
-	}
-private:
-	bool informative = false;
-	BufferLength dataLength = 0;
-	Buffer data = nullptr;
-	TextureIndex index = 0;
-	Size size;
-	Flag pixelFormat, byteSize;
-};
+		Texture(unsigned int count = 1);
+		Texture(Filter magFilter, Filter minFilter, unsigned int count = 1);
+        ~Texture();
+		
+		unsigned int GetIndex(unsigned int position);
+		void SetMagFilter(Filter filter, unsigned int position);
+		void SetMinFilter(Filter filter, unsigned int position);
+		/*
+		 * Update image data to texture of the specified position.
+		 */
+		void Update(Image& image, unsigned int position = 0);
+    private:
+		unsigned int _Count;
+		TextureIndex* _Index;
+		Filter _MagFilter, _MinFilter;
+    };
 
-typedef shared_ptr<Texture> TextureStrongRef;
-typedef weak_ptr<Texture> TextureRef;
+    typedef shared_ptr<Texture> TextureStrongRef;
+    typedef weak_ptr<Texture> TextureRef;
 
-struct TextureComponent
-{
-	Rect Rect;
-	Texture *Texture;
-};
+    struct TextureComponent
+    {
+        Rect Rect;
+        Texture *Texture;
+    };
+}
 _L_END
+#endif

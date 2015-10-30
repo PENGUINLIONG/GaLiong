@@ -17,13 +17,16 @@ using namespace LiongFramework::Serialization;
 _L_BEGIN
 namespace Media
 {
+	/*
+	 * [note] This class is a simple storage of pixel sequence so it is not able to analyze the file format whose extension is '.bmp'. To do that, please use [LiongFramework::Media::Bmp] instead.
+	 */
 	class _L_ Bitmap
     : public Image
     , public ISerializable<Bitmap>
 	{
 	public:
 		Bitmap(Image& image);
-		Bitmap(Buffer buffer, Size size, PixelType pixelType);
+		Bitmap(Buffer buffer, Size size, PixelType pixelType, bool shouldCopy = true, bool shouldDelete = true);
 		virtual ~Bitmap();
         
         // Static

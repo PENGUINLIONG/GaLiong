@@ -64,6 +64,7 @@
 		D49309DF1BDBFFA5007382A9 /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309C11BDBFFA5007382A9 /* Window.hpp */; };
 		D49309E01BDBFFA5007382A9 /* WindowsAudioSession.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */; };
 		D49945881BDF8FD2009A6064 /* ISerializable.h in Headers */ = {isa = PBXBuildFile; fileRef = D49945871BDF8FD2009A6064 /* ISerializable.h */; };
+		D4CCEDE71BE0EDD200F1666A /* InvalidFormatException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4CCEDE61BE0EDD200F1666A /* InvalidFormatException.hpp */; };
 		D4E5E89F1BDD21E0002F7F8B /* IRenderable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E89E1BDD21E0002F7F8B /* IRenderable.hpp */; };
 		D4E5E8A11BDD2265002F7F8B /* MemoryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D4E5E8A01BDD2265002F7F8B /* MemoryStream.hpp */; };
 		D4E5E8A31BDD2A08002F7F8B /* MemoryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E5E8A21BDD2A08002F7F8B /* MemoryStream.cpp */; };
@@ -132,6 +133,7 @@
 		D49309C11BDBFFA5007382A9 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Window.hpp; path = ../../../../GaLiong/Include/Window.hpp; sourceTree = "<group>"; };
 		D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WindowsAudioSession.hpp; path = ../../../../GaLiong/Include/WindowsAudioSession.hpp; sourceTree = "<group>"; };
 		D49945871BDF8FD2009A6064 /* ISerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISerializable.h; path = ../../../../GaLiong/Include/ISerializable.h; sourceTree = "<group>"; };
+		D4CCEDE61BE0EDD200F1666A /* InvalidFormatException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = InvalidFormatException.hpp; path = ../../../../GaLiong/Include/InvalidFormatException.hpp; sourceTree = "<group>"; };
 		D4E5E89E1BDD21E0002F7F8B /* IRenderable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IRenderable.hpp; path = ../../../../GaLiong/Include/IRenderable.hpp; sourceTree = "<group>"; };
 		D4E5E8A01BDD2265002F7F8B /* MemoryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MemoryStream.hpp; path = ../../../../GaLiong/Include/MemoryStream.hpp; sourceTree = "<group>"; };
 		D4E5E8A21BDD2A08002F7F8B /* MemoryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemoryStream.cpp; path = ../../../../GaLiong/MemoryStream.cpp; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				D49309C11BDBFFA5007382A9 /* Window.hpp */,
 				D49309C21BDBFFA5007382A9 /* WindowsAudioSession.hpp */,
 				D49945871BDF8FD2009A6064 /* ISerializable.h */,
+				D4CCEDE61BE0EDD200F1666A /* InvalidFormatException.hpp */,
 			);
 			name = Include;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				D49309CB1BDBFFA5007382A9 /* Font.hpp in Headers */,
 				D49309DB1BDBFFA5007382A9 /* TextureManager.hpp in Headers */,
 				D49309D81BDBFFA5007382A9 /* TextEntity.hpp in Headers */,
+				D4CCEDE71BE0EDD200F1666A /* InvalidFormatException.hpp in Headers */,
 				D49309C71BDBFFA5007382A9 /* Entity.hpp in Headers */,
 				D49309CD1BDBFFA5007382A9 /* Image.hpp in Headers */,
 				D49309E01BDBFFA5007382A9 /* WindowsAudioSession.hpp in Headers */,
