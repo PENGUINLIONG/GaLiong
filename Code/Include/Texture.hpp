@@ -9,9 +9,11 @@
 #define Texture_hpp
 
 #include "Preprocess.hpp"
+#include "File.hpp"
 #include "Image.hpp"
 
 using namespace LiongFramework::Media;
+using namespace LiongFramework::IO;
 
 _L_BEGIN
 namespace Graphic
@@ -52,6 +54,10 @@ namespace Graphic
 		 * Update image data to texture of the specified position.
 		 */
 		void Update(Image& image, unsigned int position = 0);
+		
+		// Static
+		
+		static Texture FromFile(wstring& path);
     private:
 		unsigned int _Count;
 		TextureIndex* _Index;

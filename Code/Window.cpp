@@ -1,10 +1,17 @@
+//
+//  Window.cpp
+//  GaLiong
+//
+//  Created by Liong on ??/??/??.
+//
+
 #include "Window.hpp"
 
 _L_BEGIN
 Window::Window(Size size) : size(size), previous(size), pos({ 200, 100 })
 {
 	Rect w = { 0, 0, size.Width, size.Height };
-	AdjustWindowRectEx((RECT *)&w, style, FALSE, exStyle);
+	AdjustWindowRectEx((RECT *)&w, style, false, exStyle);
 	border = { (w.Right - w.Left - size.Width), (w.Bottom - w.Top - size.Height) };
 	_MouseTracker = Timer(this);
 	

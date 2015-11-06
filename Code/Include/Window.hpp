@@ -1,4 +1,13 @@
-#pragma once
+//
+//  Window.hpp
+//  GaLiong
+//
+//  Created by Liong on ??/??/??.
+//
+
+#ifndef Window_hpp
+#define Window_hpp
+
 #include "Preprocess.hpp"
 #include "Button.hpp"
 #include "Character.hpp"
@@ -12,7 +21,6 @@
 _L_BEGIN
 class _L_ Window : public IClickable, public IRenderable
 {
-	friend class Logger;
 public:
 	Window(Size size);
 	~Window();
@@ -45,3 +53,4 @@ private:
 	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 _L_END
+#endif

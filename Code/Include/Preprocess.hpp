@@ -22,14 +22,20 @@
 #include <tuple>
 #include <vector>
 
-#ifdef _WIN32
-	// Windows
+#ifdef __APPLE__ // Apple
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glu.h>
+	#include <GLUT/glut.h>
+#else // Windows and Linux
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+	#include <GL/glut.h>
+#endif
+
+#ifdef _WIN32 // Windows
 	#include <Windows.h>
 	#include <windowsx.h>
 	#include <WinUser.h>
-	// OpenGL
-	#include <gl/GL.h>
-	#include <gl/GLU.h>
 
 	// Import libraries
 	#pragma comment (lib, "winmm.lib")
@@ -37,14 +43,11 @@
 	#pragma comment (lib, "glu32.lib")
 #endif
 
-#ifdef __APPLE__
-	// OpenGL
-	#include <GLUT/GLUT.h>
-#endif
+#include 
 
-#pragma warning(disable: 4251)
+// #pragma warning(disable: 4251)
 
-#pragma pack(1)
+// #pragma pack(1)
 
 // Not a good habit. Must be deleted after the complement of basic features.
 using namespace std;
@@ -120,34 +123,5 @@ struct RectD
 	double Top;
 	double Right;
 	double Bottom;
-};
-
-struct Color
-{
-	unsigned char Red;
-	unsigned char Green;
-	unsigned char Blue;
-	unsigned char Alpha;
-};
-
-// 二次开发的时候只要在EntityType这个命名空间内再开个枚举就行了……
-// 看上去就像是EntityType这个enum class（其实是namespace）里面的项
-struct ControlInterface
-{
-	const static Flag IClickable  = 0x0001;
-	const static Flag IRenderable = 0x0002;
-};
-
-struct FileReadOption
-{
-	const static Flag None       = 0x0000;
-	const static Flag NoClose    = 0x0001;
-	const static Flag NoGenerate = 0x0002;
-};
-
-enum class Alignment
-{
-	Center,
-	Left,
 };
 _L_END

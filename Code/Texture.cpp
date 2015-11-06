@@ -1,4 +1,4 @@
-#include "Texture.hpp"
+#include "Include/Texture.hpp"
 
 _L_BEGIN
 namespace Graphic
@@ -63,6 +63,16 @@ namespace Graphic
 		//gluBuild2DMipmapsIO_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data); // Cannot work properly.
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)image.GetSize().Width, (GLsizei)image.GetSize().Height, 0, GL_RGBA, GL_BYTE, buffer); // Alternative.
 		::delete [] buffer;
+	}
+	
+	// Static
+	
+	Texture Texture::FromFile(wstring& path)
+	{
+		switch(File::Detect(path.c_str()))
+		{
+			case FileFormat::Bmp:
+		}
 	}
 }
 _L_END
